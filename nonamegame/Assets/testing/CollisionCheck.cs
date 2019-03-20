@@ -9,6 +9,7 @@ public class CollisionCheck : MonoBehaviour
         Move();
     }
 
+    int checkpos = -1;
     public int speed = 10;
     void Move()
     {
@@ -27,6 +28,20 @@ public class CollisionCheck : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             transform.Translate(Vector3.down * speed * Time.deltaTime);
+        }
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            //checkpos = transform.position.y > 0 ? -1 : 1;
+            if(checkpos==-1)
+            {
+                checkpos = 1;
+                transform.Translate(Vector3.down * 5);
+            }
+            else
+            {
+                checkpos = -1;
+                transform.Translate(Vector3.up * 5);
+            }
         }
     }
 
