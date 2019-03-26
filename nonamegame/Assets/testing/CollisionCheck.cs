@@ -9,7 +9,7 @@ public class CollisionCheck : MonoBehaviour
         Move();
     }
 
-    int checkpos = -1;
+    int checkpos = -1; // 위아래 이동 변수
     public int speed = 10;
     void Move()
     {
