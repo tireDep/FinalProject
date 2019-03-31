@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private bool playerPos; // 플레이어 위치
     /* maybe : 양방향도 추가될 수 있음 -> int형 수정? */
     private bool isGround;  // 바닥 체크
+    private bool isPause = true;    // 일시정지 변수
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
+        CreateMap();
     }   // Update()
 
     private void Move() // 플레이어 이동 관련
@@ -34,13 +36,27 @@ public class Player : MonoBehaviour
         {
             CheckPlayerPos();
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(isPause)
+            {
+                Time.timeScale = 0;
+                isPause = false;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                isPause = true;
+            }
+            /* ToDo : 일시정지 아이콘 추가, 음악 정지, 뒤로가기 설정 etc.. */
+        }
     }   // Move()
 
     private void PlayerJump()   // 플레이어 점프
     {
         if(isGround)
         {
-            //isGround = false;
             if (playerPos)
             {
                 rigidBody.AddForce(Vector3.up * 23, ForceMode.Impulse);
@@ -93,5 +109,13 @@ public class Player : MonoBehaviour
             isGround = false; //바닥과 맞닿아 있지 않음(점프 불가능)
         }
     }   // OnCollisionExit(Collision collision)    
+
+    public Transform mapBlock;  // 맵 생성 변수
+    private int playTime = 0;
+    void CreateMap()    // 기본 1자 바닥 생성
+    {
+        Transform newMapBlock = Instantiate(mapBlock, new Vector3(playTime++, 1, 0), Quaternion.identity);
+        /* ToDo : 캐릭터가 블록위를 지나고 1초후 삭제? */
+    }   // CreateMap()
 
 }   // Class
