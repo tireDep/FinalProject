@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;  // Scene change
 
 public class Player : MonoBehaviour
 {
@@ -39,19 +40,25 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(isPause)
-            {
-                Time.timeScale = 0;
-                isPause = false;
-            }
-            else
-            {
-                Time.timeScale = 1;
-                isPause = true;
-            }
+            SceneManager.LoadScene("GamePause");
+            CheckPause();
             /* ToDo : 일시정지 아이콘 추가, 음악 정지, 뒤로가기 설정 etc.. */
         }
     }   // Move()
+
+    public void CheckPause()
+    {
+        if (isPause)
+        {
+            Time.timeScale = 0;
+            isPause = false;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            isPause = true;
+        }
+    }
 
     private void PlayerJump()   // 플레이어 점프
     {
@@ -111,10 +118,27 @@ public class Player : MonoBehaviour
     }   // OnCollisionExit(Collision collision)    
 
     public Transform mapBlock;  // 맵 생성 변수
-    private int playTime = 0;
+    private int makeBlock = 0;  // 맵 개수 변수
+    private Transform[] deleteMap = new Transform[20];  // 맵 저장 및 삭제
+    int i = 0, j = 0;
     void CreateMap()    // 기본 1자 바닥 생성
     {
-        Transform newMapBlock = Instantiate(mapBlock, new Vector3(playTime++, 1, 0), Quaternion.identity);
+        Transform newMapBlock = Instantiate(mapBlock, new Vector3(makeBlock++, 1, 0), Quaternion.identity);
+
+        /*if(makeBlock<20)
+        {
+            deleteMap[i++] = newMapBlock;
+        }
+        else
+        {
+            Destroy(deleteMap[j].gameObject,10.0f);
+            deleteMap[j++] = newMapBlock;
+            if(j==19)
+            {
+                j = 0;
+            }
+            
+        }*/
         /* ToDo : 캐릭터가 블록위를 지나고 1초후 삭제? */
     }   // CreateMap()
 
