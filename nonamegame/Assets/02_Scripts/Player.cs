@@ -21,12 +21,31 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
-        CreateMap();
+        CheckPlayTime();
     }   // Update()
+
+    float isTime = 0.0f;    // 경과시간
+    float checkTime = 0.1f; //  생성시간 !수정될 수 있는 값!
+    int checkCount = 0;
+    private void CheckPlayTime()    // 플레이시간 몇 초 지나갔는지 확인
+    {
+        isTime += Time.deltaTime;
+        if (isTime > checkTime)    // 0.1초 지날 때마다 생성
+        {
+            GetComponent<Map>().CreateMap();
+            checkCount++;
+            isTime = 0.0f;
+        }
+        /*if(checkCount==5)
+        {
+            DeleteMap();
+            checkCount = 0;
+        }*/ // 일케하면 구멍뚤린지형 나옴.. 근데 왜 안떨어지는 거지...?
+    }
 
     private void Move() // 플레이어 이동 관련
     {
-        transform.Translate(5f * Time.deltaTime, 0f, 0f);   // 플레이어 자동 이동
+        transform.Translate(5f * Time.deltaTime, 0f, 0f);   // 플레이어 자동 이동 !수정될 수 있는 값!
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -45,19 +64,23 @@ public class Player : MonoBehaviour
         }
     }   // Move()
 
+    public Canvas UI_Canvas;
+    public Canvas pauseing;
     public void CheckPause()
     {
         if (isPause)
         {
+            //if (settingCanvas) settingCanvas.gameObject.SetActive(true);
             Time.timeScale = 0;
             isPause = false;
         }
         else
         {
+            //if (settingCanvas) settingCanvas.gameObject.SetActive(false);
             Time.timeScale = 1;
             isPause = true;
         }
-    }
+    }   // CheckPause()
 
     private void PlayerJump()   // 플레이어 점프
     {
@@ -65,11 +88,11 @@ public class Player : MonoBehaviour
         {
             if (playerPos)
             {
-                rigidBody.AddForce(Vector3.up * 23, ForceMode.Impulse);
+                rigidBody.AddForce(Vector3.up * 30, ForceMode.Impulse);
             }
             else
             {
-                rigidBody.AddForce(Vector3.down * 23, ForceMode.Impulse);
+                rigidBody.AddForce(Vector3.down * 30, ForceMode.Impulse);
             }
         }
     }   // PlayerJump()
@@ -98,6 +121,12 @@ public class Player : MonoBehaviour
         {
             isGround = true; //바닥과 맞닿아 있음(점프 가능)
         }
+
+        if(collision.transform.tag=="Obstacle")
+        {
+            SceneManager.LoadScene("GameOver");
+        }   // 충돌 임시 체크
+
     }   // OnCollisionEnter(Collision collision)
 
     void OnCollisionStay(Collision collision)   // 부딪힌 상태 유지
@@ -114,31 +143,6 @@ public class Player : MonoBehaviour
         {
             isGround = false; //바닥과 맞닿아 있지 않음(점프 불가능)
         }
-    }   // OnCollisionExit(Collision collision)    
-
-    public Transform mapBlock;  // 맵 생성 변수
-    private int makeBlock = 0;  // 맵 개수 변수
-    private Transform[] deleteMap = new Transform[20];  // 맵 저장 및 삭제
-    int i = 0, j = 0;
-    void CreateMap()    // 기본 1자 바닥 생성
-    {
-        Transform newMapBlock = Instantiate(mapBlock, new Vector3(makeBlock++, 1, 0), Quaternion.identity);
-
-        /*if(makeBlock<20)
-        {
-            deleteMap[i++] = newMapBlock;
-        }
-        else
-        {
-            Destroy(deleteMap[j].gameObject,10.0f);
-            deleteMap[j++] = newMapBlock;
-            if(j==19)
-            {
-                j = 0;
-            }
-            
-        }*/
-        /* ToDo : 캐릭터가 블록위를 지나고 1초후 삭제? */
-    }   // CreateMap()
+    }   // OnCollisionExit(Collision collision)
 
 }   // Class
