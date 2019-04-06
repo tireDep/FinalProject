@@ -40,7 +40,6 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("GamePause");
             CheckPause();
             /* ToDo : 일시정지 아이콘 추가, 음악 정지, 뒤로가기 설정 etc.. */
         }
