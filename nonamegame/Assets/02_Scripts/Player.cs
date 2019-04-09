@@ -9,19 +9,30 @@ public class Player : MonoBehaviour
     private bool playerPos; // 플레이어 위치
     /* maybe : 양방향도 추가될 수 있음 -> int형 수정? */
     private bool isGround;  // 바닥 체크
-    private bool isPause = true;    // 일시정지 변수
 
+    private SpriteRenderer spriteRenderer;
+    private bool isPause;    // 일시정지 변수
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();      //Rigidbody 컴포넌트를 받아옴
-        playerPos = true;   // 위에 위치
+        spriteRenderer = GetComponent<SpriteRenderer>();
+         playerPos = true;   // 위에 위치
         isGround = true;    // 점프 가능
+
+        isPause = false;
+        canvasUI.enabled = true;
+        pauseUI.enabled = false;
+        // pasue UI Setting
     }   // Start()
 
     void Update()
     {
-        Move();
-        CheckPlayTime();
+        if(!isPause)
+        {
+            Move();
+            CheckPlayTime();
+        }
+        CheckPause();
     }   // Update()
 
     float isTime = 0.0f;    // 경과시간
@@ -43,6 +54,31 @@ public class Player : MonoBehaviour
         }*/ // 일케하면 구멍뚤린지형 나옴.. 근데 왜 안떨어지는 거지...?
     }
 
+    public Canvas canvasUI;
+    public Canvas pauseUI;
+    public void CheckPause()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Time.timeScale == 1)
+            {
+                Time.timeScale = 0;
+                isPause = true;
+                canvasUI.enabled = false;
+                pauseUI.enabled = true;
+                //Camera.main.GetComponent<Blur>().enabled = true;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                isPause = false;
+                canvasUI.enabled = true;
+                pauseUI.enabled = false;
+                //Camera.main.GetComponent<Blur>().enabled = false;
+            }
+        }
+    }   // CheckPause()
+
     private void Move() // 플레이어 이동 관련
     {
         transform.Translate(5f * Time.deltaTime, 0f, 0f);   // 플레이어 자동 이동 !수정될 수 있는 값!
@@ -56,31 +92,7 @@ public class Player : MonoBehaviour
         {
             CheckPlayerPos();
         }
-
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            CheckPause();
-            /* ToDo : 일시정지 아이콘 추가, 음악 정지, 뒤로가기 설정 etc.. */
-        }
     }   // Move()
-
-    public Canvas UI_Canvas;
-    public Canvas pauseing;
-    public void CheckPause()
-    {
-        if (isPause)
-        {
-            //if (settingCanvas) settingCanvas.gameObject.SetActive(true);
-            Time.timeScale = 0;
-            isPause = false;
-        }
-        else
-        {
-            //if (settingCanvas) settingCanvas.gameObject.SetActive(false);
-            Time.timeScale = 1;
-            isPause = true;
-        }
-    }   // CheckPause()
 
     private void PlayerJump()   // 플레이어 점프
     {
@@ -88,26 +100,29 @@ public class Player : MonoBehaviour
         {
             if (playerPos)
             {
-                rigidBody.AddForce(Vector3.up * 30, ForceMode.Impulse);
+                rigidBody.AddForce(Vector3.up * 27, ForceMode.Impulse);
             }
             else
             {
-                rigidBody.AddForce(Vector3.down * 30, ForceMode.Impulse);
+                rigidBody.AddForce(Vector3.down * 27, ForceMode.Impulse);
             }
         }
+        rockChangePos = false;
     }   // PlayerJump()
-
+    
     private void CheckPlayerPos()   // 플레이어 위치 판별
     {
-        if (playerPos == true)  // 위에서 아래로
+        if (playerPos == true && rockChangePos == true)  // 위에서 아래로
         {
             playerPos = false;
+            spriteRenderer.flipY = true;
             Physics.gravity = Vector3.up * 100;
             transform.Translate(Vector3.down * 2);
         }
-        else if(playerPos == false) // 아래에서 위로
+        else if(playerPos == false && rockChangePos == true) // 아래에서 위로
         {
             playerPos = true;
+            spriteRenderer.flipY = false;
             Physics.gravity = Vector3.down * 100;
             transform.Translate(Vector3.up * 2);
         }
@@ -115,11 +130,13 @@ public class Player : MonoBehaviour
 
     // 점프 횟수 제한 관련
     /* maybe : 점프 빠르게 연타하면 에러나는듯? 확인 필요함! */
+    bool rockChangePos = false; // 점프 중 위치 변환 x
     void OnCollisionEnter(Collision collision)  // 처음 부딪혔을 경우
     {
         if (collision.transform.tag == "Ground")
         {
             isGround = true; //바닥과 맞닿아 있음(점프 가능)
+            rockChangePos = true;
         }
 
         if(collision.transform.tag=="Obstacle")
@@ -134,6 +151,7 @@ public class Player : MonoBehaviour
         if (collision.transform.tag == "Ground")
         {
             isGround = true; //바닥과 맞닿아 있음(점프 가능)
+            rockChangePos = true;
         }
     }   // OnCollisionStay(Collision collision)   
 
@@ -142,6 +160,7 @@ public class Player : MonoBehaviour
         if (collision.transform.tag == "Ground")
         {
             isGround = false; //바닥과 맞닿아 있지 않음(점프 불가능)
+            rockChangePos = false;
         }
     }   // OnCollisionExit(Collision collision)
 

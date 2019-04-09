@@ -5,11 +5,10 @@ using UnityEngine.SceneManagement;  // Scene change
 
 public class Interface : MonoBehaviour
 {
-
     public void GameStart() // 게임화면 이동
     {
         SceneManager.LoadScene("MainGame");
-    }
+    }   //  GameStart()
 
     public void GameQuit()
     {
@@ -23,14 +22,5 @@ public class Interface : MonoBehaviour
         Application.Quit();
         // 프로그램 종료
 #endif
-    }
-
-    public void Continue()
-    {
-        bool getPause = GameObject.Find("isPause").GetComponent<Player>();
-        Time.timeScale = 1;
-        getPause = true;
-
-    }
- 
+    }   // GameQuit()
 }
