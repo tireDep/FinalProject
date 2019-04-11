@@ -79,14 +79,18 @@ public class Player : MonoBehaviour
         }
     }   // CheckPause()
 
+    Animator animator;
     private void Move() // 플레이어 이동 관련
     {
+        animator = GetComponent<Animator>();
         transform.Translate(5f * Time.deltaTime, 0f, 0f);   // 플레이어 자동 이동 !수정될 수 있는 값!
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PlayerJump();
+            animator.SetTrigger("Jumping");
         }
+        animator.SetTrigger("Running");
 
         if (Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.DownArrow))
         {
