@@ -23,4 +23,22 @@ public class Interface : MonoBehaviour
         // 프로그램 종료
 #endif
     }   // GameQuit()
+
+    public void GameRestart()   // 게임 재시작
+    {
+        SceneManager.LoadScene("MainGame");
+    }
+
+    public void ReturnMain()
+    {
+        SceneManager.LoadScene("GameStart");
+    }
+
+    public void PauseOff()
+    {
+        Time.timeScale = 1;
+        GetComponent<Player>().isPause = false;
+        GetComponent<Player>().canvasUI.enabled = true;
+        GetComponent<Player>().pauseUI.enabled = false;
+    }
 }

@@ -11,12 +11,13 @@ public class Player : MonoBehaviour
     private bool isGround;  // 바닥 체크
 
     private SpriteRenderer spriteRenderer;
-    private bool isPause;    // 일시정지 변수
+    public bool isPause = false;    // 일시정지 변수
     void Start()
     {
+        Physics.gravity = Vector3.down * 100;   // 시작시 공중뜨는거 방지
         rigidBody = GetComponent<Rigidbody>();      //Rigidbody 컴포넌트를 받아옴
         spriteRenderer = GetComponent<SpriteRenderer>();
-         playerPos = true;   // 위에 위치
+        playerPos = true;   // 위에 위치
         isGround = true;    // 점프 가능
 
         isPause = false;
@@ -88,9 +89,9 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PlayerJump();
-            animator.SetTrigger("Jumping");
+         //   animator.SetTrigger("Jumping");
         }
-        animator.SetTrigger("Running");
+        //animator.SetTrigger("Running");
 
         if (Input.GetKeyDown(KeyCode.UpArrow)||Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -104,11 +105,11 @@ public class Player : MonoBehaviour
         {
             if (playerPos)
             {
-                rigidBody.AddForce(Vector3.up * 27, ForceMode.Impulse);
+                rigidBody.AddForce(Vector3.up * 30, ForceMode.Impulse);
             }
             else
             {
-                rigidBody.AddForce(Vector3.down * 27, ForceMode.Impulse);
+                rigidBody.AddForce(Vector3.down * 30, ForceMode.Impulse);
             }
         }
         rockChangePos = false;
