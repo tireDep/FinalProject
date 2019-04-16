@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;  // Scene change
+using UnityStandardAssets.ImageEffects; // Blur
 
 public class Game : MonoBehaviour
 {
-    private bool isPause = false;    // 일시정지 변수
+    public static bool isPause = false;    // 일시정지 변수
     void Start()
     {
-        Time.timeScale = 1; // 이거 안하면 재시작때 렉걸림
+        Time.timeScale = 1; // 재시작시 일시정지 방지 
+        Camera.main.GetComponent<Blur>().enabled = false;   // 블러 해제
         isPause = false;
         canvasUI.enabled = true;
         pauseUI.enabled = false;
@@ -21,8 +23,15 @@ public class Game : MonoBehaviour
         {
             CheckPlayTime();
         }
+        Move();
         CheckPause();
     }   // Update()
+
+
+    private void Move()
+    {
+        Camera.main.transform.Translate(5f * Time.deltaTime, 0f, 0f);   // 카메라 이동
+    }   //  Move()
 
     float isTime = 0.0f;    // 경과시간
     float checkTime = 0.1f; //  생성시간 !수정될 수 있는 값!
@@ -66,7 +75,8 @@ public class Game : MonoBehaviour
         isPause = true;
         canvasUI.enabled = false;
         pauseUI.enabled = true;
-        //Camera.main.GetComponent<Blur>().enabled = true;
+        Camera.main.GetComponent<Blur>().enabled = true;
+        // auido.Pause();
     }   // PauseOn()
 
     public void PauseOff()  // 일시정지 해제
@@ -75,7 +85,8 @@ public class Game : MonoBehaviour
         isPause = false;
         canvasUI.enabled = true;
         pauseUI.enabled = false;
-        //Camera.main.GetComponent<Blur>().enabled = false;
+        Camera.main.GetComponent<Blur>().enabled = false;
+        // auido.Play();
     }   //  PauseOff()
 
 }   // Class()

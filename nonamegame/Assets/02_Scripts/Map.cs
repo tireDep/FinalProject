@@ -11,6 +11,7 @@ public class Map : MonoBehaviour
     private Transform newMapBlock;  // 맵 생성
     private int makeBlock = 0;  // 맵 개수 변수
     int testcnt = 0;
+
     public void CreateMap()    // 기본 1자 바닥 생성
     {
         newMapBlock = Instantiate(mapBlock, new Vector3(makeBlock++, 1, 0), Quaternion.identity);
@@ -33,13 +34,81 @@ public class Map : MonoBehaviour
     }   // CreateMap()
 
     public Transform obstacleBlock;
+    public Transform obstacleBlock_2;
+    public Transform obstacleBlock_3;
     Transform newObsBlock_up;
     Transform newObsBlock_down;
+    Transform tempBlock;
+    float setY = 0;
     void CreateObstacle(int makeBlock)    // 장애물 생성
     {
-        newObsBlock_up = Instantiate(obstacleBlock, new Vector3(makeBlock+5, 2, 0), Quaternion.identity);
-        newObsBlock_down = Instantiate(obstacleBlock, new Vector3(makeBlock+10, 0, 0), Quaternion.identity);
+        RandomObstacle(1);
+        newObsBlock_up = Instantiate(tempBlock, new Vector3(makeBlock+5, setY, 0), Quaternion.identity);
+        RandomObstacle(-1);
+        newObsBlock_down = Instantiate(tempBlock, new Vector3(makeBlock+10, setY, 0), Quaternion.Euler(180,0,0));
     }   // CreateObstacle()
+
+    void RandomObstacle(int pos)
+    {
+        int randomObstacle = Random.Range(1, 4);
+
+        switch (randomObstacle)
+        {
+            case 1:
+                tempBlock = obstacleBlock;
+                CheckObstacle(pos, 1);
+                break;
+
+            case 2:
+                tempBlock = obstacleBlock_2;
+                CheckObstacle(pos, 2);
+                break;
+
+            case 3:
+                tempBlock = obstacleBlock_3;
+                CheckObstacle(pos, 3);
+                break;
+
+            default:
+                tempBlock = obstacleBlock;
+                CheckObstacle(pos, 1);
+                break;
+        }
+    }   // RandomObstacle(Transform tempBlock, int pos, float setY)
+
+    void CheckObstacle(int pos, int checkNum)
+    {
+        if(pos ==1)
+        {
+            if(checkNum==1)
+            {
+                setY = 2;
+            }
+            else if(checkNum==2)
+            {
+                setY = 1.8f;
+            }
+            else if(checkNum==3)
+            {
+                setY = 2.96f;
+            }
+        }
+        else
+        {
+            if(checkNum==1)
+            {
+                setY = 0;
+            }
+            else if (checkNum == 2)
+            {
+                setY = 0.2f;
+            }
+            else if (checkNum == 3)
+            {
+                setY = -0.95F;
+            }
+        }
+    }   // checkObstacle(int pos, int checkNum)
 
     void DeleteMap()
     {

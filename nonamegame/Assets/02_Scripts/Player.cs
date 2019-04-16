@@ -22,7 +22,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        Move();
+        if(!Game.isPause)
+        {
+            Move();
+        }
     }   // Update()
 
     //Animator animator;
