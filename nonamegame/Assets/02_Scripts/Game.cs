@@ -6,6 +6,12 @@ using UnityStandardAssets.ImageEffects; // Blur
 
 public class Game : MonoBehaviour
 {
+    /*
+     게임 진행 관련 스크립트
+     - 카메라 이동 함수
+     - 일시정지 On/Off 함수
+     */
+
     public static bool isPause = false;    // 일시정지 변수
     void Start()
     {
@@ -14,7 +20,7 @@ public class Game : MonoBehaviour
         isPause = false;
         canvasUI.enabled = true;
         pauseUI.enabled = false;
-        // pasue UI Setting
+        // 일시정지 관련 설정
     }   // Start()
 
     void Update()
@@ -27,10 +33,9 @@ public class Game : MonoBehaviour
         CheckPause();
     }   // Update()
 
-
-    private void Move()
+    private void Move() // 카메라 이동
     {
-        Camera.main.transform.Translate(5f * Time.deltaTime, 0f, 0f);   // 카메라 이동
+        Camera.main.transform.Translate(5f * Time.deltaTime, 0f, 0f);
     }   //  Move()
 
     float isTime = 0.0f;    // 경과시간
@@ -45,13 +50,8 @@ public class Game : MonoBehaviour
             checkCount++;
             isTime = 0.0f;
         }
-        /*if(checkCount==5)
-        {
-            DeleteMap();
-            checkCount = 0;
-        }*/ // 일케하면 구멍뚤린지형 나옴.. 근데 왜 안떨어지는 거지...?
-    }   // CheckPlayTime()    
-
+    }   // CheckPlayTime() 
+    
     public Canvas canvasUI;
     public Canvas pauseUI;
     public void CheckPause()    // pause상태 검사
@@ -89,4 +89,4 @@ public class Game : MonoBehaviour
         // auido.Play();
     }   //  PauseOff()
 
-}   // Class()
+}   // Game Class

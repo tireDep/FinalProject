@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;  // Scene change
 
 public class Interface : MonoBehaviour
 {
+    /*
+     화면 이동, 종료 관련 스크립트
+     - 화면이동 함수
+     - 종료관련 함수
+     */
+
     public void GameStart() // 게임화면 이동
     {
         SceneManager.LoadScene("MainGame");
@@ -33,4 +39,5 @@ public class Interface : MonoBehaviour
     {
         SceneManager.LoadScene("GameStart");
     }   // ReturnMain()
-}
+
+}   // Interface Class

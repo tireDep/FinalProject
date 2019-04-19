@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    private Transform[] testArr = new Transform[10];
-    int i = 0;
+    /*
+     지형 및 장애물 생성 관련 스크립트
+     - 바닥 생성 함수
+     - 장애물 생성 함수
+     - 랜덤위치 설정 함수
+     */
 
     public Transform mapBlock;  // 프리팹
     private Transform newMapBlock;  // 맵 생성
     private int makeBlock = 0;  // 맵 개수 변수
-    int testcnt = 0;
+    int testcnt = 0; // !수정예정!
 
     public void CreateMap()    // 기본 1자 바닥 생성
     {
@@ -20,26 +24,17 @@ public class Map : MonoBehaviour
         {
             CreateObstacle(makeBlock);
         }
-        
-        /*testArr[i] = newMapBlock; 
-
-        if(i==10)
-        {
-            DeleteMap();
-        }
-        else
-        {
-            i++;
-        }*/
     }   // CreateMap()
 
-    public Transform obstacleBlock;
-    public Transform obstacleBlock_2;
-    public Transform obstacleBlock_3;
+    public Transform boxObstacle;
+    public Transform snailObstacle;
+    public Transform longObstacle;
+    // 장애물 종류
     Transform newObsBlock_up;
     Transform newObsBlock_down;
-    Transform tempBlock;
-    float setY = 0;
+    // 장애물 생성 위치
+    Transform tempBlock;    // 생성할 장애물 설정
+    float setY = 0; // 장애물 위치  설정
     void CreateObstacle(int makeBlock)    // 장애물 생성
     {
         RandomObstacle(1);
@@ -48,35 +43,36 @@ public class Map : MonoBehaviour
         newObsBlock_down = Instantiate(tempBlock, new Vector3(makeBlock+10, setY, 0), Quaternion.Euler(180,0,0));
     }   // CreateObstacle()
 
-    void RandomObstacle(int pos)
+    void RandomObstacle(int pos)    // 랜덤 장애물 생성
     {
+        // int pos : 장애물 생성 위치
         int randomObstacle = Random.Range(1, 4);
 
         switch (randomObstacle)
         {
             case 1:
-                tempBlock = obstacleBlock;
+                tempBlock = boxObstacle;
                 CheckObstacle(pos, 1);
                 break;
 
             case 2:
-                tempBlock = obstacleBlock_2;
+                tempBlock = snailObstacle;
                 CheckObstacle(pos, 2);
                 break;
 
             case 3:
-                tempBlock = obstacleBlock_3;
+                tempBlock = longObstacle;
                 CheckObstacle(pos, 3);
                 break;
 
             default:
-                tempBlock = obstacleBlock;
+                tempBlock = boxObstacle;
                 CheckObstacle(pos, 1);
                 break;
         }
     }   // RandomObstacle(Transform tempBlock, int pos, float setY)
 
-    void CheckObstacle(int pos, int checkNum)
+    void CheckObstacle(int pos, int checkNum)   // 장애물 위치 설정
     {
         if(pos ==1)
         {
@@ -109,14 +105,5 @@ public class Map : MonoBehaviour
             }
         }
     }   // checkObstacle(int pos, int checkNum)
-
-    void DeleteMap()
-    {
-        /*Destroy(testArr[0].gameObject);
-        for (int i = 0; i < 9; i++)
-        {
-            testArr[i] = testArr[i++];
-        }*/
-    }   // DeleteMap()
 
 }   // Map Class

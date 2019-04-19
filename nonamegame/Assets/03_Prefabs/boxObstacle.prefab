@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3699109900701359483}
   - component: {fileID: 8293280851157642076}
   - component: {fileID: 1081869716040815320}
+  - component: {fileID: 2978795332650466819}
   m_Layer: 0
-  m_Name: blockObstacle
+  m_Name: boxObstacle
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,3 +94,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.02, y: 1.02, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2978795332650466819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912117086906136760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76ce6f3dafd22e4fbbc7bb5cfafb993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
