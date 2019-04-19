@@ -82,11 +82,11 @@ public class Map : MonoBehaviour
         {
             if(checkNum==1)
             {
-                setY = 2;
+                setY = 2.01f;
             }
             else if(checkNum==2)
             {
-                setY = 1.8f;
+                setY = 1.81f;
             }
             else if(checkNum==3)
             {
@@ -97,15 +97,15 @@ public class Map : MonoBehaviour
         {
             if(checkNum==1)
             {
-                setY = 0;
+                setY = -0.0f;
             }
             else if (checkNum == 2)
             {
-                setY = 0.2f;
+                setY = 0.19f;
             }
             else if (checkNum == 3)
             {
-                setY = -0.95F;
+                setY = -0.96f;
             }
         }
     }   // checkObstacle(int pos, int checkNum)
