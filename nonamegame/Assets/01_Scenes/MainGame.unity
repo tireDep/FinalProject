@@ -1335,6 +1335,12 @@ MonoBehaviour:
     type: 3}
   longObstacle: {fileID: 6082811445839685359, guid: bd9ec2f9e557efa47b637264c66194f0,
     type: 3}
+  flyerObstacle: {fileID: 2947574317425378059, guid: b44c6823fd055034791ada4a96c0c5ca,
+    type: 3}
+  fishObstacle: {fileID: 8441722934380743329, guid: cf42c4f457a5e2643adcb68d5faf3cf2,
+    type: 3}
+  slimeObstacle: {fileID: 2183067046141446842, guid: 44f7ac7b0e2a42048a3c5107eb220e40,
+    type: 3}
 --- !u!4 &1268076405
 Transform:
   m_ObjectHideFlags: 0

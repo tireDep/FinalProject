@@ -29,24 +29,28 @@ public class Map : MonoBehaviour
     public Transform boxObstacle;
     public Transform snailObstacle;
     public Transform longObstacle;
+    public Transform flyerObstacle;
+    public Transform fishObstacle;
+    public Transform slimeObstacle;
     // 장애물 종류
     Transform newObsBlock_up;
     Transform newObsBlock_down;
     // 장애물 생성 위치
     Transform tempBlock;    // 생성할 장애물 설정
     float setY = 0; // 장애물 위치  설정
+    int setEuler = 0;   // 장애물 뒤집기 유무 설정
     void CreateObstacle(int makeBlock)    // 장애물 생성
     {
         RandomObstacle(1);
         newObsBlock_up = Instantiate(tempBlock, new Vector3(makeBlock+5, setY, 0), Quaternion.identity);
         RandomObstacle(-1);
-        newObsBlock_down = Instantiate(tempBlock, new Vector3(makeBlock+10, setY, 0), Quaternion.Euler(180,0,0));
+        newObsBlock_down = Instantiate(tempBlock, new Vector3(makeBlock+10, setY, 0), Quaternion.Euler(setEuler*180,0,0));
     }   // CreateObstacle()
 
     void RandomObstacle(int pos)    // 랜덤 장애물 생성
     {
         // int pos : 장애물 생성 위치
-        int randomObstacle = Random.Range(1, 4);
+        int randomObstacle = Random.Range(1, 6);
 
         switch (randomObstacle)
         {
@@ -63,6 +67,23 @@ public class Map : MonoBehaviour
             case 3:
                 tempBlock = longObstacle;
                 CheckObstacle(pos, 3);
+                break;
+
+            case 4:
+                if(pos>0)
+                {
+                    tempBlock = flyerObstacle;
+                }
+                else
+                {
+                    tempBlock = fishObstacle;
+                }
+                CheckObstacle(pos, 4);
+                break;
+
+            case 5:
+                tempBlock = slimeObstacle;
+                CheckObstacle(pos, 5);
                 break;
 
             default:
@@ -88,20 +109,41 @@ public class Map : MonoBehaviour
             {
                 setY = 2.96f;
             }
+            else if (checkNum == 4)
+            {
+                setY = 5.0f;
+            }
+            else if (checkNum == 5)
+            {
+                setY = 1.78f;
+            }
         }
         else
         {
             if(checkNum==1)
             {
+                setEuler = 1;
                 setY = -0.0f;
             }
             else if (checkNum == 2)
             {
+                setEuler = 1;
                 setY = 0.19f;
             }
             else if (checkNum == 3)
             {
+                setEuler = 1;
                 setY = -0.96f;
+            }
+            else if (checkNum == 4)
+            {
+                setEuler = 0;
+                setY = -3.0f;
+            }
+            else if (checkNum == 5)
+            {
+                setEuler = 1;
+                setY = 0.22f;
             }
         }
     }   // checkObstacle(int pos, int checkNum)
