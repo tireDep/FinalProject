@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;  // Scene change
 using UnityStandardAssets.ImageEffects; // Blur
+using UnityEngine.UI;   // UI
 
 public class Game : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Game : MonoBehaviour
      */
 
     public static bool isPause = false;    // 일시정지 변수
+    public Image life_3, life_2, life_1, life_0;    // UI 이미지
     void Start()
     {
         Time.timeScale = 1; // 재시작시 일시정지 방지 
@@ -21,17 +23,49 @@ public class Game : MonoBehaviour
         canvasUI.enabled = true;
         pauseUI.enabled = false;
         // 일시정지 관련 설정
+
+        life_3.enabled = true;
+        life_2.enabled = false;
+        life_1.enabled = false;
+        life_0.enabled = false;
+        // HP 이미지 설정
     }   // Start()
 
     void Update()
     {
+        if (Player.isDead)
+        {
+            SceneManager.LoadScene("GameOver");
+        }   // 죽음 여부 판별
+
         if (!isPause)
         {
             CheckPlayTime();
-        }
+        }   // 일시정지 여부 판별
+
+        UpdateGUI();
         Move();
         CheckPause();
     }   // Update()
+
+    void UpdateGUI()    // UI setting
+    {
+        if(2 == Player.lifeCnt)
+        {
+            life_2.enabled = true;
+            life_3.enabled = false;
+        }
+       else if (1 == Player.lifeCnt)
+        {
+            life_2.enabled = false;
+            life_1.enabled = true;
+        }
+        else if (0 == Player.lifeCnt)
+        {
+            life_1.enabled = false;
+            life_0.enabled = true;
+        }
+    }   // UpdateGUI()
 
     private void Move() // 카메라 이동
     {

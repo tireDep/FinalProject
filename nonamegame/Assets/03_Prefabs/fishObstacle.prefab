@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 753600470390824207}
   - component: {fileID: 7150079339528887352}
   - component: {fileID: 7832373652246677738}
+  - component: {fileID: 2930204143132991540}
   m_Layer: 0
   m_Name: fishObstacle
   m_TagString: Obstacle
@@ -109,7 +110,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037836525512395216}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.24, y: 0.86, z: 0.2}
@@ -124,5 +125,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d76ce6f3dafd22e4fbbc7bb5cfafb993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2930204143132991540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037836525512395216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24703ee69a62634eb3a27196bb29bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -9,7 +9,7 @@ public class BackGround : MonoBehaviour
      - 무한 배경 함수(오프셋 이용)
      */
 
-    private float scrollSpeed = 0.5f;   // 배경 이동 속도
+    private float scrollSpeed = 0.2f;   // 배경 이동 속도
     private float targetOffset; // 오프셋 지정
     private new Renderer renderer;
     private void Start()

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2535336484390203500}
   - component: {fileID: 2582948462879975185}
   - component: {fileID: 8823695093979720130}
+  - component: {fileID: 4228485029770765874}
   m_Layer: 0
   m_Name: flyerObstacle
   m_TagString: Obstacle
@@ -109,7 +110,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8658263410765194597}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.44, y: 0.72, z: 0.2}
@@ -124,5 +125,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d76ce6f3dafd22e4fbbc7bb5cfafb993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4228485029770765874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8658263410765194597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24703ee69a62634eb3a27196bb29bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

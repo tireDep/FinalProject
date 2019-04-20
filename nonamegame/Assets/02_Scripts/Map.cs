@@ -115,7 +115,7 @@ public class Map : MonoBehaviour
             }
             else if (checkNum == 5)
             {
-                setY = 1.78f;
+                setY = 1.76f;
             }
         }
         else
@@ -143,7 +143,7 @@ public class Map : MonoBehaviour
             else if (checkNum == 5)
             {
                 setEuler = 1;
-                setY = 0.22f;
+                setY = 0.24f;
             }
         }
     }   // checkObstacle(int pos, int checkNum)
