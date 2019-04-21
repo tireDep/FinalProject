@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     int maxLifeCnt = 3; // MaxHP
     public static int lifeCnt;    // HP
-    private float moveSpeed = 5.0f; // 이동속도 변수
+    private float moveSpeed = 10.0f; // 이동속도 변수
     private float jumpPower = 27.0f; // 점프 힘 변수 /*!수정예정! - 그냥 점프가 수정되야될거같기도 하고*/
     private int gravityForce = 100; // 중력변수
     private int setPos = 2; // 플레이어 위치

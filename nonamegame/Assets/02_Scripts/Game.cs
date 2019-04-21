@@ -69,11 +69,11 @@ public class Game : MonoBehaviour
 
     private void Move() // 카메라 이동
     {
-        Camera.main.transform.Translate(5f * Time.deltaTime, 0f, 0f);
+        Camera.main.transform.Translate(10f * Time.deltaTime, 0f, 0f);
     }   //  Move()
 
     float isTime = 0.0f;    // 경과시간
-    float checkTime = 0.1f; //  생성시간 !수정될 수 있는 값!
+    float checkTime = 0.05f; //  생성시간 !수정될 수 있는 값!
     int checkCount = 0;
     private void CheckPlayTime()    // 플레이시간 몇 초 지나갔는지 확인
     {
