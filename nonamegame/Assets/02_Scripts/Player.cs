@@ -11,21 +11,24 @@ public class Player : MonoBehaviour
      - 점프 함수
      - 위치 함수
      - 충돌 체크 함수
+     - Hp 체크 및 초기화
     */
 
     private Rigidbody rigidBody;    // 물리기능 이용 
     private SpriteRenderer spriteRenderer;  // filp 기능 이용
     private bool isGround;  // 바닥 체크
     private bool playerPos; // 플레이어 위치
-                            /* maybe : 양방향도 추가될 수 있음 -> int형 수정? */
+    /* !수정예정! - 양방향도 추가될 수 있음 -> int형 수정? */
 
-    int maxLifeCnt = 3; // MaxHP
-    public static int lifeCnt;    // HP
+    int maxplayerHp = 3; // MaxHP
+    public static int playerHp;    // HP
     private float moveSpeed = 10.0f; // 이동속도 변수
     private float jumpPower = 27.0f; // 점프 힘 변수 /*!수정예정! - 그냥 점프가 수정되야될거같기도 하고*/
     private int gravityForce = 100; // 중력변수
     private int setPos = 2; // 플레이어 위치
     public static bool isDead;    // 생사여부
+
+    float playTime; // 플레이 시간
     void Start()
     {
         Physics.gravity = Vector3.down * 100;   // 시작시 공중뜨는거 방지
@@ -34,15 +37,19 @@ public class Player : MonoBehaviour
         playerPos = true;   // 위에 위치
         isGround = true;    // 점프 가능   
 
-        lifeCnt = maxLifeCnt;   // HP 설정
+        playerHp = maxplayerHp;   // HP 설정
         isDead = false; // 생사여부
+
+        playTime = 0f;
     }   // Start()
 
     void Update()
     {
+        playTime += Time.deltaTime; // 플레이 시간 누적
         if(!Game.isPause)
         {
             Move();
+            ResetPlayerLife();
         }
     }   // Update()
 
@@ -87,6 +94,26 @@ public class Player : MonoBehaviour
         }
         rockChangePos = false;
     }   // PlayerJump()
+
+    public static bool isSavePoint = false; // 세이브포인트 확인
+    int checkTime = 0;  // 초기화 시간 체크
+    void ResetPlayerLife()  // 특정 시간이 지나면 플레이어 Hp 초기화
+    {
+        // Debug.Log(playTime + " / " + Audio.playTime_25);
+        if((Audio.playTime_25 == (int)playTime || Audio.playTime_50 == (int)playTime || Audio.playTime_75 == (int)playTime) && !isSavePoint)
+        {
+            isSavePoint = true;
+            //GetComponent<Map>().CreateResetPoint(); /* !수정예정! - 그래픽적으로 보여져야 함 */
+            playerHp = maxplayerHp;
+            checkTime = (int)playTime;  // 초기화는 한번만 실행되어야 함
+           // Debug.Log("resetLIfe");
+        }
+
+        if ((int)playTime > checkTime)
+        {
+            isSavePoint = false;
+        }
+    }   // ResetPlayerLife()
 
     private void CheckPlayerPos()   // 플레이어 위치 판별
     {
@@ -149,8 +176,8 @@ public class Player : MonoBehaviour
     {
         if (other.transform.tag == "Obstacle" && !isNoHit /*&& other.isTrigger*/ )
         {
-            lifeCnt--;
-            if (lifeCnt < 0)
+            playerHp--;
+            if (playerHp < 0)
             {
                 isDead = true;
             }
@@ -159,7 +186,7 @@ public class Player : MonoBehaviour
                 isNoHit = true;
                 StartCoroutine("NoHitting");
             }
-            Debug.Log(lifeCnt);/*!수정예장! -> 삭제*/
+            Debug.Log(playerHp);/*!수정예장! -> 삭제*/
         }   // 충돌 임시 체크 !수정예정! -> 세이브 포인트 등으로 + Life 초기화
     }   // OnTriggerEnter(Collider other)
 

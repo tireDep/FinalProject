@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
      게임 진행 관련 스크립트
      - 카메라 이동 함수
      - 일시정지 On/Off 함수
+     - 게임 UI 설정(Hp)
      */
 
     public static bool isPause = false;    // 일시정지 변수
@@ -38,6 +39,14 @@ public class Game : MonoBehaviour
             SceneManager.LoadScene("GameOver");
         }   // 죽음 여부 판별
 
+        if(Player.isSavePoint)
+        {
+            life_0.enabled = false;
+            life_1.enabled = false;
+            life_2.enabled = false;
+            life_3.enabled = true;
+        }   // 세이브 포인트를 지날경우 Hp 초기화&이미지 초기화
+
         if (!isPause)
         {
             CheckPlayTime();
@@ -50,17 +59,17 @@ public class Game : MonoBehaviour
 
     void UpdateGUI()    // UI setting
     {
-        if(2 == Player.lifeCnt)
+        if(2 == Player.playerHp)
         {
             life_2.enabled = true;
             life_3.enabled = false;
         }
-       else if (1 == Player.lifeCnt)
+       else if (1 == Player.playerHp)
         {
             life_2.enabled = false;
             life_1.enabled = true;
         }
-        else if (0 == Player.lifeCnt)
+        else if (0 == Player.playerHp)
         {
             life_1.enabled = false;
             life_0.enabled = true;
@@ -105,12 +114,12 @@ public class Game : MonoBehaviour
 
     public void PauseOn()   // 일시정지 설정
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0; // 정지
         isPause = true;
         canvasUI.enabled = false;
         pauseUI.enabled = true;
-        Camera.main.GetComponent<Blur>().enabled = true;
-        // auido.Pause();
+        Camera.main.GetComponent<Blur>().enabled = true;    // 카메라 블러 효과
+        Audio.audioSource.Pause();  // 오디오 정지
     }   // PauseOn()
 
     public void PauseOff()  // 일시정지 해제
@@ -120,7 +129,7 @@ public class Game : MonoBehaviour
         canvasUI.enabled = true;
         pauseUI.enabled = false;
         Camera.main.GetComponent<Blur>().enabled = false;
-        // auido.Play();
+        Audio.audioSource.Play();
     }   //  PauseOff()
 
 }   // Game Class

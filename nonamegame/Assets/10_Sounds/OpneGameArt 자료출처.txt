@@ -1,0 +1,11 @@
+<Arts>
+platformer Asset Pack 2 - CTatz CC0
+Platformer Art Deluxe - Kenney CC0
+Animated trap and obstracles - irmirx CC-BY 3.0
+(https://opengameart.org/content/animated-traps-and-obstacles)
+Gameboy Platformer Art - LittleSadNerd CC0
+8*8 Retro Style Platformer Tiles + Background - etqws3 CC0
+
+<Sounds>
+Menu Selection Click - NenadSimic CC-BY 3.0
+https://opengameart.org/content/menu-selection-click
