@@ -17,16 +17,16 @@ public class Audio : MonoBehaviour
     public AudioClip audioClip;    // 음원
     public Text songTitle;  // 노래 제목
 
-    public static float playTime_25, playTime_50, playTime_75;  // 세이브 포인트 관련 변수
+    // public static float playTime_25, playTime_50, playTime_75;  // 세이브 포인트 관련 변수
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         slider = GetComponent<Slider>();
 
-        playTime_25 = audioClip.length / 4;
+        /*playTime_25 = audioClip.length / 4;
         playTime_50 = audioClip.length / 2;
         playTime_75 = (audioClip.length / 4) * 3;
-        // 세이브 포인트 시간 할당
+        // 세이브 포인트 시간 할당*/
 
         slider.minValue = 0;
         slider.maxValue = audioClip.length;
@@ -36,8 +36,8 @@ public class Audio : MonoBehaviour
         // 곡 이름 설정
 
         audioSource.clip = audioClip;
-        /* !수정예정! - fade_in fade_out 추가? 
-         */
+        /* !수정예정! - fade_in fade_out 추가? */
+
         audioSource.Play();
         // 음악 설정
 
@@ -63,11 +63,11 @@ public class Audio : MonoBehaviour
     {
         Debug.Log("Audio Fin");
         SceneManager.LoadScene("GameOver"); /* !수정예정! - 게임 결과 창으로 이동 */
-    }
+    }   // FinishedAudio()
 
     public void MovePosition()  // 슬라이더 이동시 곡도 이동
     {
         audioSource.time = slider.value;
-    }   // MovePosition()*/
+    }   // MovePosition()
 
 }   // Audio Class

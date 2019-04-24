@@ -11,11 +11,16 @@ public class Game : MonoBehaviour
      게임 진행 관련 스크립트
      - 카메라 이동 함수
      - 일시정지 On/Off 함수
-     - 게임 UI 설정(Hp)
+     - 게임 UI 설정
+     - 점수 계산
      */
 
     public static bool isPause = false;    // 일시정지 변수
-    public Image life_3, life_2, life_1, life_0;    // UI 이미지
+
+    private static int maxScore = 1000000;  // 최고점수
+    public static int playerScore;  // 플레이어 점수
+    public Text playerScorText; // 점수 UI
+
     void Start()
     {
         Time.timeScale = 1; // 재시작시 일시정지 방지 
@@ -25,11 +30,10 @@ public class Game : MonoBehaviour
         pauseUI.enabled = false;
         // 일시정지 관련 설정
 
-        life_3.enabled = true;
-        life_2.enabled = false;
-        life_1.enabled = false;
-        life_0.enabled = false;
-        // HP 이미지 설정
+        playerScore = maxScore; 
+        checkHitCount = 0;
+        playerHitCount = 0;
+        // 점수 관련 초기화
     }   // Start()
 
     void Update()
@@ -38,14 +42,6 @@ public class Game : MonoBehaviour
         {
             SceneManager.LoadScene("GameOver");
         }   // 죽음 여부 판별
-
-        if(Player.isSavePoint)
-        {
-            life_0.enabled = false;
-            life_1.enabled = false;
-            life_2.enabled = false;
-            life_3.enabled = true;
-        }   // 세이브 포인트를 지날경우 Hp 초기화&이미지 초기화
 
         if (!isPause)
         {
@@ -57,23 +53,17 @@ public class Game : MonoBehaviour
         CheckPause();
     }   // Update()
 
+    private int checkHitCount;  // 부딪힘 & 점수차감 체크
+    int playerHitCount; // Player.cs에서 변수 받아옴
     void UpdateGUI()    // UI setting
     {
-        /*if(2 == Player.playerHp)
+        playerHitCount = Player.playerHitCount; // 부딪힘 횟수 받아옴
+        playerScorText.text = playerScore.ToString();
+        if (checkHitCount<playerHitCount) // 장애물에 부딪힐 경우 점수 차감
         {
-            life_2.enabled = true;
-            life_3.enabled = false;
+            playerScore -= playerHitCount * 2 * 100;
+            checkHitCount++;
         }
-       else if (1 == Player.playerHp)
-        {
-            life_2.enabled = false;
-            life_1.enabled = true;
-        }
-        else if (0 == Player.playerHp)
-        {
-            life_1.enabled = false;
-            life_0.enabled = true;
-        }*/
     }   // UpdateGUI()
 
     private void Move() // 카메라 이동
