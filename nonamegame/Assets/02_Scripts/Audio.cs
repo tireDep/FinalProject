@@ -41,7 +41,7 @@ public class Audio : MonoBehaviour
         audioSource.Play();
         // 음악 설정
 
-        Invoke("FinishedAudio", audioClip.length);  // 음악이 끝나면 실행
+        // Invoke("FinishedAudio", audioClip.length);  // 음악이 끝나면 실행
     }   // Start()
 
     void Update()
@@ -49,6 +49,11 @@ public class Audio : MonoBehaviour
         slider.value = audioSource.time;    // 곡 진행에 따른 슬라이더 이동
 
         if(slider.value==audioClip.length)
+        {
+            FinishedAudio();
+        }
+
+        if(!audioSource.isPlaying && !Game.isPause)
         {
             FinishedAudio();
         }

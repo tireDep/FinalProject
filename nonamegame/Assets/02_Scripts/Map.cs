@@ -60,16 +60,11 @@ public class Map : MonoBehaviour
                 break;
 
             case 2:
-                tempBlock = snailObstacle;
+                tempBlock = longObstacle;
                 CheckObstacle(pos, 2);
                 break;
 
             case 3:
-                tempBlock = longObstacle;
-                CheckObstacle(pos, 3);
-                break;
-
-            case 4:
                 if(pos>0)
                 {
                     tempBlock = flyerObstacle;
@@ -78,12 +73,19 @@ public class Map : MonoBehaviour
                 {
                     tempBlock = fishObstacle;
                 }
-                CheckObstacle(pos, 4);
+                CheckObstacle(pos, 3);
                 break;
 
-            case 5:
-                tempBlock = slimeObstacle;
-                CheckObstacle(pos, 5);
+            case 4:
+                if (pos > 0)
+                {
+                    tempBlock = snailObstacle;
+                }
+                else
+                {
+                    tempBlock = slimeObstacle;
+                }
+                CheckObstacle(pos, 4);
                 break;
 
             default:
@@ -95,7 +97,7 @@ public class Map : MonoBehaviour
 
     void CheckObstacle(int pos, int checkNum)   // 장애물 위치 설정
     {
-        if(pos ==1)
+        if (pos ==1)
         {
             if(checkNum==1)
             {
@@ -103,19 +105,16 @@ public class Map : MonoBehaviour
             }
             else if(checkNum==2)
             {
-                setY = 1.81f;
-            }
-            else if(checkNum==3)
-            {
                 setY = 2.96f;
+            }
+            else if (checkNum == 3)
+            {
+                float randomMove = Random.Range(3.0f, 5.5f);
+                setY = randomMove;
             }
             else if (checkNum == 4)
             {
-                setY = 5.0f;
-            }
-            else if (checkNum == 5)
-            {
-                setY = 1.76f;
+                setY = 1.81f;
             }
         }
         else
@@ -128,19 +127,15 @@ public class Map : MonoBehaviour
             else if (checkNum == 2)
             {
                 setEuler = 1;
-                setY = 0.19f;
+                setY = -0.96f;
             }
             else if (checkNum == 3)
             {
-                setEuler = 1;
-                setY = -0.96f;
+                float randomMove = Random.Range(-1.0f, -2.5f);
+                setEuler = 0;
+                setY = randomMove;
             }
             else if (checkNum == 4)
-            {
-                setEuler = 0;
-                setY = -3.0f;
-            }
-            else if (checkNum == 5)
             {
                 setEuler = 1;
                 setY = 0.24f;

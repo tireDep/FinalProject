@@ -20,8 +20,8 @@ public class Player : MonoBehaviour
     private bool playerPos; // 플레이어 위치
     /* !수정예정! - 양방향도 추가될 수 있음 -> int형 수정? */
 
-    int maxplayerHp = 3; // MaxHP
-    public static int playerHp;    // HP
+    //int maxplayerHp = 3; // MaxHP
+    //public static int playerHp;    // HP
     private float moveSpeed = 10.0f; // 이동속도 변수
     private float jumpPower = 27.0f; // 점프 힘 변수 /*!수정예정! - 그냥 점프가 수정되야될거같기도 하고*/
     private int gravityForce = 100; // 중력변수
@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
         playerPos = true;   // 위에 위치
         isGround = true;    // 점프 가능   
 
-        playerHp = maxplayerHp;   // HP 설정
+        //playerHp = maxplayerHp;   // HP 설정
         isDead = false; // 생사여부
 
         playTime = 0f;
@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
         {
             isSavePoint = true;
             //GetComponent<Map>().CreateResetPoint(); /* !수정예정! - 그래픽적으로 보여져야 함 */
-            playerHp = maxplayerHp;
+            //playerHp = maxplayerHp;
             checkTime = (int)playTime;  // 초기화는 한번만 실행되어야 함
            // Debug.Log("resetLIfe");
         }
@@ -176,17 +176,17 @@ public class Player : MonoBehaviour
     {
         if (other.transform.tag == "Obstacle" && !isNoHit /*&& other.isTrigger*/ )
         {
-            playerHp--;
+            /*playerHp--;
             if (playerHp < 0)
             {
                 isDead = true;
             }
-            else
+            else*/
             {
                 isNoHit = true;
                 StartCoroutine("NoHitting");
             }
-            Debug.Log(playerHp);/*!수정예장! -> 삭제*/
+            //Debug.Log(playerHp);/*!수정예장! -> 삭제*/
         }   // 충돌 임시 체크 !수정예정! -> 세이브 포인트 등으로 + Life 초기화
     }   // OnTriggerEnter(Collider other)
 

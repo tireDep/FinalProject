@@ -59,7 +59,7 @@ public class Game : MonoBehaviour
 
     void UpdateGUI()    // UI setting
     {
-        if(2 == Player.playerHp)
+        /*if(2 == Player.playerHp)
         {
             life_2.enabled = true;
             life_3.enabled = false;
@@ -73,7 +73,7 @@ public class Game : MonoBehaviour
         {
             life_1.enabled = false;
             life_0.enabled = true;
-        }
+        }*/
     }   // UpdateGUI()
 
     private void Move() // 카메라 이동

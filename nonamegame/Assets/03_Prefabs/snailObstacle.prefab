@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3717170105143011999}
   - component: {fileID: 6201213380417492640}
   - component: {fileID: 457681963245308276}
+  - component: {fileID: 2411302609670795352}
   m_Layer: 0
   m_Name: snailObstacle
   m_TagString: Obstacle
@@ -104,5 +105,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d76ce6f3dafd22e4fbbc7bb5cfafb993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2411302609670795352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8751068737998624156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f24703ee69a62634eb3a27196bb29bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
