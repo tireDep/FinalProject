@@ -62,7 +62,7 @@ public class Audio : MonoBehaviour
     void FinishedAudio()
     {
         Debug.Log("Audio Fin");
-        SceneManager.LoadScene("GameOver"); /* !수정예정! - 게임 결과 창으로 이동 */
+        SceneManager.LoadScene("GameResult");
     }   // FinishedAudio()
 
     public void MovePosition()  // 슬라이더 이동시 곡도 이동

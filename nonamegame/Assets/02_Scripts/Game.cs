@@ -17,7 +17,7 @@ public class Game : MonoBehaviour
 
     public static bool isPause = false;    // 일시정지 변수
 
-    private static int maxScore = 1000000;  // 최고점수
+    public static int maxScore = 1000000;  // 최고점수
     public static int playerScore;  // 플레이어 점수
     public Text playerScorText; // 점수 UI
 

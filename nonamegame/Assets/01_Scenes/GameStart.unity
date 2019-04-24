@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 1166108056}
   - component: {fileID: 1166108059}
   m_Layer: 5
-  m_Name: GameEnd
+  m_Name: gameEndButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 1582617239}
   - component: {fileID: 1582617238}
   m_Layer: 5
-  m_Name: Text
+  m_Name: title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -721,8 +721,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000080113, y: 188}
-  m_SizeDelta: {x: 662.4, y: 161.2}
+  m_AnchoredPosition: {x: 0.000061035, y: 192}
+  m_SizeDelta: {x: 711.5, y: 161.2}
   m_Pivot: {x: 0.5000001, y: 0.49999982}
 --- !u!114 &1582617238
 MonoBehaviour:
@@ -757,7 +757,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Running game
+  m_Text: RRG
 --- !u!222 &1582617239
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 2021884717}
   - component: {fileID: 2021884720}
   m_Layer: 5
-  m_Name: GameStart
+  m_Name: gameStartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
