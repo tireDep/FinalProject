@@ -65,11 +65,10 @@ public class Player : MonoBehaviour
         transform.Translate(moveSpeed * Time.deltaTime, 0f, 0f);
     }   // AutoMove()
 
-    //Animator animator;
+    //Animator animator
     public void InputMove() // 플레이어 입력 이동
     {
         //animator = GetComponent<Animator>();
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PlayerJump();
@@ -80,6 +79,23 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             CheckPlayerPos();
+        }
+
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            //float halfHeight = Camera.main.orthographicSize;
+            //float halfWidth = Camera.main.aspect * halfHeight;
+            //Vector3 objectScreenPos = Camera.main.WorldToScreenPoint(transform.position);
+            Vector3 objectScreenPos = Camera.main.WorldToScreenPoint(transform.position);
+            GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
+            for (int i = 0; i < objects.Length; i++)
+            {
+                if (objects[i].transform.position.x < Screen.width)
+                {
+                    Destroy(objects[i]);
+                    //Destroy(GameObject.FindGameObjectWithTag("Obstacle"));
+                }
+            }
         }
     }   // InputMove() 
 
