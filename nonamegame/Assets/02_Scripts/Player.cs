@@ -56,46 +56,26 @@ public class Player : MonoBehaviour
 
     }   // Update()
 
-    /*private void FixedUpdate()
-    {
-    }   //  FixedUpdate()*/
-
     public void AutoMove()  // 플레이어 자동 이동
     {
         transform.Translate(moveSpeed * Time.deltaTime, 0f, 0f);
     }   // AutoMove()
 
-    //Animator animator
     public void InputMove() // 플레이어 입력 이동
     {
-        //animator = GetComponent<Animator>();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))    // 점프
         {
             PlayerJump();
-            //   animator.SetTrigger("Jumping");
         }
-        //animator.SetTrigger("Running");
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))   //   위치 변환
         {
             CheckPlayerPos();
         }
 
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) // 화면 삭제
         {
-            //float halfHeight = Camera.main.orthographicSize;
-            //float halfWidth = Camera.main.aspect * halfHeight;
-            //Vector3 objectScreenPos = Camera.main.WorldToScreenPoint(transform.position);
-            Vector3 objectScreenPos = Camera.main.WorldToScreenPoint(transform.position);
-            GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
-            for (int i = 0; i < objects.Length; i++)
-            {
-                if (objects[i].transform.position.x < Screen.width)
-                {
-                    Destroy(objects[i]);
-                    //Destroy(GameObject.FindGameObjectWithTag("Obstacle"));
-                }
-            }
+            Game.BlueScreenOn();
         }
     }   // InputMove() 
 

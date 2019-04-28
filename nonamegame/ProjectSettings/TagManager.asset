@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Obstacle
   - LifeCnt
+  - CheckScreen_1
+  - CheckScreen_2
   layers:
   - Default
   - TransparentFX

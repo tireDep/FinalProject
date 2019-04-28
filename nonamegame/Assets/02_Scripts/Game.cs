@@ -122,4 +122,19 @@ public class Game : MonoBehaviour
         Audio.audioSource.Play();
     }   //  PauseOff()
 
+    static public void BlueScreenOn()   // 화면 안에 있는 장애물 삭제
+    {
+        GameObject checkScreen_1 = GameObject.FindGameObjectWithTag("CheckScreen_1");   // 스크린 가장 왼쪽 탐색
+        GameObject checkScreen_2 = GameObject.FindGameObjectWithTag("CheckScreen_2");   // 스크린 가장 오른쪽 탐색
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");   // 생성된 장애물 탐색
+        for (int i = 0; i < objects.Length; i++)
+        {
+            if (objects[i].transform.position.x > checkScreen_1.transform.position.x && objects[i].transform.position.x < checkScreen_2.transform.position.x)
+            {
+                // 스크린에서 보이는 장애물 삭제
+                Destroy(objects[i]);
+            }
+        }
+    }   // BlueScreenOn()
+
 }   // Game Class
