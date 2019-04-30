@@ -16,13 +16,14 @@ public class Audio : MonoBehaviour
     Slider slider;  // 진행상태
     public AudioClip audioClip;    // 음원
     public Text songTitle;  // 노래 제목
-
+    static public bool isAudioFin;    // 오디오 체크 변수
     // public static float playTime_25, playTime_50, playTime_75;  // 세이브 포인트 관련 변수
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         slider = GetComponent<Slider>();
 
+        isAudioFin = false;
         /*playTime_25 = audioClip.length / 4;
         playTime_50 = audioClip.length / 2;
         playTime_75 = (audioClip.length / 4) * 3;
@@ -59,10 +60,10 @@ public class Audio : MonoBehaviour
         }
     }   //   Update()
 
-    void FinishedAudio()
+    void FinishedAudio() // 노래 끝날 경우 게임 종료
     {
         Debug.Log("Audio Fin");
-        SceneManager.LoadScene("GameResult");
+        isAudioFin = true;  
     }   // FinishedAudio()
 
     public void MovePosition()  // 슬라이더 이동시 곡도 이동

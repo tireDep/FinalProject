@@ -21,6 +21,7 @@ public class Game : MonoBehaviour
     public static int playerScore;  // 플레이어 점수
     public Text playerScorText; // 점수 UI
 
+    public UnityEngine.UI.Image fadePanel;   // fade 효과 관련
     void Start()
     {
         Time.timeScale = 1; // 재시작시 일시정지 방지 
@@ -34,10 +35,17 @@ public class Game : MonoBehaviour
         checkHitCount = 0;
         playerHitCount = 0;
         // 점수 관련 초기화
+
+        fadePanel.enabled = false;
     }   // Start()
 
     void Update()
     {
+        if(Audio.isAudioFin)
+        {
+            GoToResultScene();
+        }   // 음악 종료 시 페이드효과&게임 결과 화면 출력
+
         if (Player.isDead)
         {
             SceneManager.LoadScene("GameOver");
@@ -101,6 +109,28 @@ public class Game : MonoBehaviour
             }
         }
     }   // CheckPause()
+
+    float fadeTime = 0;
+    float time = 0; 
+    // fade 시간 관련 변수들
+    void GoToResultScene()  // 페이드 효과 및 화면 전환
+    {
+        fadePanel.enabled = true;
+        
+        while(fadeTime<=255)
+        {
+            time += Time.deltaTime;
+            if (time >= 0.1f)
+            {
+                fadeTime += 10;
+                fadePanel.color = new Color(0, 0, 0, fadeTime);
+                time = 0;
+            }
+        }
+        
+        SceneManager.LoadScene("GameResult");
+        
+    }   // GoToResultScene()
 
     public void PauseOn()   // 일시정지 설정
     {
