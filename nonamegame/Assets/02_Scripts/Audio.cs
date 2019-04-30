@@ -17,6 +17,9 @@ public class Audio : MonoBehaviour
     public AudioClip audioClip;    // 음원
     public Text songTitle;  // 노래 제목
     static public bool isAudioFin;    // 오디오 체크 변수
+
+    public static bool isCheckPoint;
+    public static float checkPointTime;
     // public static float playTime_25, playTime_50, playTime_75;  // 세이브 포인트 관련 변수
     void Start()
     {
@@ -24,10 +27,10 @@ public class Audio : MonoBehaviour
         slider = GetComponent<Slider>();
 
         isAudioFin = false;
-        /*playTime_25 = audioClip.length / 4;
-        playTime_50 = audioClip.length / 2;
-        playTime_75 = (audioClip.length / 4) * 3;
-        // 세이브 포인트 시간 할당*/
+
+        checkPointTime = audioClip.length / 10;
+        isCheckPoint = false;
+        // 체크포인트 설정
 
         slider.minValue = 0;
         slider.maxValue = audioClip.length;
@@ -49,16 +52,34 @@ public class Audio : MonoBehaviour
     {
         slider.value = audioSource.time;    // 곡 진행에 따른 슬라이더 이동
 
-        if(slider.value==audioClip.length)
+        if((slider.value==audioClip.length) || (!audioSource.isPlaying && !Game.isPause))
         {
             FinishedAudio();
         }
 
-        if(!audioSource.isPlaying && !Game.isPause)
-        {
-            FinishedAudio();
-        }
+        CheckPlayTime();
     }   //   Update()
+
+    float nowTime = 0;
+    bool isPassTime = false;
+    void CheckPlayTime()
+    {
+        nowTime += Time.deltaTime;
+        Debug.Log(nowTime + "//" + checkPointTime);
+
+        if ((int)nowTime == (int)checkPointTime && !isPassTime)
+        {
+            isCheckPoint = true;
+            isPassTime = true;
+            nowTime = 0;
+        }
+
+        if (nowTime > 1)
+        {
+            isPassTime = false;
+        }
+    }   //   CheckPlayTime()
+
 
     void FinishedAudio() // 노래 끝날 경우 게임 종료
     {

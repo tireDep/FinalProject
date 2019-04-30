@@ -22,6 +22,22 @@ public class Game : MonoBehaviour
     public Text playerScorText; // 점수 UI
 
     public UnityEngine.UI.Image fadePanel;   // fade 효과 관련
+
+    private static Game instance;   // of type Game
+    public Vector3 lastCheckPointPos;
+    private void Awake()    // checkPoint 관련
+    {
+        if(instance==null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }   // Awake()
+
     void Start()
     {
         Time.timeScale = 1; // 재시작시 일시정지 방지 
@@ -43,7 +59,7 @@ public class Game : MonoBehaviour
     {
         if(Audio.isAudioFin)
         {
-            GoToResultScene();
+            Invoke("GoToResultScene", 2.0f);
         }   // 음악 종료 시 페이드효과&게임 결과 화면 출력
 
         if (Player.isDead)
@@ -55,6 +71,12 @@ public class Game : MonoBehaviour
         {
             CheckPlayTime();
         }   // 일시정지 여부 판별
+
+        if (Audio.isCheckPoint)
+        {
+            GetComponent<Map>().CreateCheckPoint();
+            Audio.isCheckPoint = false;
+        }
 
         UpdateGUI();
         Move();
@@ -91,6 +113,7 @@ public class Game : MonoBehaviour
             checkCount++;
             isTime = 0.0f;
         }
+
     }   // CheckPlayTime() 
     
     public Canvas canvasUI;
@@ -116,20 +139,25 @@ public class Game : MonoBehaviour
     void GoToResultScene()  // 페이드 효과 및 화면 전환
     {
         fadePanel.enabled = true;
-        
-        while(fadeTime<=255)
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");   // 생성된 장애물 탐색
+        for (int i = 0; i < objects.Length; i++)
+        {
+                Destroy(objects[i]);
+        }
+
+        while (fadeTime<=255)
         {
             time += Time.deltaTime;
             if (time >= 0.1f)
             {
-                fadeTime += 10;
+                fadeTime += 1;
                 fadePanel.color = new Color(0, 0, 0, fadeTime);
+                iTween.FadeFrom(fadePanel.gameObject, 0.0f, 10f);   // 투명화
+                //iTween.FadeTo(fadePanel.gameObject, 0.0f, 10f);   //   불투명화
                 time = 0;
             }
         }
-        
         SceneManager.LoadScene("GameResult");
-        
     }   // GoToResultScene()
 
     public void PauseOn()   // 일시정지 설정

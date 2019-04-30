@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<RhythmosDatabase>
+  <NoteList>
+    <NoteEntry>
+      <name>New Note 1</name>
+      <color>RGBA(0.504, 0.897, 0.411, 1.000)</color>
+      <audioclip>Assets/10_Sounds/해적선의+마지막+항해.mp3</audioclip>
+    </NoteEntry>
+    <NoteEntry>
+      <name>New Note 2</name>
+      <color>RGBA(0.342, 0.306, 0.573, 1.000)</color>
+      <audioclip>Assets/10_Sounds/숨겨진+동화+속+이야기.mp3</audioclip>
+    </NoteEntry>
+  </NoteList>
+  <RhythmList>
+    <RhythmEntry>
+      <name>New Rhythm 1</name>
+      <bpm>80</bpm>
+      <RhythmSequence>
+        <Note>
+          <rest>False</rest>
+          <duration>0.25</duration>
+          <layoutIndex>0</layoutIndex>
+        </Note>
+      </RhythmSequence>
+    </RhythmEntry>
+  </RhythmList>
+</RhythmosDatabase>

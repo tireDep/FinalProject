@@ -1053,7 +1053,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719411396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 17.9118, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 1450772613}
@@ -1655,7 +1655,7 @@ GameObject:
   - component: {fileID: 1268076406}
   m_Layer: 0
   m_Name: GameScript
-  m_TagString: Untagged
+  m_TagString: Game
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1674,6 +1674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScorText: {fileID: 280385194}
   fadePanel: {fileID: 1400956806}
+  lastCheckPointPos: {x: -3.5, y: 2.01, z: 0}
   canvasUI: {fileID: 498453518}
   pauseUI: {fileID: 277273035}
 --- !u!114 &1268076404
@@ -1701,6 +1702,8 @@ MonoBehaviour:
   fishObstacle: {fileID: 8441722934380743329, guid: cf42c4f457a5e2643adcb68d5faf3cf2,
     type: 3}
   slimeObstacle: {fileID: 2183067046141446842, guid: 44f7ac7b0e2a42048a3c5107eb220e40,
+    type: 3}
+  checkPoint: {fileID: 3645831975541456754, guid: 92e0c89af99122d46aa144c1556563c9,
     type: 3}
 --- !u!4 &1268076405
 Transform:

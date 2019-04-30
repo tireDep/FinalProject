@@ -9,6 +9,8 @@ TagManager:
   - LifeCnt
   - CheckScreen_1
   - CheckScreen_2
+  - CheckPoint
+  - Game
   layers:
   - Default
   - TransparentFX

@@ -18,7 +18,7 @@ public class RangeOutDestroy : MonoBehaviour
         Vector3 objectScreenPos = Camera.main.WorldToScreenPoint(transform.position);
         if (objectScreenPos.x < - Screen.width / 2)  
         {
-            Destroy(gameObject);
+            Destroy(gameObject,10.0f);
         }
 
        /* Vector3 view = Camera.main.WorldToScreenPoint(transform.position);  // 월드 좌표 -> 스크린 좌표 변경
