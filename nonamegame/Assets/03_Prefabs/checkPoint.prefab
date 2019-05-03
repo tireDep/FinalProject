@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3645831975541456754}
   - component: {fileID: 6194537837556309479}
-  - component: {fileID: 179003524394908364}
   - component: {fileID: 4694586372532506745}
+  - component: {fileID: 179003524394908364}
+  - component: {fileID: 2273718887708006482}
   m_Layer: 0
   m_Name: checkPoint
   m_TagString: CheckPoint
@@ -81,18 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &179003524394908364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 944518638881574857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb7b08f71558af6429eef2803089b1fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &4694586372532506745
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106,3 +95,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.95714283, y: 1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &179003524394908364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944518638881574857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7b08f71558af6429eef2803089b1fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2273718887708006482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944518638881574857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76ce6f3dafd22e4fbbc7bb5cfafb993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

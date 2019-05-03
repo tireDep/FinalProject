@@ -15,20 +15,22 @@ public class Player : MonoBehaviour
     */
 
     private Rigidbody rigidBody;    // 물리기능 이용 
-    private SpriteRenderer spriteRenderer;  // filp 기능 이용
+    public static SpriteRenderer spriteRenderer;  // filp 기능 이용
     private bool isGround;  // 바닥 체크
-    private bool playerPos; // 플레이어 위치
+    public static bool playerPos; // 플레이어 위치
     /* !수정예정! - 양방향도 추가될 수 있음 -> int형 수정? */
 
     private float moveSpeed = 10.0f; // 이동속도 변수
     private float jumpPower = 27.0f; // 점프 힘 변수 /*!수정예정! - 그냥 점프가 수정되야될거같기도 하고*/
-    private int gravityForce = 100; // 중력변수
-    private int setPos = 2; // 플레이어 위치
+    public static int gravityForce = 100; // 중력변수
+    public static int setPos = 2; // 플레이어 위치
     public static bool isDead;    // 생사여부
 
     float playTime; // 플레이 시간
 
     public static int playerHitCount; //   충돌횟수
+
+    public static bool isPlayerCheckPoint;  // 플레이어 체크포인트 지나침 확인
 
     void Start()
     {
@@ -43,8 +45,11 @@ public class Player : MonoBehaviour
         playTime = 0f;  // 플레이 시간
 
         playerHitCount = 0; // 부딪힘 초기화
+
+        isPlayerCheckPoint = false; // 체크포인트를 지나지 x
     }   // Start()
 
+    //float nowChekcPointPos = 0; // 체크포인트 위치 저장
     void Update()
     {
         playTime += Time.deltaTime; // 플레이 시간 누적
@@ -53,6 +58,14 @@ public class Player : MonoBehaviour
             AutoMove();
             InputMove();
         }
+
+        //Debug.Log(CheckPoint.checkPointPos + "//" + nowChekcPointPos);
+        /*if(CheckPoint.checkPointPos > nowChekcPointPos)
+        {
+            nowChekcPointPos = CheckPoint.checkPointPos;
+            
+            // 플레이어가 생성된 체크 포인트를 지나쳤을 때 이전 블록 삭제
+        }*/
 
     }   // Update()
 
@@ -160,6 +173,7 @@ public class Player : MonoBehaviour
             isNoHit = true;
             StartCoroutine("NoHitTime");
             playerHitCount++;   // 부딪힐 경우 증가
+            GetComponent<PlayerPos>().PlayerCheckPoint();
         }   // 충돌 체크 시 카운트 증가 -> Game.cs에서 점수 차감
     }   // OnTriggerEnter(Collider other)
 

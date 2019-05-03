@@ -13,20 +13,19 @@ public class Audio : MonoBehaviour
     */
 
     public static AudioSource audioSource;    // 음원 설정
-    Slider slider;  // 진행상태
+    public static Slider slider;  // 진행상태
     public AudioClip audioClip;    // 음원
     public Text songTitle;  // 노래 제목
     static public bool isAudioFin;    // 오디오 체크 변수
 
-    public static bool isCheckPoint;
-    public static float checkPointTime;
-    // public static float playTime_25, playTime_50, playTime_75;  // 세이브 포인트 관련 변수
+    public static bool isCheckPoint;    // 체크포인트 확인
+    public static float checkPointTime; // 체크포인트 생성 시간
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         slider = GetComponent<Slider>();
 
-        isAudioFin = false;
+        isAudioFin = false; // 음원 종료 여부
 
         checkPointTime = audioClip.length / 10;
         isCheckPoint = false;
@@ -36,14 +35,12 @@ public class Audio : MonoBehaviour
         slider.maxValue = audioClip.length;
         // 슬라이더 값 설정
 
-        songTitle.text = audioClip.name;
-        // 곡 이름 설정
+        songTitle.text = audioClip.name;    // 곡 이름 설정
 
-        audioSource.clip = audioClip;
+        audioSource.clip = audioClip;   // 곡 설정
         /* !수정예정! - fade_in fade_out 추가? */
 
-        audioSource.Play();
-        // 음악 설정
+        audioSource.Play(); // 음악 설정
 
         // Invoke("FinishedAudio", audioClip.length);  // 음악이 끝나면 실행
     }   // Start()
@@ -60,12 +57,12 @@ public class Audio : MonoBehaviour
         CheckPlayTime();
     }   //   Update()
 
-    float nowTime = 0;
-    bool isPassTime = false;
-    void CheckPlayTime()
+    float nowTime = 0;  // 체크포인트 확인 시간
+    bool isPassTime = false;    // 생성시간에 1번 생성 체크
+    void CheckPlayTime()    // 진행상황에 따른 체크포인트 생성
     {
         nowTime += Time.deltaTime;
-        Debug.Log(nowTime + "//" + checkPointTime);
+        //Debug.Log(nowTime + "//" + checkPointTime);
 
         if ((int)nowTime == (int)checkPointTime && !isPassTime)
         {
@@ -74,7 +71,7 @@ public class Audio : MonoBehaviour
             nowTime = 0;
         }
 
-        if (nowTime > 1)
+        if (nowTime > 1)    // 1번 생성 체크
         {
             isPassTime = false;
         }
@@ -83,10 +80,11 @@ public class Audio : MonoBehaviour
 
     void FinishedAudio() // 노래 끝날 경우 게임 종료
     {
-        Debug.Log("Audio Fin");
+        //Debug.Log("Audio Fin");
         isAudioFin = true;  
     }   // FinishedAudio()
 
+    /* 후에 삭제! */
     public void MovePosition()  // 슬라이더 이동시 곡도 이동
     {
         audioSource.time = slider.value;

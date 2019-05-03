@@ -30,11 +30,6 @@ public class Interface : MonoBehaviour
 #endif
     }   // GameQuit()
 
-    public void GameRestart()   // 게임 재시작
-    {
-        SceneManager.LoadScene("MainGame");
-    }   // GameRestart()   
-
     public void ReturnMain()    // 메인으로 
     {
         SceneManager.LoadScene("GameStart");

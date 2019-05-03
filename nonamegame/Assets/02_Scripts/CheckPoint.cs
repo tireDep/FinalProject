@@ -10,13 +10,23 @@ public class CheckPoint : MonoBehaviour
         game = GameObject.FindGameObjectWithTag("Game").GetComponent<Game>();
     }   //  Start()
 
-    private void OnTriggerEnter(Collider other)
+    public static float checkPointPos;  // 체크포인트 위치
+    private void OnTriggerEnter(Collider other) // 충돌체크
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player"))  // 플레이어와 부딪혔을 때, 현재 상태 저장
         {
+            Player.isPlayerCheckPoint = true;   // 체크포인트를 지났으므로 삭제 가능
+            // checkPointPos = this.transform.position.x;  // 체크포인트 위치 저장
             game.lastCheckPointPos = transform.position;
-            // !수정예정! - 음악, 지형, 장애물, 카메라 다 받아와야 함
+            game.lastCheckCamera = Camera.main.transform.position;
+            game.lastCheckCamera.x = Camera.main.transform.position.x - 1;  // 1씩 앞으로 밀림 방지
+            game.lastCheckAudio = Audio.slider.value;
         }
     }   //  OnTriggerEnter(Collider other)
+
+    private void OnTriggerExit(Collider other)
+    {
+        Player.isPlayerCheckPoint = false;  // 삭제  불가능
+    }   // OnTriggerExit(Collider other)
 
 }   // CheckPoint Class

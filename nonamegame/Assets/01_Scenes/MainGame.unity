@@ -1675,6 +1675,8 @@ MonoBehaviour:
   playerScorText: {fileID: 280385194}
   fadePanel: {fileID: 1400956806}
   lastCheckPointPos: {x: -3.5, y: 2.01, z: 0}
+  lastCheckCamera: {x: 1.5, y: 1.5, z: -0.5}
+  lastcheckAudio: 0
   canvasUI: {fileID: 498453518}
   pauseUI: {fileID: 277273035}
 --- !u!114 &1268076404
@@ -2090,7 +2092,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450772610}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.500001, y: 1.5, z: -0.5}
+  m_LocalPosition: {x: 1.5, y: 1.5, z: -0.5}
   m_LocalScale: {x: 0.9900001, y: 1, z: 1}
   m_Children:
   - {fileID: 1570610848}
@@ -2869,7 +2871,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1268076406}
-        m_MethodName: GameRestart
+        m_MethodName: GameStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

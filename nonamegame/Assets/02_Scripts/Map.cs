@@ -18,7 +18,7 @@ public class Map : MonoBehaviour
 
     public void CreateMap()    // 기본 1자 바닥 생성
     {
-        newMapBlock = Instantiate(mapBlock, new Vector3(makeBlock++, 1, 0), Quaternion.identity);
+        newMapBlock = Instantiate(mapBlock, new Vector3(++makeBlock, 1, 0), Quaternion.identity);
         testcnt++;
         if(testcnt%10==0)
         {
@@ -145,12 +145,13 @@ public class Map : MonoBehaviour
 
 
     public Transform checkPoint;
-    Transform checkPoint_up;
-    Transform checkPoint_down;
-    public void CreateCheckPoint()
+    Transform checkPoint_up;    // 위방향
+    Transform checkPoint_down;  // 아래방향
+    public void CreateCheckPoint()  // 체크포인트 생성
     {
-        Debug.Log("checkPoint");
+        //Debug.Log("checkPoint");
         checkPoint_up = Instantiate(checkPoint, new Vector3(makeBlock - 5, 2.01f, 0), Quaternion.identity);
         checkPoint_down = Instantiate(checkPoint, new Vector3(makeBlock - 5, -0.0f, 0), Quaternion.Euler(180, 0, 0));
-    }
+    }   // CreateCheckPoint()
+
 }   // Map Class

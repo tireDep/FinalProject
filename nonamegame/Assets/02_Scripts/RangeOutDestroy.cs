@@ -8,25 +8,21 @@ public class RangeOutDestroy : MonoBehaviour
      오브젝트 삭제 스크립트
      - 오브젝트 삭제 함수
      */
-    private void FixedUpdate()
+
+    private void Update()
     {
         ObjectDestroy();
-    }
+    }   // Update()
 
     void ObjectDestroy() // 물체가 화면밖에 있는 경우 삭제
     {
-        Vector3 objectScreenPos = Camera.main.WorldToScreenPoint(transform.position);
-        if (objectScreenPos.x < - Screen.width / 2)  
+        //Vector3 objectScreenPos = Camera.main.WorldToScreenPoint(transform.position);
+        if ((this.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10) && Player.isPlayerCheckPoint)
         {
-            Destroy(gameObject,10.0f);
+            // 해당 오브젝트 x축 < 플레이어 x축 - 10 && 체크포인트 지나감(삭제 가능여부)
+            // -10은 재시작시 길 끊어지지 않게 보이기 위해 설정
+            Destroy(gameObject);
         }
-
-       /* Vector3 view = Camera.main.WorldToScreenPoint(transform.position);  // 월드 좌표 -> 스크린 좌표 변경
-        if (view.x < Camera.main.transform.position.x)
-        {
-            Destroy(gameObject, 1.0f);
-            Debug.Log(view.x + "//" + Camera.main.transform.position.x);
-        }*/
-    }   // ObjectDestroy()
+    }   // ObjectDestroy() 
 
 }   // RangeOutDestroy Class

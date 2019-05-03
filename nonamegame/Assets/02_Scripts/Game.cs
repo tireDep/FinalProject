@@ -23,20 +23,24 @@ public class Game : MonoBehaviour
 
     public UnityEngine.UI.Image fadePanel;   // fade 효과 관련
 
-    private static Game instance;   // of type Game
-    public Vector3 lastCheckPointPos;
-    private void Awake()    // checkPoint 관련
+    //private static Game instance;   // of type Game
+    public Vector3 lastCheckPointPos;   // 플레이어 위치
+    public Vector3 lastCheckCamera;  // 카메라 위치
+    public float lastCheckAudio;   //  음악진행사항
+    // 체크포인트 관련
+
+    /*private void Awake()    // checkPoint 관련
     {
         if(instance==null)
         {
             instance = this;
-            DontDestroyOnLoad(instance);
+            DontDestroyOnLoad(instance);    // 삭제방지
         }
         else
         {
             Destroy(gameObject);
         }
-    }   // Awake()
+    }   // Awake()*/
 
     void Start()
     {
@@ -76,7 +80,7 @@ public class Game : MonoBehaviour
         {
             GetComponent<Map>().CreateCheckPoint();
             Audio.isCheckPoint = false;
-        }
+        }   // 체크포인트 생성 여부 판별
 
         UpdateGUI();
         Move();
