@@ -11,20 +11,48 @@ public class Map : MonoBehaviour
      - 랜덤위치 설정 함수
      */
 
-    public Transform mapBlock;  // 프리팹
-    private Transform newMapBlock;  // 맵 생성
-    private int makeBlock = 0;  // 맵 개수 변수
-    int testcnt = 0; // !수정예정!
-
-    public void CreateMap()    // 기본 1자 바닥 생성
+    int testObstacleCnt = 0; // !수정예정! 임시 장애물 생성
+    private void Update()
     {
-        newMapBlock = Instantiate(mapBlock, new Vector3(++makeBlock, 1, 0), Quaternion.identity);
-        testcnt++;
-        if(testcnt%10==0)
+        CheckPlayTime();
+
+        if (Audio.isCheckPoint)
+        {
+            GetComponent<Map>().CreateCheckPoint();
+            Audio.isCheckPoint = false;
+        }   // 체크포인트 생성 여부 판별
+
+        testObstacleCnt++;
+        if (testObstacleCnt % 10 == 0)
         {
             CreateObstacle(makeBlock);
+        }   // 장애물 임시 생성
+
+    }   //  Update()
+
+    float playTime = 0.0f;    // 경과시간
+    private void CheckPlayTime()    // 플레이시간 몇 초 지나갔는지 확인
+    {
+        playTime += Time.deltaTime;
+        if (!Game.isPause && playTime <= Audio.audioClipLength) // 일시정지x && 음원길이보다 적은 시간일경우 맵 생성
+        {
+            CreateMap(); 
         }
+        Debug.Log(playTime + "//" + Audio.audioClipLength);
+    }   // CheckPlayTime() 
+
+    public Transform mapBlock;  // 프리팹
+    private int makeBlock = 0;  // 맵 개수 변수
+    public void CreateMap()    // 기본 1자 바닥 생성
+    {
+        Transform newMapBlock = Instantiate(mapBlock, new Vector3(++makeBlock, 1, 0), Quaternion.identity);
+        newMapBlock.SetParent(transform);
     }   // CreateMap()
+
+    /*public int GetBlockCount()
+    {
+        return transform.childCount;
+    }*/
 
     public Transform boxObstacle;
     public Transform snailObstacle;
@@ -33,9 +61,11 @@ public class Map : MonoBehaviour
     public Transform fishObstacle;
     public Transform slimeObstacle;
     // 장애물 종류
+
     Transform newObsBlock_up;
     Transform newObsBlock_down;
     // 장애물 생성 위치
+
     Transform tempBlock;    // 생성할 장애물 설정
     float setY = 0; // 장애물 위치  설정
     int setEuler = 0;   // 장애물 뒤집기 유무 설정

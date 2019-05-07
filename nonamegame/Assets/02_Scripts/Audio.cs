@@ -20,6 +20,8 @@ public class Audio : MonoBehaviour
 
     public static bool isCheckPoint;    // 체크포인트 확인
     public static float checkPointTime; // 체크포인트 생성 시간
+
+    public static float audioClipLength;    // 음악길이 변수
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -42,6 +44,8 @@ public class Audio : MonoBehaviour
 
         audioSource.Play(); // 음악 설정
 
+        audioClipLength = audioClip.length; // 음악 길이 설정
+
         // Invoke("FinishedAudio", audioClip.length);  // 음악이 끝나면 실행
     }   // Start()
 
@@ -51,7 +55,7 @@ public class Audio : MonoBehaviour
 
         if((slider.value==audioClip.length) || (!audioSource.isPlaying && !Game.isPause))
         {
-            FinishedAudio();
+            isAudioFin = true;
         }
 
         CheckPlayTime();
@@ -78,16 +82,13 @@ public class Audio : MonoBehaviour
     }   //   CheckPlayTime()
 
 
-    void FinishedAudio() // 노래 끝날 경우 게임 종료
-    {
-        //Debug.Log("Audio Fin");
-        isAudioFin = true;  
-    }   // FinishedAudio()
-
     /* 후에 삭제! */
     public void MovePosition()  // 슬라이더 이동시 곡도 이동
     {
-        audioSource.time = slider.value;
+        if(slider.value!=slider.maxValue)
+        {
+            audioSource.time = slider.value;
+        }
     }   // MovePosition()
 
 }   // Audio Class

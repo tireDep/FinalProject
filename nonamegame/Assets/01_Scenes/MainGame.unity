@@ -847,6 +847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 523492180}
+  - component: {fileID: 523492181}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -879,6 +880,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &523492181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523492179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cb73a253ec7aed47a85c5d7c500dc5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapBlock: {fileID: 8211898980790493323, guid: 477095fc1eed0d54bb6d8b178e74a9db,
+    type: 3}
+  boxObstacle: {fileID: 3699109900701359483, guid: 95a89ea6558bc0348b7276fccba91425,
+    type: 3}
+  snailObstacle: {fileID: 6747979122063449171, guid: 6889b0c9871d8a4419862baacee139fc,
+    type: 3}
+  longObstacle: {fileID: 6082811445839685359, guid: bd9ec2f9e557efa47b637264c66194f0,
+    type: 3}
+  flyerObstacle: {fileID: 2947574317425378059, guid: b44c6823fd055034791ada4a96c0c5ca,
+    type: 3}
+  fishObstacle: {fileID: 8441722934380743329, guid: cf42c4f457a5e2643adcb68d5faf3cf2,
+    type: 3}
+  slimeObstacle: {fileID: 2183067046141446842, guid: 44f7ac7b0e2a42048a3c5107eb220e40,
+    type: 3}
+  checkPoint: {fileID: 3645831975541456754, guid: 92e0c89af99122d46aa144c1556563c9,
+    type: 3}
 --- !u!1001 &654243234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1443,6 +1472,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8211898980790493323, guid: 477095fc1eed0d54bb6d8b178e74a9db,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 477095fc1eed0d54bb6d8b178e74a9db, type: 3}
 --- !u!4 &867376646 stripped
@@ -1650,7 +1684,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1268076405}
-  - component: {fileID: 1268076404}
   - component: {fileID: 1268076403}
   - component: {fileID: 1268076406}
   m_Layer: 0
@@ -1676,37 +1709,9 @@ MonoBehaviour:
   fadePanel: {fileID: 1400956806}
   lastCheckPointPos: {x: -3.5, y: 2.01, z: 0}
   lastCheckCamera: {x: 1.5, y: 1.5, z: -0.5}
-  lastcheckAudio: 0
+  lastCheckAudio: 0
   canvasUI: {fileID: 498453518}
   pauseUI: {fileID: 277273035}
---- !u!114 &1268076404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1268076402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cb73a253ec7aed47a85c5d7c500dc5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mapBlock: {fileID: 8211898980790493323, guid: 477095fc1eed0d54bb6d8b178e74a9db,
-    type: 3}
-  boxObstacle: {fileID: 3699109900701359483, guid: 95a89ea6558bc0348b7276fccba91425,
-    type: 3}
-  snailObstacle: {fileID: 6747979122063449171, guid: 6889b0c9871d8a4419862baacee139fc,
-    type: 3}
-  longObstacle: {fileID: 6082811445839685359, guid: bd9ec2f9e557efa47b637264c66194f0,
-    type: 3}
-  flyerObstacle: {fileID: 2947574317425378059, guid: b44c6823fd055034791ada4a96c0c5ca,
-    type: 3}
-  fishObstacle: {fileID: 8441722934380743329, guid: cf42c4f457a5e2643adcb68d5faf3cf2,
-    type: 3}
-  slimeObstacle: {fileID: 2183067046141446842, guid: 44f7ac7b0e2a42048a3c5107eb220e40,
-    type: 3}
-  checkPoint: {fileID: 3645831975541456754, guid: 92e0c89af99122d46aa144c1556563c9,
-    type: 3}
 --- !u!4 &1268076405
 Transform:
   m_ObjectHideFlags: 0
@@ -1829,7 +1834,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1400956806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2618,8 +2623,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 13, y: 360.3}
-  m_SizeDelta: {x: 1102.3, y: 23.2}
+  m_AnchoredPosition: {x: -0.0067291, y: 360.3}
+  m_SizeDelta: {x: 1095.2, y: 23.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!82 &1837339258
 AudioSource:

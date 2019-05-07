@@ -136,30 +136,32 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)  // 처음 부딪혔을 경우
     {
-        if (collision.transform.tag == "Ground")
-        {
-            isGround = true; // 바닥과 맞닿아 있음(점프 가능)
-            rockChangePos = true;   // 위치변경 가능
-        }
+        SetCollisionVal(collision, 1);
     }   // OnCollisionEnter(Collision collision)    
 
     void OnCollisionStay(Collision collision)   // 부딪힌 상태 유지
     {
-        if (collision.transform.tag == "Ground")
-        {
-            isGround = true; //바닥과 맞닿아 있음(점프 가능)
-            rockChangePos = true; // 위치변경 가능
-        }
+        SetCollisionVal(collision, 1);
     }   // OnCollisionStay(Collision collision)   
 
     void OnCollisionExit(Collision collision)    // 콜라이더 떨어져 있을 때
     {
-        if (collision.transform.tag == "Ground")
+        SetCollisionVal(collision, -1);
+    }   // OnCollisionExit(Collision collision)
+
+    void SetCollisionVal(Collision collision, int check)    // 충돌관련 변수 set
+    {
+        if (collision.transform.tag == "Ground" && check == 1)
+        {
+            isGround = true; //바닥과 맞닿아 있음(점프 가능)
+            rockChangePos = true; // 위치변경 가능
+        }
+        else
         {
             isGround = false; //바닥과 맞닿아 있지 않음(점프 불가능)
             rockChangePos = false;  // 위치변경 불가능
         }
-    }   // OnCollisionExit(Collision collision)
+    }   // SetCollisionVal()
 
     /*
      isTriger를 이용, hitCount 체크

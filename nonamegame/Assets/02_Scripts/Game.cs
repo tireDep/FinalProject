@@ -63,24 +63,8 @@ public class Game : MonoBehaviour
     {
         if(Audio.isAudioFin)
         {
-            Invoke("GoToResultScene", 2.0f);
+            GoToResultScene();
         }   // 음악 종료 시 페이드효과&게임 결과 화면 출력
-
-        if (Player.isDead)
-        {
-            SceneManager.LoadScene("GameOver");
-        }   // 죽음 여부 판별
-
-        if (!isPause)
-        {
-            CheckPlayTime();
-        }   // 일시정지 여부 판별
-
-        if (Audio.isCheckPoint)
-        {
-            GetComponent<Map>().CreateCheckPoint();
-            Audio.isCheckPoint = false;
-        }   // 체크포인트 생성 여부 판별
 
         UpdateGUI();
         Move();
@@ -104,21 +88,6 @@ public class Game : MonoBehaviour
     {
         Camera.main.transform.Translate(10f * Time.deltaTime, 0f, 0f);
     }   //  Move()
-
-    float isTime = 0.0f;    // 경과시간
-    float checkTime = 0.05f; //  생성시간 !수정될 수 있는 값!
-    int checkCount = 0;
-    private void CheckPlayTime()    // 플레이시간 몇 초 지나갔는지 확인
-    {
-        isTime += Time.deltaTime;
-        if (isTime > checkTime)    // 0.1초 지날 때마다 생성
-        {
-            GetComponent<Map>().CreateMap();
-            checkCount++;
-            isTime = 0.0f;
-        }
-
-    }   // CheckPlayTime() 
     
     public Canvas canvasUI;
     public Canvas pauseUI;
@@ -154,9 +123,9 @@ public class Game : MonoBehaviour
             time += Time.deltaTime;
             if (time >= 0.1f)
             {
-                fadeTime += 1;
+                fadeTime += 50;
                 fadePanel.color = new Color(0, 0, 0, fadeTime);
-                iTween.FadeFrom(fadePanel.gameObject, 0.0f, 10f);   // 투명화
+                //iTween.FadeFrom(fadePanel.gameObject, 0.0f, 10f);   // 투명화
                 //iTween.FadeTo(fadePanel.gameObject, 0.0f, 10f);   //   불투명화
                 time = 0;
             }

@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 1208705583}
   - component: {fileID: 1208705582}
   m_Layer: 5
-  m_Name: wahtTxt
+  m_Name: whatTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
