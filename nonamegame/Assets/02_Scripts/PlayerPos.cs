@@ -24,7 +24,7 @@ public class PlayerPos : MonoBehaviour
         Camera.main.transform.position = game.lastCheckCamera;
         if (null != Audio.slider)
         {
-            Audio.slider.value = game.lastCheckAudio;   // 이거 왜 에러날까...
+            Audio.slider.value = game.lastCheckAudio;
         }
     }   // SetCheckPoint()
 
@@ -35,8 +35,8 @@ public class PlayerPos : MonoBehaviour
 
         Player.playerPos = true;
         Player.spriteRenderer.flipY = false;
-        Physics.gravity = Vector3.down * Player.gravityForce;
-        transform.Translate(Vector3.up * Player.setPos);
+        Physics.gravity = Vector3.down * Player._gravityForce;
+        transform.Translate(Vector3.up * Player._setPos);
         // 추락사 방지용
     }   // PlayerCheckPoint()
 

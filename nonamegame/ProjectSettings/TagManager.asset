@@ -6,11 +6,11 @@ TagManager:
   tags:
   - Ground
   - Obstacle
-  - LifeCnt
   - CheckScreen_1
   - CheckScreen_2
   - CheckPoint
   - Game
+  - BS_Count
   layers:
   - Default
   - TransparentFX

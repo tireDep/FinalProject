@@ -20,11 +20,11 @@ public class Player : MonoBehaviour
     public static bool playerPos; // 플레이어 위치
     /* !수정예정! - 양방향도 추가될 수 있음 -> int형 수정? */
 
-    private float moveSpeed = 10.0f; // 이동속도 변수
-    private float jumpPower = 27.0f; // 점프 힘 변수 /*!수정예정! - 그냥 점프가 수정되야될거같기도 하고*/
-    public static int gravityForce = 100; // 중력변수
-    public static int setPos = 2; // 플레이어 위치
-    public static bool isDead;    // 생사여부
+    private float _moveSpeed; // 이동속도 변수
+    private float _jumpPower; // 점프 힘 변수
+    public static int _gravityForce; // 중력변수
+    public static int _setPos; // 플레이어 위치
+    public static bool _isDead;    // 생사여부
 
     float playTime; // 플레이 시간
 
@@ -39,14 +39,20 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();    // SpriteRenderer 컴포넌트 받아옴
         playerPos = true;   // 위에 위치
         isGround = true;    // 점프 가능   
-
-        isDead = false; // 생사여부
-
+        
         playTime = 0f;  // 플레이 시간
 
         playerHitCount = 0; // 부딪힘 초기화
 
         isPlayerCheckPoint = false; // 체크포인트를 지나지 x
+
+        _moveSpeed = DataManager.moveSpeed;
+        _jumpPower = DataManager.jumpPower;
+        _gravityForce = DataManager.gravityForce;
+        _setPos = DataManager.setPos;
+        _isDead = DataManager.isDead;
+        // 변수 값 초기화
+
     }   // Start()
 
     //float nowChekcPointPos = 0; // 체크포인트 위치 저장
@@ -58,20 +64,11 @@ public class Player : MonoBehaviour
             AutoMove();
             InputMove();
         }
-
-        //Debug.Log(CheckPoint.checkPointPos + "//" + nowChekcPointPos);
-        /*if(CheckPoint.checkPointPos > nowChekcPointPos)
-        {
-            nowChekcPointPos = CheckPoint.checkPointPos;
-            
-            // 플레이어가 생성된 체크 포인트를 지나쳤을 때 이전 블록 삭제
-        }*/
-
     }   // Update()
 
     public void AutoMove()  // 플레이어 자동 이동
     {
-        transform.Translate(moveSpeed * Time.deltaTime, 0f, 0f);
+        transform.Translate(_moveSpeed * Time.deltaTime, 0f, 0f);
     }   // AutoMove()
 
     public void InputMove() // 플레이어 입력 이동
@@ -99,11 +96,11 @@ public class Player : MonoBehaviour
         {
             if (playerPos)
             {
-                rigidBody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+                rigidBody.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
             }
             else
             {
-                rigidBody.AddForce(Vector3.down * jumpPower, ForceMode.Impulse);
+                rigidBody.AddForce(Vector3.down * _jumpPower, ForceMode.Impulse);
             }
         }
         rockChangePos = false;
@@ -115,15 +112,15 @@ public class Player : MonoBehaviour
         {
             playerPos = false;
             spriteRenderer.flipY = true;
-            Physics.gravity = Vector3.up * gravityForce;
-            transform.Translate(Vector3.down * setPos);
+            Physics.gravity = Vector3.up * _gravityForce;
+            transform.Translate(Vector3.down * _setPos);
         }
         else if (playerPos == false && rockChangePos == true) // 아래에서 위로
         {
             playerPos = true;
             spriteRenderer.flipY = false;
-            Physics.gravity = Vector3.down * gravityForce;
-            transform.Translate(Vector3.up * setPos);
+            Physics.gravity = Vector3.down * _gravityForce;
+            transform.Translate(Vector3.up * _setPos);
         }
     }   // CheckPlayerPos()
 

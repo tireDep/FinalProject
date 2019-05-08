@@ -14,7 +14,17 @@ public class Map : MonoBehaviour
     int testObstacleCnt = 0; // !수정예정! 임시 장애물 생성
     private void Update()
     {
-        CheckPlayTime();
+        if(!Game.isPause)
+        {
+            CheckPlayTime();    // 지형 생성 관련
+
+            testObstacleCnt++;
+            if (testObstacleCnt % 10 == 0)
+            {
+                CreateObstacle(makeBlock);
+            }   // 장애물 임시 생성
+
+        }
 
         if (Audio.isCheckPoint)
         {
@@ -22,27 +32,25 @@ public class Map : MonoBehaviour
             Audio.isCheckPoint = false;
         }   // 체크포인트 생성 여부 판별
 
-        testObstacleCnt++;
-        if (testObstacleCnt % 10 == 0)
-        {
-            CreateObstacle(makeBlock);
-        }   // 장애물 임시 생성
-
     }   //  Update()
 
     float playTime = 0.0f;    // 경과시간
     private void CheckPlayTime()    // 플레이시간 몇 초 지나갔는지 확인
     {
         playTime += Time.deltaTime;
-        if (!Game.isPause && playTime <= Audio.audioClipLength) // 일시정지x && 음원길이보다 적은 시간일경우 맵 생성
+        if (playTime <= Audio.audioClipLength) // 일시정지x && 음원길이보다 적은 시간일경우 맵 생성
         {
             CreateMap(); 
         }
-        Debug.Log(playTime + "//" + Audio.audioClipLength);
+        else
+        {
+            Debug.Log("check!!");
+        }
+        //Debug.Log(playTime + "//" + Audio.audioClipLength);
     }   // CheckPlayTime() 
 
     public Transform mapBlock;  // 프리팹
-    private int makeBlock = 0;  // 맵 개수 변수
+    private int makeBlock = 15;  // 맵 개수 변수
     public void CreateMap()    // 기본 1자 바닥 생성
     {
         Transform newMapBlock = Instantiate(mapBlock, new Vector3(++makeBlock, 1, 0), Quaternion.identity);
@@ -129,49 +137,60 @@ public class Map : MonoBehaviour
     {
         if (pos ==1)
         {
-            if(checkNum==1)
-            {
-                setY = 2.01f;
-            }
-            else if(checkNum==2)
-            {
-                setY = 2.96f;
-            }
-            else if (checkNum == 3)
-            {
-                float randomMove = Random.Range(3.0f, 5.5f);
-                setY = randomMove;
-            }
-            else if (checkNum == 4)
-            {
-                setY = 1.81f;
-            }
+            SetUpObsPos(checkNum);
         }
         else
         {
-            if(checkNum==1)
-            {
-                setEuler = 1;
-                setY = -0.0f;
-            }
-            else if (checkNum == 2)
-            {
-                setEuler = 1;
-                setY = -0.96f;
-            }
-            else if (checkNum == 3)
-            {
-                float randomMove = Random.Range(-1.0f, -2.5f);
-                setEuler = 0;
-                setY = randomMove;
-            }
-            else if (checkNum == 4)
-            {
-                setEuler = 1;
-                setY = 0.24f;
-            }
+            SetDownObsPos(checkNum);
         }
     }   // checkObstacle(int pos, int checkNum)
+
+    // !수정예정! - 스크립트화 or 리스트?
+    void SetUpObsPos(int checkNum)  // 윗 장애물 위치 설정
+    {
+        if (checkNum == 1)
+        {
+            setY = 2.01f;
+        }
+        else if (checkNum == 2)
+        {
+            setY = 2.96f;
+        }
+        else if (checkNum == 3)
+        {
+            float randomMove = Random.Range(3.0f, 5.5f);
+            setY = randomMove;
+        }
+        else if (checkNum == 4)
+        {
+            setY = 1.81f;
+        }
+    }   // SetUpObsPos(int checkNum)
+
+    void SetDownObsPos(int checkNum)    // 아랫 장애물 위치 설정
+    {
+        if (checkNum == 1)
+        {
+            setEuler = 1;
+            setY = -0.0f;
+        }
+        else if (checkNum == 2)
+        {
+            setEuler = 1;
+            setY = -0.96f;
+        }
+        else if (checkNum == 3)
+        {
+            float randomMove = Random.Range(-1.0f, -2.5f);
+            setEuler = 0;
+            setY = randomMove;
+        }
+        else if (checkNum == 4)
+        {
+            setEuler = 1;
+            setY = 0.24f;
+        }
+    }   // SetDownObsPos(int checkNum)
 
 
     public Transform checkPoint;
