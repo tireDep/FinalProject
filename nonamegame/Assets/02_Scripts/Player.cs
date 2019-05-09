@@ -61,6 +61,40 @@ public class Player : MonoBehaviour
         playTime += Time.deltaTime; // 플레이 시간 누적
         if (!Game.isPause)
         {
+            if (Input.touchCount == 1)
+            {
+                Touch touch = Input.GetTouch(0);
+                float camWidth = Camera.main.pixelWidth / 2;
+
+                if (touch.phase == TouchPhase.Began)
+                {
+                    if (touch.position.x > camWidth)
+                    {
+                        CheckPlayerPos();
+                    }
+                    else
+                    {
+                        PlayerJump();
+                    }
+                }
+                /*else if (touch.phase == TouchPhase.Moved)
+                {
+
+                }
+                else if (touch.phase == TouchPhase.Ended)
+                {
+
+                }*/
+            }
+            else if (Input.touchCount >= 2)
+            {
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    Game.BlueScreenOn();
+                }
+            }
+
             AutoMove();
             InputMove();
         }

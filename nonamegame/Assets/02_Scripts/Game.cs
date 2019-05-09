@@ -19,7 +19,9 @@ public class Game : MonoBehaviour
 
     public static int maxScore = 1000000;  // 최고점수
     public static int playerScore;  // 플레이어 점수
-    public Text playerScorText; // 점수 UI
+    public Text playerScoreText; // 점수 UI
+
+    public Text bsCntText;  // 화면삭제 UI
 
     public UnityEngine.UI.Image fadePanel;   // fade 효과 관련
 
@@ -62,6 +64,7 @@ public class Game : MonoBehaviour
 
         _moveSpeed = DataManager.moveSpeed;
         _bsCnt = DataManager.bsCnt;
+        bsCntText.text = DataManager.bsCnt.ToString();
         // 변수 값 초기화
 
     }   // Start()
@@ -85,12 +88,14 @@ public class Game : MonoBehaviour
     void UpdateGUI()    // UI setting
     {
         playerHitCount = Player.playerHitCount; // 부딪힘 횟수 받아옴
-        playerScorText.text = playerScore.ToString();
+        playerScoreText.text = playerScore.ToString();
         if (checkHitCount<playerHitCount) // 장애물에 부딪힐 경우 점수 차감
         {
             playerScore -= playerHitCount * 2 * 100;
             checkHitCount++;
         }
+
+        bsCntText.text = _bsCnt.ToString();
     }   // UpdateGUI()
 
     private float _moveSpeed;   // 이동속도
