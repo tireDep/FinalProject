@@ -11,17 +11,12 @@ public class Interface : MonoBehaviour
      - 종료관련 함수
      */
 
-    public void GoToStart() // 시작화면 전환
+    public void GameStart() // 게임화면 이동
     {
-        SceneManager.LoadScene("01_Start");
-    }   // GoToStart()
+        SceneManager.LoadScene("MainGame");
+    }   //  GameStart()
 
-    public void GoToStage() // 스테이지 전환
-    {
-        SceneManager.LoadScene("02_Stage");
-    }   //  GoToStage() 
-
-    public void GameEnd()   // 게임 종료
+    public void GameQuit()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -33,32 +28,11 @@ public class Interface : MonoBehaviour
         Application.Quit();
         // 프로그램 종료
 #endif
-    }   // GameEnd()
+    }   // GameQuit()
 
-    // 스테이지 선택 관련
-    public void GoToSt01()
+    public void ReturnMain()    // 메인으로 
     {
-        SceneManager.LoadScene("03_Play_1");
-    }   // GoToSt01()
-
-    public void GoToSt02()
-    {
-        SceneManager.LoadScene("03_Play_2");
-    }   // GoToSt02()
-
-    public void GoToSt03()
-    {
-        SceneManager.LoadScene("03_Play_3");
-    }   // GoToSt03()
-
-    public void GoToSt04()
-    {
-        SceneManager.LoadScene("03_Play_4");
-    }   // GoToSt04()
-
-    public void GoToSt05()
-    {
-        SceneManager.LoadScene("03_Play_5");
-    }   // GoToSt05()
+        SceneManager.LoadScene("GameStart");
+    }   // ReturnMain()
 
 }   // Interface Class
