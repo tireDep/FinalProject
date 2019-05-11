@@ -6,15 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/01_Scenes/GameStart.unity
+    path: Assets/01_Scenes/01_Start.unity
     guid: 712822980acc1e343a1a75f749cc4cb8
   - enabled: 1
-    path: Assets/01_Scenes/MainGame.unity
-    guid: 113525975336fda4ca2ab518421827dd
+    path: Assets/01_Scenes/02_Stage.unity
+    guid: 31ac043e5343b9e45b0f3332406b1776
+  - enabled: 1
+    path: Assets/01_Scenes/03_Play_1.unity
+    guid: d18785f47aa0d4a45acdce2e70aa483d
+  - enabled: 1
+    path: Assets/01_Scenes/03_Play_2.unity
+    guid: 8e8ada69d874b3c4aa775ef98e12a681
+  - enabled: 1
+    path: Assets/01_Scenes/03_Play_3.unity
+    guid: a5c863dbcd7da164d87a8d7027e6dd0a
+  - enabled: 1
+    path: Assets/01_Scenes/03_Play_4.unity
+    guid: 4fe885680e56385488e71e2b7e2723c8
+  - enabled: 1
+    path: Assets/01_Scenes/03_Play_5.unity
+    guid: 674ffb962bd1b774a8b25cb2cdbef353
+  - enabled: 1
+    path: Assets/01_Scenes/04_Result.unity
+    guid: 885fbd591b6c83f43a87bf8c8380c92c
   - enabled: 1
     path: Assets/01_Scenes/GameOver.unity
     guid: a770be5e1587c044a8483f4501da8fe6
-  - enabled: 1
-    path: Assets/01_Scenes/GameResult.unity
-    guid: 885fbd591b6c83f43a87bf8c8380c92c
   m_configObjects: {}
