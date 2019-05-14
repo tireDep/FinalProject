@@ -28,37 +28,32 @@ public class DataManager : MonoBehaviour
       
          MixMeister BPM Analyzer 이용 BPM 확인
          
-         I'm Letting Go - 99.0
-         Don't Lock Me Out - 109.99
-         숨겨진 동화 속 이야기 - 110.34
-         해적선의 마지막 행해 - 120.14
-         Tortoise - 139.98
+         Under the rain. Background piano music - 108
+         Coporate Technology And Science - 120
+         기분좋은 오후(Happy Afternoon) - 123.5
+         000 A Lively Dynamic - 140
         */
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-            musicBPM = 99.0f;
-            moveSpeed = musicBPM / 9.3f;
+            musicBPM = 108f;
         }
         else if (SceneManager.GetActiveScene().buildIndex == 3)
         {
-            musicBPM = 109.99f;
-            moveSpeed = musicBPM / 9.3f;
+            musicBPM = 120f;
         }
         else if (SceneManager.GetActiveScene().buildIndex == 4)
         {
-            musicBPM = 110.34f;
-            moveSpeed = musicBPM / 9.3f;
+            musicBPM = 123.5f;
         }
         else if (SceneManager.GetActiveScene().buildIndex == 5)
         {
-            musicBPM = 120.14f;
-            moveSpeed = musicBPM / 9.3f;
+            musicBPM = 140f;
         }
-        else if (SceneManager.GetActiveScene().buildIndex == 6)
-        {
-            musicBPM = 140.0f;
-            moveSpeed = musicBPM / 9.3f;
-        }
+        SetMoveSpeed(musicBPM);
     }   // Awake()
 
+    void SetMoveSpeed(float musicBPM)
+    {
+        moveSpeed = musicBPM / 9.3f;
+    }
 }   // DataManager Class

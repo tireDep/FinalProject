@@ -157,7 +157,7 @@ public class Game : MonoBehaviour
 
     static public void BlueScreenOn()   // 화면 안에 있는 장애물 삭제
     {
-        if(--_bsCnt>0)
+        if(_bsCnt-->0)
         {
             RemoveObstacle();
         }

@@ -16,16 +16,13 @@ EditorBuildSettings:
     guid: d18785f47aa0d4a45acdce2e70aa483d
   - enabled: 1
     path: Assets/01_Scenes/03_Play_2.unity
-    guid: 8e8ada69d874b3c4aa775ef98e12a681
+    guid: ac84f724435a8564998f173b82d1adb8
   - enabled: 1
     path: Assets/01_Scenes/03_Play_3.unity
-    guid: a5c863dbcd7da164d87a8d7027e6dd0a
+    guid: abc78f6e7633bba46b893b01ccbd9476
   - enabled: 1
     path: Assets/01_Scenes/03_Play_4.unity
-    guid: 4fe885680e56385488e71e2b7e2723c8
-  - enabled: 1
-    path: Assets/01_Scenes/03_Play_5.unity
-    guid: 674ffb962bd1b774a8b25cb2cdbef353
+    guid: d000e2bee49898447ba8b3067b353716
   - enabled: 1
     path: Assets/01_Scenes/04_Result.unity
     guid: 885fbd591b6c83f43a87bf8c8380c92c

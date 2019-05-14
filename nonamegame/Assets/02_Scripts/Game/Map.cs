@@ -199,8 +199,9 @@ public class Map : MonoBehaviour
     public void CreateCheckPoint()  // 체크포인트 생성
     {
         //Debug.Log("checkPoint");
-        checkPoint_up = Instantiate(checkPoint, new Vector3(makeBlock - 5, 2.01f, 0), Quaternion.identity);
-        checkPoint_down = Instantiate(checkPoint, new Vector3(makeBlock - 5, -0.0f, 0), Quaternion.Euler(180, 0, 0));
+        float _playerPos = GameObject.FindGameObjectWithTag("Player").transform.position.x;
+        checkPoint_up = Instantiate(checkPoint, new Vector3(_playerPos, 2.01f, 0), Quaternion.identity);
+        checkPoint_down = Instantiate(checkPoint, new Vector3(_playerPos, -0.0f, 0), Quaternion.Euler(180, 0, 0));
     }   // CreateCheckPoint()
 
 }   // Map Class

@@ -61,21 +61,20 @@ public class Audio : MonoBehaviour
         CheckPlayTime();
     }   //   Update()
 
-    float nowTime = 0;  // 체크포인트 확인 시간
+    float addTime = checkPointTime;
     bool isPassTime = false;    // 생성시간에 1번 생성 체크
     void CheckPlayTime()    // 진행상황에 따른 체크포인트 생성
     {
-        nowTime += Time.deltaTime;
-        //Debug.Log(nowTime + "//" + checkPointTime);
+        Debug.Log(audioSource.time + "//" + checkPointTime);
 
-        if ((int)nowTime == (int)checkPointTime && !isPassTime)
+        if ((int)audioSource.time == (int)checkPointTime && !isPassTime)
         {
             isCheckPoint = true;
             isPassTime = true;
-            nowTime = 0;
+            checkPointTime += addTime;
         }
 
-        if (nowTime > 1)    // 1번 생성 체크
+        else // 1번 생성 체크
         {
             isPassTime = false;
         }
