@@ -14,19 +14,19 @@ public class Player : MonoBehaviour
      - 충돌 체크(점수 계산)
     */
 
-    private Rigidbody rigidBody;    // 물리기능 이용 
+    public static Rigidbody rigidBody;    // 물리기능 이용 
     public static SpriteRenderer spriteRenderer;  // filp 기능 이용
-    private bool isGround;  // 바닥 체크
+    public static bool isGround;  // 바닥 체크
     public static bool playerPos; // 플레이어 위치
     /* !수정예정! - 양방향도 추가될 수 있음 -> int형 수정? */
 
     private float _moveSpeed; // 이동속도 변수
-    private float _jumpPower; // 점프 힘 변수
+    public static float _jumpPower; // 점프 힘 변수
     public static int _gravityForce; // 중력변수
     public static int _setPos; // 플레이어 위치
     public static bool _isDead;    // 생사여부
 
-    float playTime; // 플레이 시간
+     float playTime; // 플레이 시간
 
     public static int playerHitCount; //   충돌횟수
 
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         playerPos = true;   // 위에 위치
         isGround = true;    // 점프 가능   
         
-        playTime = 0f;  // 플레이 시간
+         playTime = 0f;  // 플레이 시간
 
         playerHitCount = 0; // 부딪힘 초기화
 
@@ -58,7 +58,9 @@ public class Player : MonoBehaviour
     //float nowChekcPointPos = 0; // 체크포인트 위치 저장
     void Update()
     {
-        playTime += Time.deltaTime; // 플레이 시간 누적
+       playTime += Time.deltaTime; // 플레이 시간 누적
+        AutoMove();
+        InputMove();
         if (!Game.isPause)
         {
             if (Input.touchCount == 1)
@@ -77,27 +79,9 @@ public class Player : MonoBehaviour
                         PlayerJump();
                     }
                 }
-                /*else if (touch.phase == TouchPhase.Moved)
-                {
-
-                }
-                else if (touch.phase == TouchPhase.Ended)
-                {
-
-                }*/
             }
-            else if (Input.touchCount >= 2)
-            {
-                Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Began)
-                {
-                    Game.BlueScreenOn();
-                }
-            }
-
-            AutoMove();
-            InputMove();
         }
+
     }   // Update()
 
     public void AutoMove()  // 플레이어 자동 이동
@@ -123,8 +107,8 @@ public class Player : MonoBehaviour
         }
     }   // InputMove() 
 
-    bool rockChangePos = false; // 점프 중 위치 변환 x
-    private void PlayerJump()   // 플레이어 점프
+    public static bool rockChangePos = false; // 점프 중 위치 변환 x
+    public static void PlayerJump()   // 플레이어 점프
     {
         if (isGround)   // 땅에 위치할 경우
         {
@@ -140,21 +124,21 @@ public class Player : MonoBehaviour
         rockChangePos = false;
     }   // PlayerJump()
 
-    private void CheckPlayerPos()   // 플레이어 위치 판별
+    public static void CheckPlayerPos()   // 플레이어 위치 판별
     {
         if (playerPos == true && rockChangePos == true)  // 위에서 아래로
         {
             playerPos = false;
             spriteRenderer.flipY = true;
             Physics.gravity = Vector3.up * _gravityForce;
-            transform.Translate(Vector3.down * _setPos);
+            GameObject.FindGameObjectWithTag("Player").transform.Translate(Vector3.down * _setPos);
         }
         else if (playerPos == false && rockChangePos == true) // 아래에서 위로
         {
             playerPos = true;
             spriteRenderer.flipY = false;
             Physics.gravity = Vector3.down * _gravityForce;
-            transform.Translate(Vector3.up * _setPos);
+            GameObject.FindGameObjectWithTag("Player").transform.Translate(Vector3.up * _setPos);
         }
     }   // CheckPlayerPos()
 

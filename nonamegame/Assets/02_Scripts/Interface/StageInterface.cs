@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class StageInterface : MonoBehaviour
 {
     public Canvas basicUI;
-    public Canvas imgUI;
 
     void Start()
     {
@@ -16,12 +15,10 @@ public class StageInterface : MonoBehaviour
     public void OpenHowToPlay()
     {
         basicUI.enabled = false;
-        imgUI.enabled = true;
     }   // OpenHowToPlay()
 
     public void CloseHowToPlay()
     {
-        imgUI.enabled = false;
         basicUI.enabled = true;
     }   // CloseHowToPlay()
 

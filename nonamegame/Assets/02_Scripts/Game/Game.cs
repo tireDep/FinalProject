@@ -23,7 +23,7 @@ public class Game : MonoBehaviour
 
     public Text bsCntText;  // 화면삭제 UI
 
-    public UnityEngine.UI.Image fadePanel;   // fade 효과 관련
+    //public UnityEngine.UI.Image fadePanel;   // fade 효과 관련
 
     public Vector3 lastCheckPointPos;   // 플레이어 위치
     public Vector3 lastCheckCamera;  // 카메라 위치
@@ -46,7 +46,7 @@ public class Game : MonoBehaviour
         playerHitCount = 0;
         // 점수 관련 초기화
 
-        fadePanel.enabled = false;
+        //fadePanel.enabled = false;
 
         _moveSpeed = DataManager.moveSpeed;
         _bsCnt = DataManager.bsCnt;
@@ -59,7 +59,7 @@ public class Game : MonoBehaviour
     {
         //Debug.Log(DataManager.moveSpeed);
         //Debug.Log(_bsCnt);
-        Debug.Log(DataManager.moveSpeed);
+        //Debug.Log(DataManager.moveSpeed);
         if(Audio.isAudioFin)
         {
             GoToResultScene();
@@ -97,23 +97,28 @@ public class Game : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Time.timeScale == 1)
-            {
-                PauseOn();
-            }
-            else
-            {
-                PauseOff();
-            }
+            SetPause();
         }
     }   // CheckPause()
+
+    public void SetPause()
+    {
+        if (Time.timeScale == 1)
+        {
+            PauseOn();
+        }
+        else
+        {
+            PauseOff();
+        }
+    }   // SetPause()
 
     float fadeTime = 0;
     float time = 0; 
     // fade 시간 관련 변수들
     void GoToResultScene()  // 페이드 효과 및 화면 전환
     {
-        fadePanel.enabled = true;
+        //fadePanel.enabled = true;
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");   // 생성된 장애물 탐색
         for (int i = 0; i < objects.Length; i++)
         {
@@ -126,7 +131,7 @@ public class Game : MonoBehaviour
             if (time >= 0.1f)
             {
                 fadeTime += 50;
-                fadePanel.color = new Color(0, 0, 0, fadeTime);
+                //fadePanel.color = new Color(0, 0, 0, fadeTime);
                 //iTween.FadeFrom(fadePanel.gameObject, 0.0f, 10f);   // 투명화
                 //iTween.FadeTo(fadePanel.gameObject, 0.0f, 10f);   //   불투명화
                 time = 0;

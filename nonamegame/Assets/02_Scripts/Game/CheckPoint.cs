@@ -13,13 +13,13 @@ public class CheckPoint : MonoBehaviour
     public static float checkPointPos;  // 체크포인트 위치
     private void OnTriggerEnter(Collider other) // 충돌체크
     {
-        if(other.CompareTag("Player"))  // 플레이어와 부딪혔을 때, 현재 상태 저장
+        if (other.CompareTag("Player"))  // 플레이어와 부딪혔을 때, 현재 상태 저장
         {
             Player.isPlayerCheckPoint = true;   // 체크포인트를 지났으므로 삭제 가능
-            // checkPointPos = this.transform.position.x;  // 체크포인트 위치 저장
+
             game.lastCheckPointPos = transform.position;
             game.lastCheckCamera = Camera.main.transform.position;
-            game.lastCheckCamera.x = Camera.main.transform.position.x;  // 1씩 앞으로 밀림 방지
+            game.lastCheckCamera.x = game.lastCheckPointPos.x + 4.0f; ;  // 카메라 밀림 방지
             game.lastCheckAudio = Audio.slider.value;
 
             Game._bsCnt = DataManager.bsCnt;    //   화면 삭제 변수 초기화

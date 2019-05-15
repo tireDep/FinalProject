@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class testing : MonoBehaviour
 {
-    private void Awake()
+    /*
+    public void InputJumpBtn()
     {
-        // Screen.SetResolution(1920, 1080, true);
+        Player.PlayerJump();
     }
 
+    public void InputConvertBtn()
+    {
+        Player.CheckPlayerPos();
+    }
+    */
+
+    public void InputBs()
+    {
+        Game.BlueScreenOn();
+    }
 }

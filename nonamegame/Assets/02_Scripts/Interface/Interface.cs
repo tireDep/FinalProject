@@ -11,12 +11,15 @@ public class Interface : MonoBehaviour
      - 종료관련 함수
      */
 
-    public void Awake()
+   /* private void Update()
     {
-        // Screen.SetResolution(int width, int height, bool fullscreen);
-        // Screen.SetResolution(Screen.width, Screen.width * int SetWidth / int SetHeight, bool fullscreen);
-        // Screen.SetResolution(Screen.width, Screen.width * 18 / 9, true);
-    }
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            if(Input.GetKey(KeyCode.Escape))
+            { }
+        }
+    }   // Update()*/
+
     public void GoToStart() // 시작화면 전환
     {
         SceneManager.LoadScene("01_Start");
@@ -61,9 +64,15 @@ public class Interface : MonoBehaviour
         SceneManager.LoadScene("03_Play_4");
     }   // GoToSt04()
 
-    public void GoToSt05()
+ /*   public void GoToSt05()
     {
         SceneManager.LoadScene("03_Play_5");
     }   // GoToSt05()
+    */
+
+    public void ReStart()   // 재시작
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }   // ReStart()
 
 }   // Interface Class

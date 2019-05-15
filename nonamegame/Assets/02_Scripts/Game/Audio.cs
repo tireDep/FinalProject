@@ -20,8 +20,10 @@ public class Audio : MonoBehaviour
 
     public static bool isCheckPoint;    // 체크포인트 확인
     public static float checkPointTime; // 체크포인트 생성 시간
+    private static float addTime; // 체크포인트 생성 시간 저장 변수
 
     public static float audioClipLength;    // 음악길이 변수
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -31,6 +33,7 @@ public class Audio : MonoBehaviour
 
         checkPointTime = audioClip.length / 10;
         isCheckPoint = false;
+        addTime = checkPointTime;
         // 체크포인트 설정
 
         slider.minValue = 0;
@@ -61,13 +64,12 @@ public class Audio : MonoBehaviour
         CheckPlayTime();
     }   //   Update()
 
-    float addTime = checkPointTime;
     bool isPassTime = false;    // 생성시간에 1번 생성 체크
     void CheckPlayTime()    // 진행상황에 따른 체크포인트 생성
     {
         Debug.Log(audioSource.time + "//" + checkPointTime);
 
-        if ((int)audioSource.time == (int)checkPointTime && !isPassTime)
+        if (!isPassTime&&(int)audioSource.time == (int)checkPointTime)
         {
             isCheckPoint = true;
             isPassTime = true;
@@ -77,6 +79,7 @@ public class Audio : MonoBehaviour
         else // 1번 생성 체크
         {
             isPassTime = false;
+            isCheckPoint = false;
         }
     }   //   CheckPlayTime()
 

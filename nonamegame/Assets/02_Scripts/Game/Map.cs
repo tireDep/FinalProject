@@ -29,7 +29,7 @@ public class Map : MonoBehaviour
         if (Audio.isCheckPoint)
         {
             GetComponent<Map>().CreateCheckPoint();
-            Audio.isCheckPoint = false;
+            // Audio.isCheckPoint = false;
         }   // 체크포인트 생성 여부 판별
 
     }   //  Update()
@@ -194,14 +194,11 @@ public class Map : MonoBehaviour
 
 
     public Transform checkPoint;
-    Transform checkPoint_up;    // 위방향
-    Transform checkPoint_down;  // 아래방향
+    Transform makecheckPoint;    // 위방향
     public void CreateCheckPoint()  // 체크포인트 생성
     {
-        //Debug.Log("checkPoint");
-        float _playerPos = GameObject.FindGameObjectWithTag("Player").transform.position.x;
-        checkPoint_up = Instantiate(checkPoint, new Vector3(_playerPos, 2.01f, 0), Quaternion.identity);
-        checkPoint_down = Instantiate(checkPoint, new Vector3(_playerPos, -0.0f, 0), Quaternion.Euler(180, 0, 0));
+        float _playerPosX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
+        makecheckPoint = Instantiate(checkPoint, new Vector3(_playerPosX + 10, 1.0f, 0), Quaternion.Euler(0, 0, setEuler * 90));
     }   // CreateCheckPoint()
 
 }   // Map Class
