@@ -11,22 +11,35 @@ public class Interface : MonoBehaviour
      - 종료관련 함수
      */
 
-   /* private void Update()
+    /* private void Update()
+     {
+         if(Application.platform == RuntimePlatform.Android)
+         {
+             if(Input.GetKey(KeyCode.Escape))
+             { }
+         }
+     }   // Update()*/
+
+    public AudioClip btnSound;  // 버튼 소리
+    public static AudioSource audioSource;  // 버튼 소리 설정
+
+    private void Start()
     {
-        if(Application.platform == RuntimePlatform.Android)
-        {
-            if(Input.GetKey(KeyCode.Escape))
-            { }
-        }
-    }   // Update()*/
+        audioSource = GetComponent<AudioSource>();
+
+        audioSource.clip = btnSound;
+    }
 
     public void GoToStart() // 시작화면 전환
     {
+        Destroy(BackGroundMusic.audioSource);
+        audioSource.Play();
         SceneManager.LoadScene("01_Start");
     }   //  GameStart()	   
 
     public void GoToStage() // 스테이지 전환
     {
+        audioSource.Play();
         SceneManager.LoadScene("02_Stage");
     }   //  GoToStage() 
 
@@ -46,21 +59,25 @@ public class Interface : MonoBehaviour
 
     public void GoToSt01()
     {
+        audioSource.Play();
         SceneManager.LoadScene("03_Play_1");
     }   // GoToSt01()
 
     public void GoToSt02()
     {
+        audioSource.Play();
         SceneManager.LoadScene("03_Play_2");
     }   // GoToSt02()
 
     public void GoToSt03()
     {
+        audioSource.Play();
         SceneManager.LoadScene("03_Play_3");
     }   // GoToSt03()
 
     public void GoToSt04()
     {
+        audioSource.Play();
         SceneManager.LoadScene("03_Play_4");
     }   // GoToSt04()
 
@@ -72,6 +89,7 @@ public class Interface : MonoBehaviour
 
     public void ReStart()   // 재시작
     {
+        audioSource.Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }   // ReStart()
 
