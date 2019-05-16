@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 179003524394908364}
   - component: {fileID: 2273718887708006482}
   m_Layer: 0
-  m_Name: checkPoint
+  m_Name: tempcheckPoint
   m_TagString: CheckPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 944518638881574857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.07, y: 1.3, z: 0}
+  m_LocalScale: {x: 0.02, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300006, guid: 08232e5eee995ae4ea0ab919e6b06f46, type: 3}
+  m_Sprite: {fileID: 21300000, guid: df139b66a8b400e4083e4adb97babb98, type: 3}
   m_Color: {r: 0, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

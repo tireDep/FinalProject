@@ -49,7 +49,6 @@ public class Audio : MonoBehaviour
 
         audioClipLength = audioClip.length; // 음악 길이 설정
 
-        // Invoke("FinishedAudio", audioClip.length);  // 음악이 끝나면 실행
     }   // Start()
 
     void Update()

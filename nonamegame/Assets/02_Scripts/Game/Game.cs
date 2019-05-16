@@ -23,8 +23,6 @@ public class Game : MonoBehaviour
 
     public Text bsCntText;  // 화면삭제 UI
 
-    //public UnityEngine.UI.Image fadePanel;   // fade 효과 관련
-
     public Vector3 lastCheckPointPos;   // 플레이어 위치
     public Vector3 lastCheckCamera;  // 카메라 위치
     public float lastCheckAudio;   //  음악진행사항
@@ -46,22 +44,14 @@ public class Game : MonoBehaviour
         playerHitCount = 0;
         // 점수 관련 초기화
 
-        //fadePanel.enabled = false;
-
         _moveSpeed = DataManager.moveSpeed;
         _bsCnt = DataManager.bsCnt;
-        bsCntText.text = DataManager.bsCnt.ToString();
         // 변수 값 초기화
 
     }   // Start()
 
-
-
     void Update()
     {
-        //Debug.Log(DataManager.moveSpeed);
-        //Debug.Log(_bsCnt);
-        //Debug.Log(DataManager.moveSpeed);
         if(Audio.isAudioFin)
         {
             GoToResultScene();
@@ -84,8 +74,32 @@ public class Game : MonoBehaviour
             checkHitCount++;
         }
 
-        bsCntText.text = _bsCnt.ToString();
+        if(_bsCnt<=0)   // BSCnt 갯수 출력
+        {
+            bsCntText.text = "NOPE :(";
+        }
+        else
+        {
+            bsCntText.text =  "Remove :)\n" + _bsCnt.ToString();
+        }
+
     }   // UpdateGUI()
+
+    // 모바일 버튼 함수들
+    public void MobileJumpBtn()
+    {
+        Player.PlayerJump();
+    }   // JumpBtn()
+
+    public void MobileConvertBtn()
+    {
+        Player.CheckPlayerPos();
+    }   // ConvertBtn()
+
+    public void MobileBsBtn()
+    {
+        BlueScreenOn();
+    }   // BsBtn()
 
     private float _moveSpeed;   // 이동속도
     private void Move() // 카메라 이동
@@ -103,7 +117,7 @@ public class Game : MonoBehaviour
         }
     }   // CheckPause()
 
-    public void SetPause()
+    public void SetPause()  // pause상태 변경
     {
         if (Time.timeScale == 1)
         {
@@ -114,31 +128,9 @@ public class Game : MonoBehaviour
             PauseOff();
         }
     }   // SetPause()
-
-    //float fadeTime = 0;
-    //float time = 0; 
-    // fade 시간 관련 변수들
-    void GoToResultScene()  // 페이드 효과 및 화면 전환
+    
+    void GoToResultScene()  // 결과창 출력
     {
-        //fadePanel.enabled = true;
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");   // 생성된 장애물 탐색
-        for (int i = 0; i < objects.Length; i++)
-        {
-                Destroy(objects[i]);
-        }
-
-        /*while (fadeTime<=255)
-        {
-            time += Time.deltaTime;
-            if (time >= 0.1f)
-            {
-                fadeTime += 50;
-                //fadePanel.color = new Color(0, 0, 0, fadeTime);
-                //iTween.FadeFrom(fadePanel.gameObject, 0.0f, 10f);   // 투명화
-                //iTween.FadeTo(fadePanel.gameObject, 0.0f, 10f);   //   불투명화
-                time = 0;
-            }
-        }*/
         SceneManager.LoadScene("04_Result");
     }   // GoToResultScene()
 

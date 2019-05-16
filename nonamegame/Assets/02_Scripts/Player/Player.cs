@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
        playTime += Time.deltaTime; // 플레이 시간 누적
         AutoMove();
         InputMove();
-        if (!Game.isPause)
+        /*if (!Game.isPause)
         {
             if (Input.touchCount == 1)
             {
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
 
     }   // Update()
 

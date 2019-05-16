@@ -30,7 +30,6 @@ public class PlayerPos : MonoBehaviour
 
     public void PlayerCheckPoint()  // 체크포인트 정보 저장
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // 씬 재시작인데 이거로 하면 화면 UI가 화면 가려서 작동x
         SetCheckPoint();
 
         Player.playerPos = true;

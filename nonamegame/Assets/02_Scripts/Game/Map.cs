@@ -198,7 +198,19 @@ public class Map : MonoBehaviour
     public void CreateCheckPoint()  // 체크포인트 생성
     {
         float _playerPosX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
-        makecheckPoint = Instantiate(checkPoint, new Vector3(_playerPosX + 10, 1.0f, 0), Quaternion.Euler(0, 0, setEuler * 90));
+        makecheckPoint = Instantiate(checkPoint, new Vector3(_playerPosX + 10, 1.0f, 0), Quaternion.identity);
+
+        float checkPointPos = makecheckPoint.transform.position.x;
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
+        for (int i = 0; i < objects.Length; i++)
+        {
+            if (objects[i].transform.position.x > checkPointPos - 3 && objects[i].transform.position.x < checkPointPos + 3)
+            {
+                Destroy(objects[i]);
+            }
+        }
+        // 체크포인트 근처 장애물 삭제
+
     }   // CreateCheckPoint()
 
 }   // Map Class

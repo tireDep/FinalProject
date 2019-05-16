@@ -21,8 +21,6 @@ public class CheckPoint : MonoBehaviour
             game.lastCheckCamera = Camera.main.transform.position;
             game.lastCheckCamera.x = game.lastCheckPointPos.x + 4.0f; ;  // 카메라 밀림 방지
             game.lastCheckAudio = Audio.slider.value;
-
-            Game._bsCnt = DataManager.bsCnt;    //   화면 삭제 변수 초기화
         }
     }   //  OnTriggerEnter(Collider other)
 
