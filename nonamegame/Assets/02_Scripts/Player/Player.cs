@@ -103,6 +103,7 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) // 화면 삭제
         {
+            // 2초간 실행 + 이미지 효과 추가
             Game.BlueScreenOn();
         }
     }   // InputMove() 

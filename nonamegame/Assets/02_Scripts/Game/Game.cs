@@ -55,6 +55,8 @@ public class Game : MonoBehaviour
 
     }   // Start()
 
+
+
     void Update()
     {
         //Debug.Log(DataManager.moveSpeed);
@@ -113,8 +115,8 @@ public class Game : MonoBehaviour
         }
     }   // SetPause()
 
-    float fadeTime = 0;
-    float time = 0; 
+    //float fadeTime = 0;
+    //float time = 0; 
     // fade 시간 관련 변수들
     void GoToResultScene()  // 페이드 효과 및 화면 전환
     {
@@ -125,7 +127,7 @@ public class Game : MonoBehaviour
                 Destroy(objects[i]);
         }
 
-        while (fadeTime<=255)
+        /*while (fadeTime<=255)
         {
             time += Time.deltaTime;
             if (time >= 0.1f)
@@ -136,7 +138,7 @@ public class Game : MonoBehaviour
                 //iTween.FadeTo(fadePanel.gameObject, 0.0f, 10f);   //   불투명화
                 time = 0;
             }
-        }
+        }*/
         SceneManager.LoadScene("04_Result");
     }   // GoToResultScene()
 
@@ -160,7 +162,7 @@ public class Game : MonoBehaviour
         Audio.audioSource.Play();
     }   //  PauseOff()
 
-    static public void BlueScreenOn()   // 화면 안에 있는 장애물 삭제
+    public static void BlueScreenOn()   // 화면 안에 있는 장애물 삭제
     {
         if(_bsCnt-->0)
         {
@@ -172,7 +174,7 @@ public class Game : MonoBehaviour
         }
     }   // BlueScreenOn()
 
-    static void RemoveObstacle()    // 화면 장애물 삭제
+    public static void RemoveObstacle()    // 화면 장애물 삭제
     {
         GameObject checkScreen_1 = GameObject.FindGameObjectWithTag("CheckScreen_1");   // 스크린 가장 왼쪽 탐색
         GameObject checkScreen_2 = GameObject.FindGameObjectWithTag("CheckScreen_2");   // 스크린 가장 오른쪽 탐색
