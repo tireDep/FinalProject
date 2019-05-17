@@ -10,52 +10,39 @@ public class FadeEffect : MonoBehaviour
      - 페이드 인, 페이드 아웃 함수
      */
 
-    private float fadeTime = 2f; //  fade효과 재생 시간
+    public static float fadeTime; //  fade효과 재생 시간
 
     private Image fadeImg;  // 페이드 애니메이션 이미지
 
     private float start;    // Mathf.Lerp 시작점
-    private float end;      // Mathf.Lerp 종료점
-    private float time; // Mathf.Lerp 거리비율
-    private bool isPlaying = false; // 실행 유무 확인
+    private static float end;      // Mathf.Lerp 종료점
+    private static float time; // Mathf.Lerp 거리비율
+    public static bool isPlaying = false; // 실행 유무 확인
 
-    void Start()
-    {
-        fadeImg = GetComponent<Image>();
-        FadeInAnimation();
-    }   // Start()
-
-    private void Update()
-    {
-        if (Audio.audioClipLength - Audio.audioSource.time < 2)
-        {
-            FadeOutAnimation();
-        }
-    }   // Update()
-
-    public void FadeInAnimation()
+    public void FadeInAnimation(Image fadeImg, float inputStart, bool isBS, float inputfadeTime)
     {
         if (isPlaying)  // 한 번만 실행
         {
             return;
         }
-        StartCoroutine("PlayFadeIn");
+        StartCoroutine(PlayFadeIn(fadeImg, inputStart, isBS, inputfadeTime));
     }   // FadeInAnimation()
 
-    public void FadeOutAnimation()
+    public void FadeOutAnimation(Image fadeImg)
     {
         if (isPlaying)
         {
             return;
         }
-        StartCoroutine("PlayFadeOut");
+        StartCoroutine("PlayFadeOut", fadeImg);
     }   // FadeOutAnimation()
 
-    IEnumerator PlayFadeIn()    // 페이드 인 효과
+    IEnumerator PlayFadeIn(Image fadeImg, float inputStart, bool isBS, float inputfadeTime)    // 페이드 인 효과
     {
         isPlaying = true;
-        start = 1f; //0.5f;
+        start = inputStart;
         end = 0f;
+        fadeTime = inputfadeTime;
 
         Color color = fadeImg.color;
         time = 0f;
@@ -72,17 +59,22 @@ public class FadeEffect : MonoBehaviour
              */
             fadeImg.color = color;
 
+            if(isBS)
+            {
+                Game.RemoveObstacle();
+            }
             yield return null;
         }
 
         isPlaying = false;
     }   // PlayFadeIn()
 
-    IEnumerator PlayFadeOut()   // 페이드 아웃 효과
+    IEnumerator PlayFadeOut(Image fadeImg)   // 페이드 아웃 효과
     {
         start = 0f;
         end = 1f;
         isPlaying = true;
+        fadeTime = 2f;
 
         Color color = fadeImg.color;
         time = 0f;

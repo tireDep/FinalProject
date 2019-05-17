@@ -154,11 +154,13 @@ public class Game : MonoBehaviour
         Audio.audioSource.Play();
     }   //  PauseOff()
 
+    public static bool isBS = false;    // 효과 관련
     public static void BlueScreenOn()   // 화면 안에 있는 장애물 삭제
     {
-        if(_bsCnt-->0)
+        if(_bsCnt-->0 && !FadeEffect.isPlaying)
         {
-            RemoveObstacle();
+            isBS = true;
+            // RemoveObstacle();
         }
         else
         {

@@ -66,7 +66,7 @@ public class Audio : MonoBehaviour
     bool isPassTime = false;    // 생성시간에 1번 생성 체크
     void CheckPlayTime()    // 진행상황에 따른 체크포인트 생성
     {
-        Debug.Log(audioSource.time + "//" + checkPointTime);
+        //Debug.Log(audioSource.time + "//" + checkPointTime);
 
         if (!isPassTime&&(int)audioSource.time == (int)checkPointTime)
         {
