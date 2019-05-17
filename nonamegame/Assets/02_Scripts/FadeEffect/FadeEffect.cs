@@ -15,12 +15,13 @@ public class FadeEffect : MonoBehaviour
     private Image fadeImg;  // 페이드 애니메이션 이미지
 
     private float start;    // Mathf.Lerp 시작점
-    private static float end;      // Mathf.Lerp 종료점
-    private static float time; // Mathf.Lerp 거리비율
+    private float end;      // Mathf.Lerp 종료점
+    private float time; // Mathf.Lerp 거리비율
     public static bool isPlaying = false; // 실행 유무 확인
 
-    public void FadeInAnimation(Image fadeImg, float inputStart, bool isBS, float inputfadeTime)
+    public void FadeInAnimation(Image fadeImg, float inputStart, bool isBS, float inputfadeTime)    // 페이드 인 효과
     {
+        // 변수 : 적용할 이미지, 시작점, BS 실행 유무, 진행시간
         if (isPlaying)  // 한 번만 실행
         {
             return;
@@ -28,7 +29,7 @@ public class FadeEffect : MonoBehaviour
         StartCoroutine(PlayFadeIn(fadeImg, inputStart, isBS, inputfadeTime));
     }   // FadeInAnimation()
 
-    public void FadeOutAnimation(Image fadeImg)
+    public void FadeOutAnimation(Image fadeImg) // 페이드 아웃 효과
     {
         if (isPlaying)
         {
@@ -39,6 +40,7 @@ public class FadeEffect : MonoBehaviour
 
     IEnumerator PlayFadeIn(Image fadeImg, float inputStart, bool isBS, float inputfadeTime)    // 페이드 인 효과
     {
+        // 변수 : 적용할 이미지, 시작점, BS 실행 유무, 진행시간
         isPlaying = true;
         start = inputStart;
         end = 0f;

@@ -48,6 +48,10 @@ public class Game : MonoBehaviour
         _bsCnt = DataManager.bsCnt;
         // 변수 값 초기화
 
+        FadeEffect.isPlaying = false;
+        isBS = false;
+        // 재시작시 화면 에러 방지
+
     }   // Start()
 
     void Update()
@@ -131,6 +135,9 @@ public class Game : MonoBehaviour
     
     void GoToResultScene()  // 결과창 출력
     {
+        // 모든 static 변수 초기화..?
+        //FadeEffect.isPlaying = false;
+        //isBS = false;
         SceneManager.LoadScene("04_Result");
     }   // GoToResultScene()
 
@@ -157,12 +164,12 @@ public class Game : MonoBehaviour
     public static bool isBS = false;    // 효과 관련
     public static void BlueScreenOn()   // 화면 안에 있는 장애물 삭제
     {
-        if(_bsCnt-->0 && !FadeEffect.isPlaying)
+        if(_bsCnt>0 && !FadeEffect.isPlaying) // BS 카운트 존재 && FadeIn 애니메이션이 실행x(삭제 x) 일 때
         {
+            _bsCnt--;
             isBS = true;
-            // RemoveObstacle();
         }
-        else
+        else if(_bsCnt <= 0)
         {
             _bsCnt = 0;
         }

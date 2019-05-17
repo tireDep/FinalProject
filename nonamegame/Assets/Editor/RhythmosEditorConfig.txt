@@ -1,4 +1,0 @@
-RhythmosEditor - Configuration
-
-LastRhythmosDatabaseFile: C:/Users/wing9/Desktop/종합프로젝트_게임/nonamegame/Assets/RhythmosDatabase.xml
-MetronomeSound: none
