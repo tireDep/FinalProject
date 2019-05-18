@@ -23,7 +23,7 @@ public class Result : MonoBehaviour
     void CheckScore()
     {
         hitCntText.text = Game.checkHitCount.ToString();
-        scoreText.text= Game.playerScore.ToString();
+        scoreText.text= Game.setPlayerScoreUI.ToString();
     }   // CheckScore()
 
 }   // Result Class

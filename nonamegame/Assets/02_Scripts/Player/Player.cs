@@ -26,8 +26,6 @@ public class Player : MonoBehaviour
     public static int _setPos; // 플레이어 위치
     public static bool _isDead;    // 생사여부
 
-     float playTime; // 플레이 시간
-
     public static int playerHitCount; //   충돌횟수
 
     public static bool isPlayerCheckPoint;  // 플레이어 체크포인트 지나침 확인
@@ -39,8 +37,6 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();    // SpriteRenderer 컴포넌트 받아옴
         playerPos = true;   // 위에 위치
         isGround = true;    // 점프 가능   
-        
-         playTime = 0f;  // 플레이 시간
 
         playerHitCount = 0; // 부딪힘 초기화
 
@@ -58,9 +54,11 @@ public class Player : MonoBehaviour
     //float nowChekcPointPos = 0; // 체크포인트 위치 저장
     void Update()
     {
-       playTime += Time.deltaTime; // 플레이 시간 누적
-        AutoMove();
-        InputMove();
+        if (!Game.isPause && !StartEndEffect.isStartEndEffect)
+        {
+            AutoMove();
+            InputMove();
+        }
         /*if (!Game.isPause)
         {
             if (Input.touchCount == 1)

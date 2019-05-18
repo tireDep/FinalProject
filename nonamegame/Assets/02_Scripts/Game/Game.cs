@@ -17,8 +17,9 @@ public class Game : MonoBehaviour
 
     public static bool isPause;    // 일시정지 변수
 
-    public static int maxScore = 1000000;  // 최고점수
-    public static int playerScore;  // 플레이어 점수
+    // public static int maxScore = 1000000;  // 최고점수
+    public static int startScore = 0;
+    public static float playerScore;  // 플레이어 점수
     public Text playerScoreText; // 점수 UI
 
     public Text bsCntText;  // 화면삭제 UI
@@ -39,7 +40,7 @@ public class Game : MonoBehaviour
         pauseUI.enabled = false;
         // 일시정지 관련 설정
 
-        playerScore = maxScore; 
+        playerScore = startScore; 
         checkHitCount = 0;
         playerHitCount = 0;
         // 점수 관련 초기화
@@ -48,35 +49,33 @@ public class Game : MonoBehaviour
         _bsCnt = DataManager.bsCnt;
         // 변수 값 초기화
 
-        FadeEffect.isPlaying = false;
-        isBS = false;
-        // 재시작시 화면 에러 방지
-
     }   // Start()
 
     void Update()
     {
-        if(Audio.isAudioFin)
-        {
-            GoToResultScene();
-        }   // 음악 종료 시 페이드효과&게임 결과 화면 출력
+        CheckPause();   // 정지상태 판별
 
-        UpdateGUI();
-        Move();
-        CheckPause();
+        if (!isPause)
+        {
+            Move();
+
+            if (Audio.isAudioFin)
+            {
+                GoToResultScene();
+            }   // 음악 종료 시 페이드효과&게임 결과 화면 출력
+
+            if(!StartEndEffect.isStartEndEffect)
+            {
+                UpdateGUI();
+            }
+        }
     }   // Update()
 
     public static int checkHitCount;  // 부딪힘 & 점수차감 체크
     int playerHitCount; // Player.cs에서 변수 받아옴
     void UpdateGUI()    // UI setting
     {
-        playerHitCount = Player.playerHitCount; // 부딪힘 횟수 받아옴
-        playerScoreText.text = playerScore.ToString();
-        if (checkHitCount<playerHitCount) // 장애물에 부딪힐 경우 점수 차감
-        {
-            playerScore -= playerHitCount * 2 * 100;
-            checkHitCount++;
-        }
+        CheckPlayerScore();
 
         if(_bsCnt<=0)   // BSCnt 갯수 출력
         {
@@ -88,6 +87,25 @@ public class Game : MonoBehaviour
         }
 
     }   // UpdateGUI()
+
+    public static float setPlayerScoreUI = 0;
+    void CheckPlayerScore() // 점수계산
+    {
+        // 점수 다시 세팅하기
+        // 점프, 뒤집기에도 점수 추가? bs는 x
+        // 피버타임 등 추가
+
+        playerScore = (playerScore + 1);
+        playerHitCount = Player.playerHitCount; // 부딪힘 횟수 받아옴
+        if (checkHitCount < playerHitCount) // 장애물에 부딪힐 경우 점수 차감
+        {
+            playerScore -= playerHitCount * 11;
+            Debug.Log(playerHitCount * 11);
+            checkHitCount++;
+        }
+        setPlayerScoreUI = playerScore * 10;   //   출력용
+        playerScoreText.text = setPlayerScoreUI.ToString();
+    }   // CheckPlayerScore()
 
     // 모바일 버튼 함수들
     public void MobileJumpBtn()
@@ -135,9 +153,8 @@ public class Game : MonoBehaviour
     
     void GoToResultScene()  // 결과창 출력
     {
-        // 모든 static 변수 초기화..?
-        //FadeEffect.isPlaying = false;
-        //isBS = false;
+        DataManager.ResetValue();
+
         SceneManager.LoadScene("04_Result");
     }   // GoToResultScene()
 

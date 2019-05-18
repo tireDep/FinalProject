@@ -56,4 +56,13 @@ public class DataManager : MonoBehaviour
     {
         moveSpeed = musicBPM / 9.3f;
     }
+
+    public static void ResetValue()    // 재시작시 static 값 초기화
+    {
+        FadeEffect.isPlaying = false;
+        StartEndEffect.isStartEndEffect = false;
+        Game.isBS = false;
+        Audio.isCheckPoint = false;
+    }   // ResetValue()
+
 }   // DataManager Class

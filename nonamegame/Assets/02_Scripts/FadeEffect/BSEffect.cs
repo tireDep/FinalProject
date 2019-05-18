@@ -24,10 +24,35 @@ public class BSEffect : FadeEffect  // FadeEffect 상속
         if (Game.isBS)
         {
             BSImg.enabled = true;
-            FadeInAnimation(BSImg, alphaValue, Game.isBS, 0.5f);
+            FadeInAnimation(BSImg, alphaValue, 0.5f);
             Game.isBS = false;
         }
         //BSImg.enabled = false;
     }   // Update()
+
+    public override IEnumerator PlayFadeIn(Image fadeImg, float inputStart, float inputfadeTime)    // 페이드 인 효과
+    {
+        isPlaying = true;
+        start = inputStart;
+        end = 0f;
+        fadeTime = inputfadeTime;
+
+        Color color = fadeImg.color;
+        time = 0f;
+        color.a = Mathf.Lerp(start, end, time);
+
+        while (color.a > 0f)
+        {
+            time += Time.deltaTime / fadeTime;  // 2초 동안 재생됨
+            color.a = Mathf.Lerp(start, end, time); // 알파 값 계산
+            fadeImg.color = color;
+
+            Game.RemoveObstacle();  // 장애물 삭제 실행
+            
+            yield return null;
+        }
+
+        isPlaying = false;
+    }   // override IEnumerator PlayFadeIn()
 
 }   // BSEffect Class

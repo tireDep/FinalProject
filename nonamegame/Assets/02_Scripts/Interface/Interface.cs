@@ -40,6 +40,7 @@ public class Interface : MonoBehaviour
     public void GoToStage() // 스테이지 전환
     {
         audioSource.Play();
+        DataManager.ResetValue();
         SceneManager.LoadScene("02_Stage");
     }   //  GoToStage() 
 
@@ -89,7 +90,7 @@ public class Interface : MonoBehaviour
 
     public void ReStart()   // 재시작
     {
-        audioSource.Play();
+        DataManager.ResetValue();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }   // ReStart()
 

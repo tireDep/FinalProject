@@ -42,11 +42,6 @@ public class Map : MonoBehaviour
         {
             CreateMap(); 
         }
-        else
-        {
-            Debug.Log("check!!");
-        }
-        //Debug.Log(playTime + "//" + Audio.audioClipLength);
     }   // CheckPlayTime() 
 
     public Transform mapBlock;  // 프리팹
