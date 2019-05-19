@@ -100,7 +100,7 @@ public class Game : MonoBehaviour
         if (checkHitCount < playerHitCount) // 장애물에 부딪힐 경우 점수 차감
         {
             playerScore -= playerHitCount * 11;
-            Debug.Log(playerHitCount * 11);
+            // Debug.Log(playerHitCount * 11);
             checkHitCount++;
         }
         setPlayerScoreUI = playerScore * 10;   //   출력용

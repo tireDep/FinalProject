@@ -125,14 +125,14 @@ public class Player : MonoBehaviour
 
     public static void CheckPlayerPos()   // 플레이어 위치 판별
     {
-        if (playerPos == true && rockChangePos == true)  // 위에서 아래로
+        if (rockChangePos == true && playerPos == true)  // 위에서 아래로
         {
             playerPos = false;
             spriteRenderer.flipY = true;
             Physics.gravity = Vector3.up * _gravityForce;
             GameObject.FindGameObjectWithTag("Player").transform.Translate(Vector3.down * _setPos);
         }
-        else if (playerPos == false && rockChangePos == true) // 아래에서 위로
+        else if (rockChangePos == true && playerPos == false) // 아래에서 위로
         {
             playerPos = true;
             spriteRenderer.flipY = false;
@@ -181,20 +181,48 @@ public class Player : MonoBehaviour
      isTriger를 이용, hitCount 체크
     */
 
-    bool isNoHit = false;   // 부딪침 체크
+    public static bool isNoHit = false;   // 부딪침 체크
     private void OnTriggerEnter(Collider other) // 장애물과 부딪혔을 경우
     {
-        if (other.transform.tag == "Obstacle" && !isNoHit /*&& other.isTrigger*/ )
+        if ( other.transform.tag == "Obstacle" && !isNoHit )
         {
             isNoHit = true;
             StartCoroutine("NoHitTime");
             playerHitCount++;   // 부딪힐 경우 증가
             GetComponent<PlayerPos>().PlayerCheckPoint();
         }   // 충돌 체크 시 카운트 증가 -> Game.cs에서 점수 차감
+
+        //rockChangePos = true; // 위치변경 가능
     }   // OnTriggerEnter(Collider other)
+
+/*    private void OnTriggerStay(Collider other)
+    {
+        isNoHit = false;
+        if (other.transform.tag == "Obstacle" && !isNoHit)
+        {
+            rockChangePos = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        isNoHit = false;
+        if (other.transform.tag == "Obstacle" && !isNoHit)
+        {
+            rockChangePos = false;
+        }
+    }*/
 
     IEnumerator NoHitTime() // 무적시간용 코루틴 함수
     {
+        Player.rockChangePos = false;
+        Player.playerPos = true;
+        Player.spriteRenderer.flipY = false;
+        Physics.gravity = Vector3.down * Player._gravityForce;
+        GameObject.FindGameObjectWithTag("Player").transform.Translate(Vector3.up * Player._setPos);
+        // 추락&승천사 방지용
+        // 고친건지는 아직 모르겠음...
+
         int countTime = 0;
 
         while(countTime<10)

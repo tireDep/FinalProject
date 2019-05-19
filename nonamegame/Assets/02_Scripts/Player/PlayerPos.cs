@@ -31,12 +31,6 @@ public class PlayerPos : MonoBehaviour
     public void PlayerCheckPoint()  // 체크포인트 정보 저장
     {
         SetCheckPoint();
-
-        Player.playerPos = true;
-        Player.spriteRenderer.flipY = false;
-        Physics.gravity = Vector3.down * Player._gravityForce;
-        transform.Translate(Vector3.up * Player._setPos);
-        // 추락사 방지용
-    }   // PlayerCheckPoint()
+    }   // PlayerCheckPoint() 
 
 }   // PlyaerPos Class

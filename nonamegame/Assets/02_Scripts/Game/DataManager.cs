@@ -63,6 +63,9 @@ public class DataManager : MonoBehaviour
         StartEndEffect.isStartEndEffect = false;
         Game.isBS = false;
         Audio.isCheckPoint = false;
+
+        Player.rockChangePos = false;
+        Player.isNoHit = false;
     }   // ResetValue()
 
 }   // DataManager Class
