@@ -13,16 +13,20 @@ public class BackGroundMusic : MonoBehaviour
     public AudioClip backGroundMusic;   // 배경음악 음원
     public static AudioSource audioSource;  // 배경음악 설정
 
-    private static BackGroundMusic instance;
+   private static BackGroundMusic instance;
 
     private void Start()
     {
-        if (instance == null)
+        /*if (instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(instance);    // 씬 넘어가도 파괴 x
-        }
+           instance = this;
+           //DontDestroyOnLoad(gameObject);    // 씬 넘어가도 파괴 x
+           audioSource = GetComponent<AudioSource>();
 
+          audioSource.clip = backGroundMusic;
+          audioSource.Play();
+        }*/
+        DontDestroyOnLoad(gameObject);    // 씬 넘어가도 파괴 x
         audioSource = GetComponent<AudioSource>();
 
         audioSource.clip = backGroundMusic;
@@ -34,7 +38,7 @@ public class BackGroundMusic : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex > 1)
         {
-            Destroy(audioSource);   // 시작화면, 스테이지가 아닐경우 음악 삭제
+            Destroy(gameObject);   // 시작화면, 스테이지가 아닐경우 삭제
         }
     }   // Update()
 

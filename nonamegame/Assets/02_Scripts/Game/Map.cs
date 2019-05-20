@@ -193,7 +193,7 @@ public class Map : MonoBehaviour
     public void CreateCheckPoint()  // 체크포인트 생성
     {
         float _playerPosX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
-        makecheckPoint = Instantiate(checkPoint, new Vector3(_playerPosX + 10, 1.0f, 0), Quaternion.identity);
+        makecheckPoint = Instantiate(checkPoint, new Vector3(_playerPosX + 10, 2.01f, 0), Quaternion.identity);
 
         float checkPointPos = makecheckPoint.transform.position.x;
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");

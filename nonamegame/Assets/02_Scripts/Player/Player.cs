@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;  // Scene change
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -57,7 +58,9 @@ public class Player : MonoBehaviour
         if (!Game.isPause && !StartEndEffect.isStartEndEffect)
         {
             AutoMove();
-            InputMove();
+            InputMoveForPC();
+
+            InputMoveForMobile();
         }
         /*if (!Game.isPause)
         {
@@ -87,7 +90,7 @@ public class Player : MonoBehaviour
         transform.Translate(_moveSpeed * Time.deltaTime, 0f, 0f);
     }   // AutoMove()
 
-    public void InputMove() // 플레이어 입력 이동
+    public void InputMoveForPC() // 플레이어 입력 이동
     {
         if (Input.GetKeyDown(KeyCode.Space))    // 점프
         {
@@ -105,6 +108,27 @@ public class Player : MonoBehaviour
             Game.BlueScreenOn();
         }
     }   // InputMove() 
+
+    public void InputMoveForMobile()
+    {
+        if (Input.touchCount == 1 && EventSystem.current.IsPointerOverGameObject() == false)
+        {
+            Touch touch = Input.GetTouch(0);
+            float camWidth = Camera.main.pixelWidth / 2;
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                if (touch.position.x > camWidth)
+                {
+                    CheckPlayerPos();
+                }
+                else
+                {
+                    PlayerJump();
+                }
+            }
+        }
+    }
 
     public static bool rockChangePos = false; // 점프 중 위치 변환 x
     public static void PlayerJump()   // 플레이어 점프

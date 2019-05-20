@@ -165,7 +165,10 @@ public class Game : MonoBehaviour
         canvasUI.enabled = false;
         pauseUI.enabled = true;
         Camera.main.GetComponent<Blur>().enabled = true;    // 카메라 블러 효과
-        Audio.audioSource.Pause();  // 오디오 정지
+        if (null != Audio.audioSource)
+        {
+            Audio.audioSource.Pause();  // 오디오 정지
+        }
     }   // PauseOn()
 
     public void PauseOff()  // 일시정지 해제
@@ -206,5 +209,13 @@ public class Game : MonoBehaviour
             }
         }
     }   // RemoveObstacle()
+
+    private void OnApplicationPause(bool pause) // 게임이 백그라운드로 넘어갔을 경우 실행
+    {
+        //if (SceneManager.GetActiveScene().buildIndex >= 2 && SceneManager.GetActiveScene().buildIndex <= 6)
+        //{
+            PauseOn();
+        //}
+    }   //   OnApplicationPause(bool pause)
 
 }   // Game Class

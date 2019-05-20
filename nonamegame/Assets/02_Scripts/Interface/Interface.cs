@@ -82,11 +82,11 @@ public class Interface : MonoBehaviour
         SceneManager.LoadScene("03_Play_4");
     }   // GoToSt04()
 
- /*   public void GoToSt05()
+    public void GoToSt05()
     {
         SceneManager.LoadScene("03_Play_5");
     }   // GoToSt05()
-    */
+    
 
     public void ReStart()   // 재시작
     {

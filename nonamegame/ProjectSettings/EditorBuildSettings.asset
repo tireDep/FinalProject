@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/01_Scenes/03_Play_4.unity
     guid: df01aa84650e37645a448b73ddd5a315
   - enabled: 1
+    path: Assets/01_Scenes/03_Play_5.unity
+    guid: 09e0c35eed214d540a00d91e2620fa90
+  - enabled: 1
     path: Assets/01_Scenes/04_Result.unity
     guid: 885fbd591b6c83f43a87bf8c8380c92c
   - enabled: 1
