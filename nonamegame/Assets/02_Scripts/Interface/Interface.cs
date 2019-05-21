@@ -32,7 +32,7 @@ public class Interface : MonoBehaviour
 
     public void GoToStart() // 시작화면 전환
     {
-        Destroy(BackGroundMusic.audioSource);
+        // Destroy(BackGroundMusic.audioSource);    // 이거때문에 배경음악이 계속 끊겼음..
         audioSource.Play();
         SceneManager.LoadScene("01_Start");
     }   //  GameStart()	   

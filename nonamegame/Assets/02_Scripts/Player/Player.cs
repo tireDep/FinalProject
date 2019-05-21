@@ -59,30 +59,8 @@ public class Player : MonoBehaviour
         {
             AutoMove();
             InputMoveForPC();
-
             InputMoveForMobile();
         }
-        /*if (!Game.isPause)
-        {
-            if (Input.touchCount == 1)
-            {
-                Touch touch = Input.GetTouch(0);
-                float camWidth = Camera.main.pixelWidth / 2;
-
-                if (touch.phase == TouchPhase.Began)
-                {
-                    if (touch.position.x > camWidth)
-                    {
-                        CheckPlayerPos();
-                    }
-                    else
-                    {
-                        PlayerJump();
-                    }
-                }
-            }
-        }*/
-
     }   // Update()
 
     public void AutoMove()  // 플레이어 자동 이동
@@ -111,23 +89,41 @@ public class Player : MonoBehaviour
 
     public void InputMoveForMobile()
     {
-        if (Input.touchCount == 1 && EventSystem.current.IsPointerOverGameObject() == false)
+        if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-            float camWidth = Camera.main.pixelWidth / 2;
-
-            if (touch.phase == TouchPhase.Began)
+            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
-                if (touch.position.x > camWidth)
+                float camWidth = Camera.main.pixelWidth / 2;
+
+                if (touch.phase == TouchPhase.Began)
                 {
-                    CheckPlayerPos();
-                }
-                else
-                {
-                    PlayerJump();
+                    if (touch.position.x > camWidth)
+                    {
+                        CheckPlayerPos();
+                    }
+                    else
+                    {
+                        PlayerJump();
+                    }
                 }
             }
         }
+    }
+
+    public bool IsPointerOverUIObject(Vector2 touchPos)
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+    
+        eventDataCurrentPosition.position = touchPos;
+    
+        List<RaycastResult> results = new List<RaycastResult>();
+    	
+    
+        EventSystem.current
+        .RaycastAll(eventDataCurrentPosition, results);
+ 		
+       return results.Count > 0;
     }
 
     public static bool rockChangePos = false; // 점프 중 위치 변환 x
