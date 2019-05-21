@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
 
     }   // Start()
 
-    //float nowChekcPointPos = 0; // 체크포인트 위치 저장
+
     void Update()
     {
         if (!Game.isPause && !StartEndEffect.isStartEndEffect)
@@ -61,10 +61,13 @@ public class Player : MonoBehaviour
             InputMoveForPC();
             InputMoveForMobile();
         }
+        // Debug.Log(transform.position +" // "+lastPlayerPos);
     }   // Update()
 
+    public static Vector3 lastPlayerPos;    // Pause 상태일 때 플레이어가 튀어나가는 것 방지
     public void AutoMove()  // 플레이어 자동 이동
     {
+        lastPlayerPos = transform.position; // 플레이어 위치 저장
         transform.Translate(_moveSpeed * Time.deltaTime, 0f, 0f);
     }   // AutoMove()
 
@@ -91,9 +94,9 @@ public class Player : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
             if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
+                Touch touch = Input.GetTouch(0);
                 float camWidth = Camera.main.pixelWidth / 2;
 
                 if (touch.phase == TouchPhase.Began)
@@ -129,6 +132,7 @@ public class Player : MonoBehaviour
     public static bool rockChangePos = false; // 점프 중 위치 변환 x
     public static void PlayerJump()   // 플레이어 점프
     {
+        Game.playerScore += 15; // 점수 추가
         if (isGround)   // 땅에 위치할 경우
         {
             if (playerPos)
@@ -145,6 +149,7 @@ public class Player : MonoBehaviour
 
     public static void CheckPlayerPos()   // 플레이어 위치 판별
     {
+        Game.playerScore += 15; // 점수 추가
         if (rockChangePos == true && playerPos == true)  // 위에서 아래로
         {
             playerPos = false;
@@ -215,9 +220,8 @@ public class Player : MonoBehaviour
         //rockChangePos = true; // 위치변경 가능
     }   // OnTriggerEnter(Collider other)
 
-/*    private void OnTriggerStay(Collider other)
+    /*private void OnTriggerStay(Collider other)
     {
-        isNoHit = false;
         if (other.transform.tag == "Obstacle" && !isNoHit)
         {
             rockChangePos = false;
@@ -226,7 +230,6 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        isNoHit = false;
         if (other.transform.tag == "Obstacle" && !isNoHit)
         {
             rockChangePos = false;
@@ -244,10 +247,9 @@ public class Player : MonoBehaviour
         // 고친건지는 아직 모르겠음...
 
         int countTime = 0;
-
         while(countTime<10)
         {
-            if(countTime%2==0)
+            if (countTime%2==0)
             {
                 spriteRenderer.color = new Color32(255, 255, 255, 90);
             }

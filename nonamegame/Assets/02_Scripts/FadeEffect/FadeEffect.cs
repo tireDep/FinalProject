@@ -24,14 +24,16 @@ public class FadeEffect : MonoBehaviour
         isPlaying = false;
     }
 
-    public void FadeInAnimation(Image fadeImg, float inputStart, float inputfadeTime)    // 페이드 인 효과
+    public static IEnumerator corutine; // StopCorutine() 이용 변수 선언
+    public virtual void FadeInAnimation(Image fadeImg, float inputStart, float inputfadeTime)    // 페이드 인 효과
     {
         // 변수 : 적용할 이미지, 시작점, BS 실행 유무, 진행시간
         if (isPlaying)  // 한 번만 실행
         {
             return;
         }
-        StartCoroutine(PlayFadeIn(fadeImg, inputStart, inputfadeTime));
+        corutine = PlayFadeIn(fadeImg, inputStart, inputfadeTime);
+        StartCoroutine(corutine);
     }   // FadeInAnimation()
 
     public void FadeOutAnimation(Image fadeImg) // 페이드 아웃 효과

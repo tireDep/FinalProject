@@ -42,7 +42,6 @@ public class Game : MonoBehaviour
 
         playerScore = startScore; 
         checkHitCount = 0;
-        playerHitCount = 0;
         // 점수 관련 초기화
 
         _moveSpeed = DataManager.moveSpeed;
@@ -72,7 +71,6 @@ public class Game : MonoBehaviour
     }   // Update()
 
     public static int checkHitCount;  // 부딪힘 & 점수차감 체크
-    int playerHitCount; // Player.cs에서 변수 받아옴
     void UpdateGUI()    // UI setting
     {
         CheckPlayerScore();
@@ -91,33 +89,18 @@ public class Game : MonoBehaviour
     public static float setPlayerScoreUI = 0;
     void CheckPlayerScore() // 점수계산
     {
-        // 점수 다시 세팅하기
-        // 점프, 뒤집기에도 점수 추가? bs는 x
-        // 피버타임 등 추가
+        playerScore = playerScore + 1;  // 기본 점수 계산
 
-        playerScore = (playerScore + 1);
-        playerHitCount = Player.playerHitCount; // 부딪힘 횟수 받아옴
-        if (checkHitCount < playerHitCount) // 장애물에 부딪힐 경우 점수 차감
+        if (checkHitCount < Player.playerHitCount) // 장애물에 부딪힐 경우 점수 차감
         {
-            playerScore -= playerHitCount * 11;
-            // Debug.Log(playerHitCount * 11);
+            playerScore -= Player.playerHitCount * 100;
             checkHitCount++;
         }
         setPlayerScoreUI = playerScore * 10;   //   출력용
         playerScoreText.text = setPlayerScoreUI.ToString();
     }   // CheckPlayerScore()
 
-    // 모바일 버튼 함수들
-    public void MobileJumpBtn()
-    {
-        Player.PlayerJump();
-    }   // JumpBtn()
-
-    public void MobileConvertBtn()
-    {
-        Player.CheckPlayerPos();
-    }   // ConvertBtn()
-
+    // 모바일 버튼 함수
     public void MobileBsBtn()
     {
         BlueScreenOn();
@@ -131,8 +114,11 @@ public class Game : MonoBehaviour
     
     public Canvas canvasUI;
     public Canvas pauseUI;
+    Vector3 nowPlayerPos;   //   플레이어 현 위치
+
     public void CheckPause()    // pause상태 검사
     {
+        nowPlayerPos = Player.lastPlayerPos;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SetPause();
@@ -140,7 +126,7 @@ public class Game : MonoBehaviour
     }   // CheckPause()
 
     public void SetPause()  // pause상태 변경
-    {
+    { 
         if (Time.timeScale == 1)
         {
             PauseOn();
@@ -173,13 +159,23 @@ public class Game : MonoBehaviour
 
     public void PauseOff()  // 일시정지 해제
     {
+        StartCoroutine("DelayPauseOff");
+
         Time.timeScale = 1;
         isPause = false;
         canvasUI.enabled = true;
         pauseUI.enabled = false;
         Camera.main.GetComponent<Blur>().enabled = false;
         Audio.audioSource.Play();
+
+        GameObject.FindGameObjectWithTag("Player").transform.position = nowPlayerPos;
     }   //  PauseOff()
+
+    IEnumerator DelayPauseOff()
+    {
+        Debug.Log("test");
+        yield return new WaitForSeconds(3);
+    }
 
     public static bool isBS = false;    // 효과 관련
     public static void BlueScreenOn()   // 화면 안에 있는 장애물 삭제
@@ -212,10 +208,7 @@ public class Game : MonoBehaviour
 
     private void OnApplicationPause(bool pause) // 게임이 백그라운드로 넘어갔을 경우 실행
     {
-        //if (SceneManager.GetActiveScene().buildIndex >= 2 && SceneManager.GetActiveScene().buildIndex <= 6)
-        //{
-            PauseOn();
-        //}
+        PauseOn();
     }   //   OnApplicationPause(bool pause)
 
 }   // Game Class

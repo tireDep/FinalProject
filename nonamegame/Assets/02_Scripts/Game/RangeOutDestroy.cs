@@ -14,6 +14,7 @@ public class RangeOutDestroy : MonoBehaviour
         ObjectDestroy();
     }   // Update()
 
+    public static bool isDestroy = false;
     void ObjectDestroy() // 물체가 화면밖에 있는 경우 삭제
     {
         if ((this.transform.position.x < GameObject.FindGameObjectWithTag("Player").transform.position.x - 10) && Player.isPlayerCheckPoint)
@@ -22,6 +23,7 @@ public class RangeOutDestroy : MonoBehaviour
             // -10은 재시작시 길 끊어지지 않게 보이기 위해 설정
             Destroy(gameObject);
             Game._bsCnt = DataManager.bsCnt;    //   화면 삭제 변수 초기화 -> 여러번 실행 방지 위해 이동
+            isDestroy = true;
         }
     }   // ObjectDestroy() 
 
