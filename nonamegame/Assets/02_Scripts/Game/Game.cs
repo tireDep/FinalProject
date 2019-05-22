@@ -44,7 +44,7 @@ public class Game : MonoBehaviour
         checkHitCount = 0;
         // 점수 관련 초기화
 
-        _moveSpeed = DataManager.moveSpeed;
+        camMoveSpeed = DataManager.moveSpeed;
         _bsCnt = DataManager.bsCnt;
         // 변수 값 초기화
 
@@ -106,10 +106,10 @@ public class Game : MonoBehaviour
         BlueScreenOn();
     }   // BsBtn()
 
-    private float _moveSpeed;   // 이동속도
+    public static float camMoveSpeed;   // 이동속도
     private void Move() // 카메라 이동
     {
-        Camera.main.transform.Translate(_moveSpeed * Time.deltaTime, 0f, 0f);
+        Camera.main.transform.Translate(camMoveSpeed * Time.deltaTime, 0f, 0f);
     }   //  Move()
     
     public Canvas canvasUI;
@@ -180,7 +180,7 @@ public class Game : MonoBehaviour
     public static bool isBS = false;    // 효과 관련
     public static void BlueScreenOn()   // 화면 안에 있는 장애물 삭제
     {
-        if(_bsCnt>0 && !FadeEffect.isPlaying) // BS 카운트 존재 && FadeIn 애니메이션이 실행x(삭제 x) 일 때
+        if(_bsCnt>0 && !StartEndEffect.isStartEndEffect) // BS 카운트 존재 && FadeIn 애니메이션이 실행x(삭제 x) 일 때
         {
             _bsCnt--;
             isBS = true;

@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public static bool playerPos; // 플레이어 위치
     /* !수정예정! - 양방향도 추가될 수 있음 -> int형 수정? */
 
-    private float _moveSpeed; // 이동속도 변수
+    public static float playerMoveSpeed; // 이동속도 변수
     public static float _jumpPower; // 점프 힘 변수
     public static int _gravityForce; // 중력변수
     public static int _setPos; // 플레이어 위치
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
 
         isPlayerCheckPoint = false; // 체크포인트를 지나지 x
 
-        _moveSpeed = DataManager.moveSpeed;
+        playerMoveSpeed = DataManager.moveSpeed;
         _jumpPower = DataManager.jumpPower;
         _gravityForce = DataManager.gravityForce;
         _setPos = DataManager.setPos;
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
     public void AutoMove()  // 플레이어 자동 이동
     {
         lastPlayerPos = transform.position; // 플레이어 위치 저장
-        transform.Translate(_moveSpeed * Time.deltaTime, 0f, 0f);
+        transform.Translate(playerMoveSpeed * Time.deltaTime, 0f, 0f);
     }   // AutoMove()
 
     public void InputMoveForPC() // 플레이어 입력 이동
@@ -94,9 +94,9 @@ public class Player : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            Touch touch = Input.GetTouch(0);
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                Touch touch = Input.GetTouch(0);
                 float camWidth = Camera.main.pixelWidth / 2;
 
                 if (touch.phase == TouchPhase.Began)
@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
     public static bool rockChangePos = false; // 점프 중 위치 변환 x
     public static void PlayerJump()   // 플레이어 점프
     {
-        Game.playerScore += 15; // 점수 추가
+        // Game.playerScore += 15; // 점수 추가
         if (isGround)   // 땅에 위치할 경우
         {
             if (playerPos)
@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
 
     public static void CheckPlayerPos()   // 플레이어 위치 판별
     {
-        Game.playerScore += 15; // 점수 추가
+        // Game.playerScore += 15; // 점수 추가
         if (rockChangePos == true && playerPos == true)  // 위에서 아래로
         {
             playerPos = false;

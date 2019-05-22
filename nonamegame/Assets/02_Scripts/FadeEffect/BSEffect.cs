@@ -11,11 +11,14 @@ public class BSEffect : FadeEffect  // FadeEffect 상속
      */
 
     private Image BSImg;
+    public static bool _isPlaying;
 
     private void Awake()
     {
         BSImg = GetComponent<Image>();
         BSImg.enabled = false;
+
+        _isPlaying = false;
     }   // Awake()
 
     private float alphaValue = 0.5f;
@@ -24,15 +27,24 @@ public class BSEffect : FadeEffect  // FadeEffect 상속
         if (Game.isBS)
         {
             BSImg.enabled = true;
-            FadeInAnimation(BSImg, alphaValue, 0.5f);
+            FadeInAnimation_BS(BSImg, alphaValue, 0.5f);
             Game.isBS = false;
         }
-        //BSImg.enabled = false;
     }   // Update()
 
-    public override IEnumerator PlayFadeIn(Image fadeImg, float inputStart, float inputfadeTime)    // 페이드 인 효과
+    public void FadeInAnimation_BS(Image fadeImg, float inputStart, float inputfadeTime)    // 페이드 인 효과
     {
-        isPlaying = true;
+        // 변수 : 적용할 이미지, 시작점, BS 실행 유무, 진행시간
+        if (_isPlaying)  // 한 번만 실행
+        {
+            return;
+        }
+        StartCoroutine(PlayFadeIn_BS(fadeImg, inputStart, inputfadeTime));
+    }   // FadeInAnimation()
+
+    public IEnumerator PlayFadeIn_BS(Image fadeImg, float inputStart, float inputfadeTime)    // 페이드 인 효과
+    {
+        _isPlaying = true;
         start = inputStart;
         end = 0f;
         fadeTime = inputfadeTime;
@@ -52,7 +64,7 @@ public class BSEffect : FadeEffect  // FadeEffect 상속
             yield return null;
         }
 
-        isPlaying = false;
+        _isPlaying = false;
     }   // override IEnumerator PlayFadeIn()
 
 }   // BSEffect Class
