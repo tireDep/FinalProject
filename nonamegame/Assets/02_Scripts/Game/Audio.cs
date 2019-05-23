@@ -43,7 +43,7 @@ public class Audio : MonoBehaviour
         songTitle.text = audioClip.name;    // 곡 이름 설정
 
         audioSource.clip = audioClip;   // 곡 설정
-        /* !수정예정! - fade_in fade_out 추가? */
+
 
         audioSource.Play(); // 음악 설정
 
@@ -66,7 +66,6 @@ public class Audio : MonoBehaviour
     bool isPassTime = false;    // 생성시간에 1번 생성 체크
     void CheckPlayTime()    // 진행상황에 따른 체크포인트 생성
     {
-        //Debug.Log(audioSource.time + "//" + checkPointTime);
 
         if (!isPassTime&&(int)audioSource.time == (int)checkPointTime)
         {

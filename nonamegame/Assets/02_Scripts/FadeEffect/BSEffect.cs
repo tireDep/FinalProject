@@ -10,7 +10,7 @@ public class BSEffect : FadeEffect  // FadeEffect 상속
      - BS관련 키 입력시 FadeIn애니메이션 실행&화면 장애물 삭제
      */
 
-    private Image BSImg;
+    public Image BSImg;
     public static bool _isPlaying;
 
     private void Awake()
@@ -39,7 +39,8 @@ public class BSEffect : FadeEffect  // FadeEffect 상속
         {
             return;
         }
-        StartCoroutine(PlayFadeIn_BS(fadeImg, inputStart, inputfadeTime));
+        corutine = PlayFadeIn_BS(fadeImg, inputStart, inputfadeTime);
+        StartCoroutine(corutine);
     }   // FadeInAnimation()
 
     public IEnumerator PlayFadeIn_BS(Image fadeImg, float inputStart, float inputfadeTime)    // 페이드 인 효과
@@ -55,16 +56,34 @@ public class BSEffect : FadeEffect  // FadeEffect 상속
 
         while (color.a > 0f)
         {
-            time += Time.deltaTime / fadeTime;  // 2초 동안 재생됨
-            color.a = Mathf.Lerp(start, end, time); // 알파 값 계산
-            fadeImg.color = color;
-
-            Game.RemoveObstacle();  // 장애물 삭제 실행
-            
+            if(Player.isPlayerCheckPoint)// FeverEffect.isFever) // 피버 때 실행x
+            {
+                // BSImg.enabled = false; // 이렇게 하면 장애물 계속 삭제됨..
+                BreakEffect_BS(color);
+            }
+            else if(EndEffect.isEndEffect)
+            {
+                BreakEffect_BS(color);
+            }
+            else
+            {
+                time += Time.deltaTime / fadeTime;  // 2초 동안 재생됨
+                color.a = Mathf.Lerp(start, end, time); // 알파 값 계산
+                fadeImg.color = color;
+                Game.RemoveObstacle();  // 장애물 삭제 실행
+            }
             yield return null;
         }
 
         _isPlaying = false;
     }   // override IEnumerator PlayFadeIn()
+
+    void BreakEffect_BS(Color color)
+    {
+        color.a = 0;
+        BSImg.color = color;
+        _isPlaying = false;
+        StopCoroutine(corutine);
+    }   // BreakEffect_BS()
 
 }   // BSEffect Class

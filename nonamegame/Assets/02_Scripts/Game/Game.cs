@@ -33,6 +33,8 @@ public class Game : MonoBehaviour
 
     void Start()
     {
+        DataManager.ResetValue();
+
         Time.timeScale = 1; // 재시작시 일시정지 방지 
         Camera.main.GetComponent<Blur>().enabled = false;   // 블러 해제
         isPause = false;
@@ -52,6 +54,7 @@ public class Game : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(FadeEffect.isPlaying);
         CheckPause();   // 정지상태 판별
 
         if (!isPause)
@@ -63,7 +66,7 @@ public class Game : MonoBehaviour
                 GoToResultScene();
             }   // 음악 종료 시 페이드효과&게임 결과 화면 출력
 
-            if(!StartEndEffect.isStartEndEffect)
+            if(!EndEffect.isEndEffect)
             {
                 UpdateGUI();
             }
@@ -81,7 +84,7 @@ public class Game : MonoBehaviour
         }
         else
         {
-            bsCntText.text =  "Remove :)\n" + _bsCnt.ToString();
+            bsCntText.text =  "BS:) X " + _bsCnt.ToString();
         }
 
     }   // UpdateGUI()
@@ -99,12 +102,6 @@ public class Game : MonoBehaviour
         setPlayerScoreUI = playerScore * 10;   //   출력용
         playerScoreText.text = setPlayerScoreUI.ToString();
     }   // CheckPlayerScore()
-
-    // 모바일 버튼 함수
-    public void MobileBsBtn()
-    {
-        BlueScreenOn();
-    }   // BsBtn()
 
     public static float camMoveSpeed;   // 이동속도
     private void Move() // 카메라 이동
@@ -159,7 +156,7 @@ public class Game : MonoBehaviour
 
     public void PauseOff()  // 일시정지 해제
     {
-        StartCoroutine("DelayPauseOff");
+        // StartCoroutine("DelayPauseOff");
 
         Time.timeScale = 1;
         isPause = false;
@@ -171,16 +168,16 @@ public class Game : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").transform.position = nowPlayerPos;
     }   //  PauseOff()
 
-    IEnumerator DelayPauseOff()
+    /*IEnumerator DelayPauseOff()
     {
-        Debug.Log("test");
+        // Debug.Log("test");
         yield return new WaitForSeconds(3);
-    }
+    }*/
 
     public static bool isBS = false;    // 효과 관련
     public static void BlueScreenOn()   // 화면 안에 있는 장애물 삭제
     {
-        if(_bsCnt>0 && !StartEndEffect.isStartEndEffect) // BS 카운트 존재 && FadeIn 애니메이션이 실행x(삭제 x) 일 때
+        if(_bsCnt>0 && !EndEffect.isEndEffect && !BSEffect._isPlaying/*!FadeEffect.isPlaying*/) // BS 카운트 존재 && FadeIn 애니메이션이 실행x(삭제 x) 일 때
         {
             _bsCnt--;
             isBS = true;

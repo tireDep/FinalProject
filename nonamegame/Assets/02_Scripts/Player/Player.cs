@@ -55,23 +55,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!Game.isPause && !StartEndEffect.isStartEndEffect)
+        if (!Game.isPause && !EndEffect.isEndEffect)
         {
             AutoMove();
             InputMoveForPC();
-            InputMoveForMobile();
         }
-        // Debug.Log(transform.position +" // "+lastPlayerPos);
     }   // Update()
 
-    public static Vector3 lastPlayerPos;    // Pause 상태일 때 플레이어가 튀어나가는 것 방지
-    public void AutoMove()  // 플레이어 자동 이동
-    {
-        lastPlayerPos = transform.position; // 플레이어 위치 저장
-        transform.Translate(playerMoveSpeed * Time.deltaTime, 0f, 0f);
-    }   // AutoMove()
-
-    public void InputMoveForPC() // 플레이어 입력 이동
+    public void InputMoveForPC() // 플레이어 입력 이동ver. PC
     {
         if (Input.GetKeyDown(KeyCode.Space))    // 점프
         {
@@ -83,56 +74,22 @@ public class Player : MonoBehaviour
             CheckPlayerPos();
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) // 화면 삭제
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)) // 화면 삭제
         {
-            // 2초간 실행 + 이미지 효과 추가
             Game.BlueScreenOn();
         }
     }   // InputMove() 
 
-    public void InputMoveForMobile()
+    public static Vector3 lastPlayerPos;    // Pause 상태일 때 플레이어가 튀어나가는 것 방지
+    public void AutoMove()  // 플레이어 자동 이동
     {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (!EventSystem.current.IsPointerOverGameObject())
-            {
-                float camWidth = Camera.main.pixelWidth / 2;
-
-                if (touch.phase == TouchPhase.Began)
-                {
-                    if (touch.position.x > camWidth)
-                    {
-                        CheckPlayerPos();
-                    }
-                    else
-                    {
-                        PlayerJump();
-                    }
-                }
-            }
-        }
-    }
-
-    public bool IsPointerOverUIObject(Vector2 touchPos)
-    {
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
-    
-        eventDataCurrentPosition.position = touchPos;
-    
-        List<RaycastResult> results = new List<RaycastResult>();
-    	
-    
-        EventSystem.current
-        .RaycastAll(eventDataCurrentPosition, results);
- 		
-       return results.Count > 0;
-    }
+        lastPlayerPos = transform.position; // 플레이어 위치 저장
+        transform.Translate(playerMoveSpeed * Time.deltaTime, 0f, 0f);
+    }   // AutoMove()
 
     public static bool rockChangePos = false; // 점프 중 위치 변환 x
     public static void PlayerJump()   // 플레이어 점프
     {
-        // Game.playerScore += 15; // 점수 추가
         if (isGround)   // 땅에 위치할 경우
         {
             if (playerPos)
@@ -149,7 +106,6 @@ public class Player : MonoBehaviour
 
     public static void CheckPlayerPos()   // 플레이어 위치 판별
     {
-        // Game.playerScore += 15; // 점수 추가
         if (rockChangePos == true && playerPos == true)  // 위에서 아래로
         {
             playerPos = false;

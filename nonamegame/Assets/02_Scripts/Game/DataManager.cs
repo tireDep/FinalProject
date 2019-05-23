@@ -60,12 +60,17 @@ public class DataManager : MonoBehaviour
     public static void ResetValue()    // 재시작시 static 값 초기화
     {
         FadeEffect.isPlaying = false;
-        StartEndEffect.isStartEndEffect = false;
+  
         Game.isBS = false;
         Audio.isCheckPoint = false;
 
         Player.rockChangePos = false;
         Player.isNoHit = false;
+
+        FeverEffect.isFever = false;
+        BSEffect._isPlaying = false;
+
+        EndEffect.isEndEffect = false;
     }   // ResetValue()
 
 }   // DataManager Class
