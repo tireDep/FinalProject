@@ -90,31 +90,55 @@ public class Player : MonoBehaviour
         }
     }   // InputMove() 
 
+    //private Vector3 fp;   //First touch position	
+    //private Vector3 lp;   //Last touch position	
     public void InputMoveForMobile()
     {
-        if (Input.touchCount > 0)
+        /*if (EventSystem.current.IsPointerOverGameObject() == false) 
         {
-            Touch touch = Input.GetTouch(0);
-            if (!EventSystem.current.IsPointerOverGameObject())
+            if (Input.touchCount == 1)
             {
-                float camWidth = Camera.main.pixelWidth / 2;
+                /* Touch touch = Input.GetTouch(0);
+                 float camWidth = Camera.main.pixelWidth / 2;
+
+                 if (touch.phase == TouchPhase.Began)
+                 {
+                     if (touch.position.x > camWidth)
+                     {
+                         CheckPlayerPos();
+                     }
+                     else
+                     {
+                         PlayerJump();
+                     }
+                 }
+                Touch touch = Input.GetTouch(0);
 
                 if (touch.phase == TouchPhase.Began)
                 {
-                    if (touch.position.x > camWidth)
-                    {
-                        CheckPlayerPos();
-                    }
-                    else
-                    {
-                        PlayerJump();
+                    fp = touch.position;
+                    lp = touch.position;
+                }
+
+                else if (touch.phase == TouchPhase.Moved)
+                {
+                    lp = touch.position;
+                }
+                else if (touch.phase == TouchPhase.Ended) //check if the finger is removed from the screen	
+                {
+                    lp = touch.position;  //last touch position. Ommitted if you use list	
+
+                    if
+                    {   //It's a tap as the drag distance is less than 20% of the screen height	
+                        Debug.Log("Tap");
+                        // Player.CheckPlayerPos();
                     }
                 }
             }
-        }
+        }*/
     }
 
-    public bool IsPointerOverUIObject(Vector2 touchPos)
+    /*public bool IsPointerOverUIObject(Vector2 touchPos)
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
     
@@ -127,7 +151,7 @@ public class Player : MonoBehaviour
         .RaycastAll(eventDataCurrentPosition, results);
  		
        return results.Count > 0;
-    }
+    }*/
 
     public static bool rockChangePos = false; // 점프 중 위치 변환 x
     public static void PlayerJump()   // 플레이어 점프

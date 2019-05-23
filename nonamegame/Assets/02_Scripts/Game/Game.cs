@@ -159,7 +159,7 @@ public class Game : MonoBehaviour
 
     public void PauseOff()  // 일시정지 해제
     {
-        StartCoroutine("DelayPauseOff");
+        // StartCoroutine("DelayPauseOff");
 
         Time.timeScale = 1;
         isPause = false;
@@ -171,16 +171,16 @@ public class Game : MonoBehaviour
         GameObject.FindGameObjectWithTag("Player").transform.position = nowPlayerPos;
     }   //  PauseOff()
 
-    IEnumerator DelayPauseOff()
+    /*IEnumerator DelayPauseOff()
     {
-        Debug.Log("test");
+        // Debug.Log("test");
         yield return new WaitForSeconds(3);
-    }
+    }*/
 
     public static bool isBS = false;    // 효과 관련
     public static void BlueScreenOn()   // 화면 안에 있는 장애물 삭제
     {
-        if(_bsCnt>0 && !StartEndEffect.isStartEndEffect) // BS 카운트 존재 && FadeIn 애니메이션이 실행x(삭제 x) 일 때
+        if(_bsCnt>0 && !StartEndEffect.isStartEndEffect && !BSEffect._isPlaying/*!FadeEffect.isPlaying*/) // BS 카운트 존재 && FadeIn 애니메이션이 실행x(삭제 x) 일 때
         {
             _bsCnt--;
             isBS = true;

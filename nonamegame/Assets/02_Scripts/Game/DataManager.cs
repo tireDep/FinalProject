@@ -66,6 +66,9 @@ public class DataManager : MonoBehaviour
 
         Player.rockChangePos = false;
         Player.isNoHit = false;
+
+        FeverEffect.isFever = false;
+        BSEffect._isPlaying = false;
     }   // ResetValue()
 
 }   // DataManager Class
