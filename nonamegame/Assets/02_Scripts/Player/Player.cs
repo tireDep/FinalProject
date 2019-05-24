@@ -80,12 +80,77 @@ public class Player : MonoBehaviour
         }
     }   // InputMove() 
 
+<<<<<<< HEAD
     public static Vector3 lastPlayerPos;    // Pause 상태일 때 플레이어가 튀어나가는 것 방지
     public void AutoMove()  // 플레이어 자동 이동
     {
         lastPlayerPos = transform.position; // 플레이어 위치 저장
         transform.Translate(playerMoveSpeed * Time.deltaTime, 0f, 0f);
     }   // AutoMove()
+=======
+    //private Vector3 fp;   //First touch position	
+    //private Vector3 lp;   //Last touch position	
+    public void InputMoveForMobile()
+    {
+        /*if (EventSystem.current.IsPointerOverGameObject() == false) 
+        {
+            if (Input.touchCount == 1)
+            {
+                /* Touch touch = Input.GetTouch(0);
+                 float camWidth = Camera.main.pixelWidth / 2;
+
+                 if (touch.phase == TouchPhase.Began)
+                 {
+                     if (touch.position.x > camWidth)
+                     {
+                         CheckPlayerPos();
+                     }
+                     else
+                     {
+                         PlayerJump();
+                     }
+                 }
+                Touch touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Began)
+                {
+                    fp = touch.position;
+                    lp = touch.position;
+                }
+
+                else if (touch.phase == TouchPhase.Moved)
+                {
+                    lp = touch.position;
+                }
+                else if (touch.phase == TouchPhase.Ended) //check if the finger is removed from the screen	
+                {
+                    lp = touch.position;  //last touch position. Ommitted if you use list	
+
+                    if
+                    {   //It's a tap as the drag distance is less than 20% of the screen height	
+                        Debug.Log("Tap");
+                        // Player.CheckPlayerPos();
+                    }
+                }
+            }
+        }*/
+    }
+
+    /*public bool IsPointerOverUIObject(Vector2 touchPos)
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+    
+        eventDataCurrentPosition.position = touchPos;
+    
+        List<RaycastResult> results = new List<RaycastResult>();
+    	
+    
+        EventSystem.current
+        .RaycastAll(eventDataCurrentPosition, results);
+ 		
+       return results.Count > 0;
+    }*/
+>>>>>>> ec2943ecac8f414fb3bd68840ad40cb73f440250
 
     public static bool rockChangePos = false; // 점프 중 위치 변환 x
     public static void PlayerJump()   // 플레이어 점프
