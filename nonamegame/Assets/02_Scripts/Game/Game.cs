@@ -177,11 +177,7 @@ public class Game : MonoBehaviour
     public static bool isBS = false;    // 효과 관련
     public static void BlueScreenOn()   // 화면 안에 있는 장애물 삭제
     {
-<<<<<<< HEAD
         if(_bsCnt>0 && !EndEffect.isEndEffect && !BSEffect._isPlaying/*!FadeEffect.isPlaying*/) // BS 카운트 존재 && FadeIn 애니메이션이 실행x(삭제 x) 일 때
-=======
-        if(_bsCnt>0 && !StartEndEffect.isStartEndEffect && !BSEffect._isPlaying/*!FadeEffect.isPlaying*/) // BS 카운트 존재 && FadeIn 애니메이션이 실행x(삭제 x) 일 때
->>>>>>> ec2943ecac8f414fb3bd68840ad40cb73f440250
         {
             _bsCnt--;
             isBS = true;

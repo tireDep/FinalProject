@@ -69,11 +69,8 @@ public class DataManager : MonoBehaviour
 
         FeverEffect.isFever = false;
         BSEffect._isPlaying = false;
-<<<<<<< HEAD
 
         EndEffect.isEndEffect = false;
-=======
->>>>>>> ec2943ecac8f414fb3bd68840ad40cb73f440250
     }   // ResetValue()
 
 }   // DataManager Class

@@ -59,18 +59,11 @@ public class BSEffect : FadeEffect  // FadeEffect 상속
             if(Player.isPlayerCheckPoint)// FeverEffect.isFever) // 피버 때 실행x
             {
                 // BSImg.enabled = false; // 이렇게 하면 장애물 계속 삭제됨..
-<<<<<<< HEAD
                 BreakEffect_BS(color);
             }
             else if(EndEffect.isEndEffect)
             {
                 BreakEffect_BS(color);
-=======
-                color.a = 0;
-                BSImg.color = color;
-                _isPlaying = false;
-                StopCoroutine(corutine);
->>>>>>> ec2943ecac8f414fb3bd68840ad40cb73f440250
             }
             else
             {

@@ -57,11 +57,7 @@ public class FeverEffect : FadeEffect
                 // feverImg.enabled = false;
                 color.a = 0;
                 feverImg.color = color;
-<<<<<<< HEAD
                 BreakEffect_Fever();
-=======
-                ResetValue();
->>>>>>> ec2943ecac8f414fb3bd68840ad40cb73f440250
                 StopCoroutine(corutine);
             }
             else
@@ -94,11 +90,7 @@ public class FeverEffect : FadeEffect
         }
     }   // CheckStatus()
 
-<<<<<<< HEAD
     void BreakEffect_Fever()   // 값 초기화
-=======
-    void ResetValue()   // 값 초기화
->>>>>>> ec2943ecac8f414fb3bd68840ad40cb73f440250
     {
         isPlaying = false;
         Player.playerMoveSpeed = DataManager.moveSpeed;
@@ -109,10 +101,6 @@ public class FeverEffect : FadeEffect
         slowStatusImg.enabled = false;
 
         isFever = false;
-<<<<<<< HEAD
     }   // BreakEffect_Fever()
-=======
-    }   // ResetValue()
->>>>>>> ec2943ecac8f414fb3bd68840ad40cb73f440250
 
 }   // FeverEffect Class
