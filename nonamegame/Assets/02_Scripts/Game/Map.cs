@@ -12,6 +12,7 @@ public class Map : MonoBehaviour
      */
 
     int testObstacleCnt = 0; // !수정예정! 임시 장애물 생성
+    public static bool isObsCreate=false;
     private void Update()
     {
         if(!Game.isPause)
@@ -21,7 +22,7 @@ public class Map : MonoBehaviour
             testObstacleCnt++;
             if (testObstacleCnt % 10 == 0)
             {
-                CreateObstacle(makeBlock);
+                isObsCreate = true;
             }   // 장애물 임시 생성
 
         }
@@ -44,7 +45,7 @@ public class Map : MonoBehaviour
     }   // CheckPlayTime() 
 
     public Transform mapBlock;  // 프리팹
-    private int makeBlock = 15;  // 맵 개수 변수
+    public static int makeBlock = 15;  // 맵 개수 변수
     public void CreateMap()    // 기본 1자 바닥 생성
     {
         Transform newMapBlock = Instantiate(mapBlock, new Vector3(++makeBlock, 1, 0), Quaternion.identity);
@@ -71,133 +72,5 @@ public class Map : MonoBehaviour
 
     }   // CreateCheckPoint()
 
-    public Transform boxObstacle;
-    public Transform snailObstacle;
-    public Transform longObstacle;
-    public Transform flyerObstacle;
-    public Transform fishObstacle;
-    public Transform slimeObstacle;
-    // 장애물 종류
-
-    Transform newObsBlock_up;
-    Transform newObsBlock_down;
-    // 장애물 생성 위치
-
-    Transform tempBlock;    // 생성할 장애물 설정
-    float setY = 0; // 장애물 위치  설정
-    int setEuler = 0;   // 장애물 뒤집기 유무 설정
-    void CreateObstacle(int makeBlock)    // 장애물 생성
-    {
-        RandomObstacle(1);
-        newObsBlock_up = Instantiate(tempBlock, new Vector3(makeBlock + 5, setY, 0), Quaternion.identity);
-        RandomObstacle(-1);
-        newObsBlock_down = Instantiate(tempBlock, new Vector3(makeBlock + 10, setY, 0), Quaternion.Euler(setEuler * 180, 0, 0));
-    }   // CreateObstacle()
-
-    void RandomObstacle(int pos)    // 랜덤 장애물 생성
-    {
-        // int pos : 장애물 생성 위치
-        int randomObstacle = Random.Range(1, 6);
-
-        switch (randomObstacle)
-        {
-            case 1:
-                tempBlock = boxObstacle;
-                CheckObstacle(pos, 1);
-                break;
-
-            case 2:
-                tempBlock = longObstacle;
-                CheckObstacle(pos, 2);
-                break;
-
-            case 3:
-                if (pos > 0)
-                {
-                    tempBlock = flyerObstacle;
-                }
-                else
-                {
-                    tempBlock = fishObstacle;
-                }
-                CheckObstacle(pos, 3);
-                break;
-
-            case 4:
-                if (pos > 0)
-                {
-                    tempBlock = snailObstacle;
-                }
-                else
-                {
-                    tempBlock = slimeObstacle;
-                }
-                CheckObstacle(pos, 4);
-                break;
-
-            default:
-                tempBlock = boxObstacle;
-                CheckObstacle(pos, 1);
-                break;
-        }
-    }   // RandomObstacle(Transform tempBlock, int pos, float setY)
-
-    void CheckObstacle(int pos, int checkNum)   // 장애물 위치 설정
-    {
-        if (pos == 1)
-        {
-            SetUpObsPos(checkNum);
-        }
-        else
-        {
-            SetDownObsPos(checkNum);
-        }
-    }   // checkObstacle(int pos, int checkNum)
-
-    void SetUpObsPos(int checkNum)  // 윗 장애물 위치 설정
-    {
-        if (checkNum == 1)
-        {
-            setY = 2.01f;
-        }
-        else if (checkNum == 2)
-        {
-            setY = 2.96f;
-        }
-        else if (checkNum == 3)
-        {
-            float randomMove = Random.Range(3.0f, 5.5f);
-            setY = randomMove;
-        }
-        else if (checkNum == 4)
-        {
-            setY = 1.81f;
-        }
-    }   // SetUpObsPos(int checkNum)
-
-    void SetDownObsPos(int checkNum)    // 아랫 장애물 위치 설정
-    {
-        if (checkNum == 1)
-        {
-            setEuler = 1;
-            setY = -0.0f;
-        }
-        else if (checkNum == 2)
-        {
-            setEuler = 1;
-            setY = -0.96f;
-        }
-        else if (checkNum == 3)
-        {
-            float randomMove = Random.Range(-1.0f, -2.5f);
-            setEuler = 0;
-            setY = randomMove;
-        }
-        else if (checkNum == 4)
-        {
-            setEuler = 1;
-            setY = 0.24f;
-        }
-    }   // SetDownObsPos(int checkNum)
 
 }   // Map Class

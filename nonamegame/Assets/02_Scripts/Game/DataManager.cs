@@ -31,7 +31,8 @@ public class DataManager : MonoBehaviour
          Under the rain. Background piano music - 108
          Coporate Technology And Science - 120
          기분좋은 오후(Happy Afternoon) - 123.5
-         000 A Lively Dynamic - 140
+         Inspiring Piano - howserg - 130
+         A Lively Dynamic - 140
         */
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
@@ -45,7 +46,11 @@ public class DataManager : MonoBehaviour
         {
             musicBPM = 123.5f;
         }
-        else if (SceneManager.GetActiveScene().buildIndex == 5)
+        else if(SceneManager.GetActiveScene().buildIndex==5)
+        {
+            musicBPM = 130.0f;
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 6)
         {
             musicBPM = 140f;
         }
@@ -66,11 +71,15 @@ public class DataManager : MonoBehaviour
 
         Player.rockChangePos = false;
         Player.isNoHit = false;
+        Player.isHiting = false;
 
         FeverEffect.isFever = false;
         BSEffect._isPlaying = false;
 
         EndEffect.isEndEffect = false;
+
+        Map.isObsCreate = false;
+        Map.makeBlock = 15;
     }   // ResetValue()
 
 }   // DataManager Class

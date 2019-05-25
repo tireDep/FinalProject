@@ -162,11 +162,13 @@ public class Player : MonoBehaviour
     */
 
     public static bool isNoHit = false;   // 부딪침 체크
+    public static bool isHiting = false;
     private void OnTriggerEnter(Collider other) // 장애물과 부딪혔을 경우
     {
         if ( other.transform.tag == "Obstacle" && !isNoHit )
         {
             isNoHit = true;
+            isHiting = true;
             StartCoroutine("NoHitTime");
             playerHitCount++;   // 부딪힐 경우 증가
             GetComponent<PlayerPos>().PlayerCheckPoint();

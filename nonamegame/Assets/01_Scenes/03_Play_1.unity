@@ -1716,6 +1716,7 @@ GameObject:
   m_Component:
   - component: {fileID: 523492180}
   - component: {fileID: 523492181}
+  - component: {fileID: 523492182}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -1779,6 +1780,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapBlock: {fileID: 8211898980790493323, guid: 477095fc1eed0d54bb6d8b178e74a9db,
     type: 3}
+  checkPoint: {fileID: 486018737070337948, guid: 057ee8f028cc1ef43a737d98290dc742,
+    type: 3}
+--- !u!114 &523492182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523492179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d07e0cb7611019a4da8ed9783e37a02f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   boxObstacle: {fileID: 3699109900701359483, guid: 95a89ea6558bc0348b7276fccba91425,
     type: 3}
   snailObstacle: {fileID: 6747979122063449171, guid: 6889b0c9871d8a4419862baacee139fc,
@@ -1790,8 +1805,6 @@ MonoBehaviour:
   fishObstacle: {fileID: 8441722934380743329, guid: cf42c4f457a5e2643adcb68d5faf3cf2,
     type: 3}
   slimeObstacle: {fileID: 2183067046141446842, guid: 44f7ac7b0e2a42048a3c5107eb220e40,
-    type: 3}
-  checkPoint: {fileID: 486018737070337948, guid: 057ee8f028cc1ef43a737d98290dc742,
     type: 3}
 --- !u!1 &577285371
 GameObject:
