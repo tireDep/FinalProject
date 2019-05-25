@@ -13,8 +13,10 @@ public class Map : MonoBehaviour
 
     int testObstacleCnt = 0; // !수정예정! 임시 장애물 생성
     public static bool isObsCreate=false;
+    int createValue;
     private void Update()
     {
+        createValue = (int)DataManager.moveSpeed;
         if(!Game.isPause)
         {
             CheckPlayTime();    // 지형 생성 관련
@@ -63,7 +65,7 @@ public class Map : MonoBehaviour
         GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
         for (int i = 0; i < objects.Length; i++)
         {
-            if (objects[i].transform.position.x > checkPointPos - 3 && objects[i].transform.position.x < checkPointPos + 3)
+            if (objects[i].transform.position.x > checkPointPos - 5 && objects[i].transform.position.x < checkPointPos + 5)
             {
                 Destroy(objects[i]);
             }

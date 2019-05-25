@@ -6,7 +6,6 @@ public class Obstacle : MonoBehaviour
 {
     public Transform boxObstacle;
     public Transform snailObstacle;
-    public Transform longObstacle;
     public Transform flyerObstacle;
     public Transform fishObstacle;
     public Transform slimeObstacle;
@@ -17,18 +16,18 @@ public class Obstacle : MonoBehaviour
     private void Update()
     {
         obstaclePos = Map.makeBlock;
-        if(Map.isObsCreate)
+        if (Map.isObsCreate)
         {
             CreateObstacle(obstaclePos);
             Map.isObsCreate = false;
         }
 
-        //passTime += Time.deltaTime;
-        //if(Player.isHiting)//(passTime >= 1.0f)
-        //{
-            //passTime = 0;
-       //     CreateMoveObstacle();
-       // }
+        passTime += Time.deltaTime;
+        if(passTime >= 0.75f) /*Player.isHiting)//*/
+        {
+            passTime = 0;
+            CreateMoveObstacle();
+        }
     }
 
     Transform newObsBlock_up;
@@ -38,49 +37,26 @@ public class Obstacle : MonoBehaviour
     Transform tempBlock;    // 생성할 장애물 설정
     float setY = 0; // 장애물 위치  설정
     int setEuler = 0;   // 장애물 뒤집기 유무 설정
+    
+    int ranNumArrUp;
+    int ranNumArrDown;
     void CreateObstacle(int makeBlock)    // 장애물 생성
     {
-        int rndCnt = Random.Range(1, 5);
+        ranNumArrUp = Random.Range(-3, 0);
         RandomObstacle(1);
-        newObsBlock_up = Instantiate(tempBlock, new Vector3(makeBlock + rndCnt, setY, 0), Quaternion.identity);
-        rndCnt = Random.Range(10,16);
-        RandomObstacle(-1);
-        newObsBlock_down = Instantiate(tempBlock, new Vector3(makeBlock + rndCnt, setY, 0), Quaternion.Euler(setEuler * 180, 0, 0));
-    }   // CreateObstacle()
+        newObsBlock_up = Instantiate(tempBlock, new Vector3(obstaclePos  + ranNumArrUp, setY, 0), Quaternion.identity);
+        newObsBlock_up.SetParent(transform);
 
+        ranNumArrDown = Random.Range(1, 3);
+        RandomObstacle(-1);
+        newObsBlock_down = Instantiate(tempBlock, new Vector3(obstaclePos + ranNumArrDown, setY, 0), Quaternion.Euler(setEuler * 180, 0, 0));
+        newObsBlock_down.SetParent(transform);
+    }   // CreateObstacle()
 
     void RandomObstacle(int pos)    // 랜덤 장애물 생성
     {
-        // int pos : 장애물 생성 위치
-        int randomObstacle = Random.Range(1, 5);
-
-        switch (randomObstacle)
-        {
-            case 1:
-                tempBlock = boxObstacle;
-                CheckObstacle(pos, 1);
-                break;
-
-            case 2:
-                tempBlock = longObstacle;
-                CheckObstacle(pos, 2);
-                break;
-            case 3:
-                if (pos > 0)
-                {
-                    tempBlock = snailObstacle;
-                }
-                else
-                {
-                    tempBlock = slimeObstacle;
-                }
-                CheckObstacle(pos, 3);
-                break;
-            default:
-                tempBlock = boxObstacle;
-                CheckObstacle(pos, 1);
-                break;
-        }
+        tempBlock = boxObstacle;
+        CheckObstacle(pos, 1);
     }   // RandomObstacle(Transform tempBlock, int pos, float setY)
 
     void CheckObstacle(int pos, int checkNum)   // 장애물 위치 설정
@@ -101,14 +77,6 @@ public class Obstacle : MonoBehaviour
         {
             setY = 2.01f;
         }
-        else if (checkNum == 2)
-        {
-            setY = 2.96f;
-        }
-        else if (checkNum == 3)
-        {
-            setY = 1.81f;
-        }
     }   // SetUpObsPos(int checkNum)
 
     void SetDownObsPos(int checkNum)    // 아랫 장애물 위치 설정
@@ -118,27 +86,38 @@ public class Obstacle : MonoBehaviour
             setEuler = 1;
             setY = -0.0f;
         }
-        else if (checkNum == 2)
-        {
-            setEuler = 1;
-            setY = -0.96f;
-        }
-        else if (checkNum == 3)
-        {
-            setEuler = 1;
-            setY = 0.24f;
-        }
     }   // SetDownObsPos(int checkNum)
 
     void CreateMoveObstacle()
     {
-        float randomMove_up = Random.Range(2.0f, 5.5f);
-        float playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position.x;
-        newObsBlock_up = Instantiate(flyerObstacle, new Vector3(playerPosition + 10, 2.0f, 0), Quaternion.identity);
+        float randomMove_up = Random.Range(3.0f, 5.5f);
+        newObsBlock_up = Instantiate(flyerObstacle, new Vector3(obstaclePos, randomMove_up, 0), Quaternion.identity);
+        newObsBlock_up.SetParent(transform);
 
-        float randomMove_down = Random.Range(-0.0f, -2.5f);
-        newObsBlock_down = Instantiate(fishObstacle, new Vector3(playerPosition + 15, 0f, 0), Quaternion.identity);
+        float randomMove_down = Random.Range(-1.0f, -2.5f);
+        newObsBlock_down = Instantiate(fishObstacle, new Vector3(obstaclePos + 10, randomMove_down, 0), Quaternion.identity);
+        newObsBlock_down.SetParent(transform);
 
+        /*int rndNum = Random.Range(1, 3);
+        if(rndNum == 1)
+        {
+            float randomMove_up = Random.Range(3.0f, 5.5f);
+            newObsBlock_up = Instantiate(flyerObstacle, new Vector3(obstaclePos, randomMove_up, 0), Quaternion.identity);
+            newObsBlock_up.SetParent(transform);
+
+            float randomMove_down = Random.Range(-1.0f, -2.5f);
+            newObsBlock_down = Instantiate(fishObstacle, new Vector3(obstaclePos + 10, randomMove_down, 0), Quaternion.identity);
+            newObsBlock_down.SetParent(transform);
+        }
+        else
+        {
+            newObsBlock_up = Instantiate(snailObstacle, new Vector3(obstaclePos, 1.81f, 0), Quaternion.identity);
+            newObsBlock_up.SetParent(transform);
+
+            setEuler = 1;
+            newObsBlock_down = Instantiate(slimeObstacle, new Vector3(obstaclePos + 5, 0.24f, 0), Quaternion.Euler(setEuler * 180, 0, 0));
+            newObsBlock_down.SetParent(transform);
+        }*/
         Player.isHiting = false;
     }
 

@@ -17,7 +17,6 @@ public class Game : MonoBehaviour
 
     public static bool isPause;    // 일시정지 변수
 
-    // public static int maxScore = 1000000;  // 최고점수
     public static int startScore = 0;
     public static float playerScore;  // 플레이어 점수
     public Text playerScoreText; // 점수 UI
@@ -95,7 +94,7 @@ public class Game : MonoBehaviour
 
         if (checkHitCount < Player.playerHitCount) // 장애물에 부딪힐 경우 점수 차감
         {
-            playerScore -= Player.playerHitCount * 100;
+            playerScore -= Player.playerHitCount * 10;
             checkHitCount++;
         }
         setPlayerScoreUI = playerScore * 10;   //   출력용
