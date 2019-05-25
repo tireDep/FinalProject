@@ -51,6 +51,26 @@ public class Map : MonoBehaviour
         newMapBlock.SetParent(transform);
     }   // CreateMap()
 
+    public Transform checkPoint;
+    Transform makecheckPoint;    // 위방향
+    public void CreateCheckPoint()  // 체크포인트 생성
+    {
+        float _playerPosX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
+        makecheckPoint = Instantiate(checkPoint, new Vector3(_playerPosX + 10, 2.01f, 0), Quaternion.identity);
+
+        float checkPointPos = makecheckPoint.transform.position.x;
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
+        for (int i = 0; i < objects.Length; i++)
+        {
+            if (objects[i].transform.position.x > checkPointPos - 3 && objects[i].transform.position.x < checkPointPos + 3)
+            {
+                Destroy(objects[i]);
+            }
+        }
+        // 체크포인트 근처 장애물 삭제
+
+    }   // CreateCheckPoint()
+
     public Transform boxObstacle;
     public Transform snailObstacle;
     public Transform longObstacle;
@@ -69,9 +89,9 @@ public class Map : MonoBehaviour
     void CreateObstacle(int makeBlock)    // 장애물 생성
     {
         RandomObstacle(1);
-        newObsBlock_up = Instantiate(tempBlock, new Vector3(makeBlock+5, setY, 0), Quaternion.identity);
+        newObsBlock_up = Instantiate(tempBlock, new Vector3(makeBlock + 5, setY, 0), Quaternion.identity);
         RandomObstacle(-1);
-        newObsBlock_down = Instantiate(tempBlock, new Vector3(makeBlock+10, setY, 0), Quaternion.Euler(setEuler*180,0,0));
+        newObsBlock_down = Instantiate(tempBlock, new Vector3(makeBlock + 10, setY, 0), Quaternion.Euler(setEuler * 180, 0, 0));
     }   // CreateObstacle()
 
     void RandomObstacle(int pos)    // 랜덤 장애물 생성
@@ -92,7 +112,7 @@ public class Map : MonoBehaviour
                 break;
 
             case 3:
-                if(pos>0)
+                if (pos > 0)
                 {
                     tempBlock = flyerObstacle;
                 }
@@ -124,7 +144,7 @@ public class Map : MonoBehaviour
 
     void CheckObstacle(int pos, int checkNum)   // 장애물 위치 설정
     {
-        if (pos ==1)
+        if (pos == 1)
         {
             SetUpObsPos(checkNum);
         }
@@ -134,7 +154,6 @@ public class Map : MonoBehaviour
         }
     }   // checkObstacle(int pos, int checkNum)
 
-    // !수정예정! - 스크립트화 or 리스트?
     void SetUpObsPos(int checkNum)  // 윗 장애물 위치 설정
     {
         if (checkNum == 1)
@@ -180,26 +199,5 @@ public class Map : MonoBehaviour
             setY = 0.24f;
         }
     }   // SetDownObsPos(int checkNum)
-
-
-    public Transform checkPoint;
-    Transform makecheckPoint;    // 위방향
-    public void CreateCheckPoint()  // 체크포인트 생성
-    {
-        float _playerPosX = GameObject.FindGameObjectWithTag("Player").transform.position.x;
-        makecheckPoint = Instantiate(checkPoint, new Vector3(_playerPosX + 10, 2.01f, 0), Quaternion.identity);
-
-        float checkPointPos = makecheckPoint.transform.position.x;
-        GameObject[] objects = GameObject.FindGameObjectsWithTag("Obstacle");
-        for (int i = 0; i < objects.Length; i++)
-        {
-            if (objects[i].transform.position.x > checkPointPos - 3 && objects[i].transform.position.x < checkPointPos + 3)
-            {
-                Destroy(objects[i]);
-            }
-        }
-        // 체크포인트 근처 장애물 삭제
-
-    }   // CreateCheckPoint()
 
 }   // Map Class
