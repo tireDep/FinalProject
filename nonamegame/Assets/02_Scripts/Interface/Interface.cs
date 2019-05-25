@@ -11,15 +11,6 @@ public class Interface : MonoBehaviour
      - 종료관련 함수
      */
 
-    /* private void Update()
-     {
-         if(Application.platform == RuntimePlatform.Android)
-         {
-             if(Input.GetKey(KeyCode.Escape))
-             { }
-         }
-     }   // Update()*/
-
     public AudioClip btnSound;  // 버튼 소리
     public static AudioSource audioSource;  // 버튼 소리 설정
 
@@ -32,7 +23,6 @@ public class Interface : MonoBehaviour
 
     public void GoToStart() // 시작화면 전환
     {
-        // Destroy(BackGroundMusic.audioSource);    // 이거때문에 배경음악이 계속 끊겼음..
         audioSource.Play();
         SceneManager.LoadScene("01_Start");
     }   //  GameStart()	   

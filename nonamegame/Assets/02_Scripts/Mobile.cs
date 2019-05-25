@@ -47,7 +47,7 @@ public class Mobile : MonoBehaviour
                 Player.CheckPlayerPos();
             }
         }
-    }   //  // CheckTouchPos(Touch inputTouch, float camWidth, float camHeight)
+    }   // CheckTouchPos(Touch inputTouch, float camWidth, float camHeight)
 
 
 }   // Mobile Class

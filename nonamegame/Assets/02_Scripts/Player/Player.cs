@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     public static SpriteRenderer spriteRenderer;  // filp 기능 이용
     public static bool isGround;  // 바닥 체크
     public static bool playerPos; // 플레이어 위치
-    /* !수정예정! - 양방향도 추가될 수 있음 -> int형 수정? */
 
     public static float playerMoveSpeed; // 이동속도 변수
     public static float _jumpPower; // 점프 힘 변수
@@ -173,24 +172,7 @@ public class Player : MonoBehaviour
             GetComponent<PlayerPos>().PlayerCheckPoint();
         }   // 충돌 체크 시 카운트 증가 -> Game.cs에서 점수 차감
 
-        //rockChangePos = true; // 위치변경 가능
     }   // OnTriggerEnter(Collider other)
-
-    /*private void OnTriggerStay(Collider other)
-    {
-        if (other.transform.tag == "Obstacle" && !isNoHit)
-        {
-            rockChangePos = false;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.transform.tag == "Obstacle" && !isNoHit)
-        {
-            rockChangePos = false;
-        }
-    }*/
 
     IEnumerator NoHitTime() // 무적시간용 코루틴 함수
     {
@@ -199,8 +181,7 @@ public class Player : MonoBehaviour
         Player.spriteRenderer.flipY = false;
         Physics.gravity = Vector3.down * Player._gravityForce;
         GameObject.FindGameObjectWithTag("Player").transform.Translate(Vector3.up * Player._setPos);
-        // 추락&승천사 방지용
-        // 고친건지는 아직 모르겠음...
+        // 추락&승천사 방지용.. 고친건지는 아직 모르겠음...
 
         int countTime = 0;
         while(countTime<10)

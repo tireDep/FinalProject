@@ -29,7 +29,6 @@ public class Map : MonoBehaviour
         if (Audio.isCheckPoint)
         {
             GetComponent<Map>().CreateCheckPoint();
-            // Audio.isCheckPoint = false;
         }   // 체크포인트 생성 여부 판별
 
     }   //  Update()
@@ -51,11 +50,6 @@ public class Map : MonoBehaviour
         Transform newMapBlock = Instantiate(mapBlock, new Vector3(++makeBlock, 1, 0), Quaternion.identity);
         newMapBlock.SetParent(transform);
     }   // CreateMap()
-
-    /*public int GetBlockCount()
-    {
-        return transform.childCount;
-    }*/
 
     public Transform boxObstacle;
     public Transform snailObstacle;
