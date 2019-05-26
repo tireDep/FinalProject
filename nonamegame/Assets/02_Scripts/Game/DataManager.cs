@@ -20,6 +20,8 @@ public class DataManager : MonoBehaviour
 
     public static int bsCnt = 5;    // 화면지우기 카운트
 
+    public static int activeSceneNum = 0;
+
     private void Awake()
     {
         /* 
@@ -37,22 +39,27 @@ public class DataManager : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             musicBPM = 108f;
+            activeSceneNum = 1;
         }
         else if (SceneManager.GetActiveScene().buildIndex == 3)
         {
             musicBPM = 120f;
+            activeSceneNum = 2;
         }
         else if (SceneManager.GetActiveScene().buildIndex == 4)
         {
             musicBPM = 123.5f;
+            activeSceneNum = 3;
         }
         else if(SceneManager.GetActiveScene().buildIndex==5)
         {
             musicBPM = 130.0f;
+            activeSceneNum = 4;
         }
         else if (SceneManager.GetActiveScene().buildIndex == 6)
         {
             musicBPM = 140f;
+            activeSceneNum = 5;
         }
         SetMoveSpeed(musicBPM);
     }   // Awake()
@@ -64,8 +71,6 @@ public class DataManager : MonoBehaviour
 
     public static void ResetValue()    // 재시작시 static 값 초기화
     {
-        FadeEffect.isPlaying = false;
-  
         Game.isBS = false;
         Audio.isCheckPoint = false;
 
@@ -73,13 +78,24 @@ public class DataManager : MonoBehaviour
         Player.isNoHit = false;
         Player.isHiting = false;
 
-        FeverEffect.isFever = false;
-        BSEffect._isPlaying = false;
-
-        EndEffect.isEndEffect = false;
-
         Map.isObsCreate = false;
         Map.makeBlock = 15;
+
+        FadeEffect.isPlaying = false;
+        FeverEffect.isFever = false;
+        BSEffect._isPlaying = false;
+        EndEffect.isEndEffect = false;
     }   // ResetValue()
+
+    public static bool CheckHighScore()
+    {
+        if (Game.setPlayerScoreUI > PlayerPrefs.GetFloat("StageScore" + "_0" + activeSceneNum))
+        {
+            PlayerPrefs.SetFloat("StageScore" + "_0" + activeSceneNum, Game.setPlayerScoreUI);
+            return true;
+        }
+
+        return false;
+    }   // CheckHighScore()
 
 }   // DataManager Class

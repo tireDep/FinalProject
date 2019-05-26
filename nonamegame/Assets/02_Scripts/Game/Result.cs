@@ -13,6 +13,8 @@ public class Result : MonoBehaviour
 
     public Text hitCntText;
     public Text scoreText;
+
+    public Text highScoreText;
     // UI 변수들
 
     void Start()
@@ -22,8 +24,18 @@ public class Result : MonoBehaviour
 
     void CheckScore()
     {
-        hitCntText.text = Game.checkHitCount.ToString();
-        scoreText.text= Game.setPlayerScoreUI.ToString();
+        highScoreText.text = "";
+        if (DataManager.CheckHighScore())
+        {
+            highScoreText.text = "new\nhighScore!";
+            hitCntText.text = Game.checkHitCount.ToString();
+            scoreText.text = Game.setPlayerScoreUI.ToString();
+        }
+        else
+        {
+            hitCntText.text = Game.checkHitCount.ToString();
+            scoreText.text = Game.setPlayerScoreUI.ToString();
+        }
     }   // CheckScore()
 
 }   // Result Class

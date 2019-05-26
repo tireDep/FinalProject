@@ -135,7 +135,6 @@ public class Game : MonoBehaviour
     void GoToResultScene()  // 결과창 출력
     {
         DataManager.ResetValue();
-
         SceneManager.LoadScene("04_Result");
     }   // GoToResultScene()
 
