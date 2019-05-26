@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class RangeOutDestroy : MonoBehaviour
 {
-    /*
-     오브젝트 삭제 스크립트
-     - 오브젝트 삭제 함수
-     */
-
     private void Update()
     {
         ObjectDestroy();

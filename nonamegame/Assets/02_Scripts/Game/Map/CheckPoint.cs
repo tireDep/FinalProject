@@ -22,9 +22,12 @@ public class CheckPoint : MonoBehaviour
 
         if (other.CompareTag("Player"))  // 플레이어와 부딪혔을 때, 현재 상태 저장
         {
-            game.lastCheckPointPos = transform.position;;
+            Game._bsCnt = DataManager.bsCnt;
+
+            game.lastCheckPointPos = transform.position;
+            game.lastCheckPointPos.x = transform.position.x + 1.5f; // 체크포인트에 닿는거 방지
             game.lastCheckCamera = Camera.main.transform.position;
-            game.lastCheckCamera.x = game.lastCheckPointPos.x + 4.0f; ;  // 카메라 밀림 방지
+            game.lastCheckCamera.x = game.lastCheckPointPos.x + 5.5f; ;  // 카메라 밀림 방지
             game.lastCheckAudio = Audio.slider.value;
         }
 

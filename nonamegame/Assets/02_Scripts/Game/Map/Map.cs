@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class Map : MonoBehaviour
 {
-    /*
-     지형 및 장애물 생성 관련 스크립트
-     - 바닥 생성 함수
-     - 장애물 생성 함수
-     - 랜덤위치 설정 함수
-     */
-
     int testObstacleCnt = 0; // !수정예정! 임시 장애물 생성
     public static bool isObsCreate=false;
     int createValue;

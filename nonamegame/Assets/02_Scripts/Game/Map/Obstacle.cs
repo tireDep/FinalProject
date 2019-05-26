@@ -5,10 +5,8 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     public Transform boxObstacle;
-    public Transform snailObstacle;
     public Transform flyerObstacle;
     public Transform fishObstacle;
-    public Transform slimeObstacle;
     // 장애물 종류
     float passTime = 0;
 
@@ -98,26 +96,6 @@ public class Obstacle : MonoBehaviour
         newObsBlock_down = Instantiate(fishObstacle, new Vector3(obstaclePos + 10, randomMove_down, 0), Quaternion.identity);
         newObsBlock_down.SetParent(transform);
 
-        /*int rndNum = Random.Range(1, 3);
-        if(rndNum == 1)
-        {
-            float randomMove_up = Random.Range(3.0f, 5.5f);
-            newObsBlock_up = Instantiate(flyerObstacle, new Vector3(obstaclePos, randomMove_up, 0), Quaternion.identity);
-            newObsBlock_up.SetParent(transform);
-
-            float randomMove_down = Random.Range(-1.0f, -2.5f);
-            newObsBlock_down = Instantiate(fishObstacle, new Vector3(obstaclePos + 10, randomMove_down, 0), Quaternion.identity);
-            newObsBlock_down.SetParent(transform);
-        }
-        else
-        {
-            newObsBlock_up = Instantiate(snailObstacle, new Vector3(obstaclePos, 1.81f, 0), Quaternion.identity);
-            newObsBlock_up.SetParent(transform);
-
-            setEuler = 1;
-            newObsBlock_down = Instantiate(slimeObstacle, new Vector3(obstaclePos + 5, 0.24f, 0), Quaternion.Euler(setEuler * 180, 0, 0));
-            newObsBlock_down.SetParent(transform);
-        }*/
         Player.isHiting = false;
     }
 

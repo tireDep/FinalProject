@@ -906,7 +906,7 @@ MonoBehaviour:
     m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -2961,7 +2961,7 @@ MonoBehaviour:
     m_MinSize: 3
     m_MaxSize: 40
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -4367,7 +4367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771db10564ad54c4e88129651e5c0601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnSound: {fileID: 8300000, guid: dd21853cb64e4c641b8d5f2afb3b1281, type: 3}
 --- !u!1 &1450772610
 GameObject:
   m_ObjectHideFlags: 0
@@ -5378,7 +5377,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 154434053}
   m_FillRect: {fileID: 1736579415}
   m_HandleRect: {fileID: 154434052}
@@ -5813,7 +5812,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771db10564ad54c4e88129651e5c0601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnSound: {fileID: 8300000, guid: dd21853cb64e4c641b8d5f2afb3b1281, type: 3}
 --- !u!4 &1904101986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8211898980790493323, guid: 477095fc1eed0d54bb6d8b178e74a9db,
@@ -5885,7 +5883,7 @@ MonoBehaviour:
     m_MinSize: 0
     m_MaxSize: 50
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -6309,7 +6307,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771db10564ad54c4e88129651e5c0601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btnSound: {fileID: 8300000, guid: dd21853cb64e4c641b8d5f2afb3b1281, type: 3}
 --- !u!4 &1971056324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8211898980790493323, guid: 477095fc1eed0d54bb6d8b178e74a9db,

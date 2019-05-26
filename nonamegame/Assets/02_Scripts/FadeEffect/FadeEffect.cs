@@ -5,11 +5,6 @@ using UnityEngine.UI;
 
 public class FadeEffect : MonoBehaviour
 {
-    /*
-     페이드 인&아웃 애니메이션 스크립트
-     - 페이드 인, 페이드 아웃 함수
-     */
-
     public static float fadeTime; //  fade효과 재생 시간
 
     private Image fadeImg;  // 페이드 애니메이션 이미지

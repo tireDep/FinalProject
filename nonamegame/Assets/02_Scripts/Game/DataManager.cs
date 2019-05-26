@@ -5,11 +5,6 @@ using UnityEngine.SceneManagement;  // Scene change
 
 public class DataManager : MonoBehaviour
 {
-    /*
-     변수값 관련 설정 스크립트
-     - 모든 스크립트 변수 초기화 값 저장
-     */
-
     private static float musicBPM;   //  음원 BPM 설정, 변경될 수 있는 값!
     public static float moveSpeed; // 이동속도 변수   
 
@@ -22,20 +17,10 @@ public class DataManager : MonoBehaviour
 
     public static int activeSceneNum = 0;
 
+    public static int checkPlay = 0;
+
     private void Awake()
     {
-        /* 
-         BPM 140, moveSpeed 15.0f
-         => BPM 9.3, moveSpeed 1.0f
-      
-         MixMeister BPM Analyzer 이용 BPM 확인
-         
-         Under the rain. Background piano music - 108
-         Coporate Technology And Science - 120
-         기분좋은 오후(Happy Afternoon) - 123.5
-         Inspiring Piano - howserg - 130
-         A Lively Dynamic - 140
-        */
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             musicBPM = 108f;
@@ -89,7 +74,8 @@ public class DataManager : MonoBehaviour
 
     public static bool CheckHighScore()
     {
-        if (Game.setPlayerScoreUI > PlayerPrefs.GetFloat("StageScore" + "_0" + activeSceneNum))
+        float saveScore = PlayerPrefs.GetFloat("StageScore" + "_0" + activeSceneNum);
+        if (Game.setPlayerScoreUI > saveScore || saveScore != 1)
         {
             PlayerPrefs.SetFloat("StageScore" + "_0" + activeSceneNum, Game.setPlayerScoreUI);
             return true;

@@ -16,20 +16,98 @@ public class StageInterface : MonoBehaviour
 
     void Start()
     {
-        /*PlayerPrefs.SetInt("StageScore_01", 0);
-        PlayerPrefs.SetInt("StageScore_02", 0);
-        PlayerPrefs.SetInt("StageScore_03", 0);
-        PlayerPrefs.SetInt("StageScore_04", 0);
-        PlayerPrefs.SetInt("StageScore_05", 0);*/
+        // ResetScore();
 
-        highScore_1.text = PlayerPrefs.GetFloat("StageScore_01").ToString();
-        highScore_2.text = PlayerPrefs.GetFloat("StageScore_02").ToString();
-        highScore_3.text = PlayerPrefs.GetFloat("StageScore_03").ToString();
-        highScore_4.text = PlayerPrefs.GetFloat("StageScore_04").ToString();
-        highScore_5.text = PlayerPrefs.GetFloat("StageScore_05").ToString();
-
+        Ads.PlayAds();
+        CheckScore();
         highScoreUI.enabled = false;
     }   // Start()
+
+    public void ResetScore()
+    {
+        PlayerPrefs.SetInt("StageScore_01", 1);
+        PlayerPrefs.SetInt("StageScore_02", 1);
+        PlayerPrefs.SetInt("StageScore_03", 1);
+        PlayerPrefs.SetInt("StageScore_04", 1);
+        PlayerPrefs.SetInt("StageScore_05", 1);
+
+        CheckScore();
+    }   // ResetScore()
+
+    void CheckScore()
+    {
+        if(PlayerPrefs.GetFloat("StageScore_01") == 1)
+        {
+            highScore_1.text = "0";
+        }
+        else
+        {
+            highScore_1.text = PlayerPrefs.GetFloat("StageScore_01").ToString();
+        }
+
+        if (PlayerPrefs.GetFloat("StageScore_02") == 1)
+        {
+            highScore_2.text = "0";
+        }
+        else
+        {
+            highScore_2.text = PlayerPrefs.GetFloat("StageScore_02").ToString();
+        }
+
+        if (PlayerPrefs.GetFloat("StageScore_01") == 1)
+        {
+            highScore_1.text = "0";
+        }
+        else
+        {
+            highScore_1.text = PlayerPrefs.GetFloat("StageScore_01").ToString();
+        }
+
+        if (PlayerPrefs.GetFloat("StageScore_02") == 1)
+        {
+            highScore_2.text = "0";
+        }
+        else
+        {
+            highScore_2.text = PlayerPrefs.GetFloat("StageScore_02").ToString();
+        }
+
+        if (PlayerPrefs.GetFloat("StageScore_01") == 1)
+        {
+            highScore_1.text = "0";
+        }
+        else
+        {
+            highScore_1.text = PlayerPrefs.GetFloat("StageScore_01").ToString();
+        }
+
+        if (PlayerPrefs.GetFloat("StageScore_03") == 1)
+        {
+            highScore_3.text = "0";
+        }
+        else
+        {
+            highScore_3.text = PlayerPrefs.GetFloat("StageScore_03").ToString();
+        }
+
+        if (PlayerPrefs.GetFloat("StageScore_04") == 1)
+        {
+            highScore_4.text = "0";
+        }
+        else
+        {
+            highScore_4.text = PlayerPrefs.GetFloat("StageScore_04").ToString();
+        }
+
+        if (PlayerPrefs.GetFloat("StageScore_05") == 1)
+        {
+            highScore_5.text = "0";
+        }
+        else
+        {
+            highScore_5.text = PlayerPrefs.GetFloat("StageScore_05").ToString();
+        }
+    }
 
     public void OpenToHighScore()
     {

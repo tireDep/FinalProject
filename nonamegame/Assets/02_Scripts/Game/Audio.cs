@@ -6,12 +6,6 @@ using UnityEngine.UI;   // UI
 
 public class Audio : MonoBehaviour
 {
-    /*
-     음악 관련 스크립트
-     - 게임 음악 설정 및 진행바 이동
-     - 게임 UI 설정(슬라이더, 곡 정보)
-    */
-
     public static AudioSource audioSource;    // 음원 설정
     public static Slider slider;  // 진행상태
     public AudioClip audioClip;    // 음원
@@ -66,7 +60,6 @@ public class Audio : MonoBehaviour
     bool isPassTime = false;    // 생성시간에 1번 생성 체크
     void CheckPlayTime()    // 진행상황에 따른 체크포인트 생성
     {
-
         if (!isPassTime&&(int)audioSource.time == (int)checkPointTime)
         {
             isCheckPoint = true;
@@ -81,8 +74,6 @@ public class Audio : MonoBehaviour
         }
     }   //   CheckPlayTime()
 
-
-    /* 후에 삭제! */
     public void MovePosition()  // 슬라이더 이동시 곡도 이동
     {
         if(slider.value!=slider.maxValue)

@@ -6,15 +6,6 @@ using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
-    /*
-     플레이어 조작 관련 스크립트
-     - 이동 함수
-     - 점프 함수
-     - 위치 함수
-     - 충돌 체크 함수
-     - 충돌 체크(점수 계산)
-    */
-
     public static Rigidbody rigidBody;    // 물리기능 이용 
     public static SpriteRenderer spriteRenderer;  // filp 기능 이용
     public static bool isGround;  // 바닥 체크

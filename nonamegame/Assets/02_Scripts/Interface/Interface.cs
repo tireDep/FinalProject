@@ -5,31 +5,13 @@ using UnityEngine.SceneManagement;  // Scene change
 
 public class Interface : MonoBehaviour
 {
-    /*
-     화면 이동, 종료 관련 스크립트
-     - 화면이동 함수
-     - 종료관련 함수
-     */
-
-    public AudioClip btnSound;  // 버튼 소리
-    public static AudioSource audioSource;  // 버튼 소리 설정
-
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-
-        audioSource.clip = btnSound;
-    }
-
     public void GoToStart() // 시작화면 전환
     {
-        audioSource.Play();
         SceneManager.LoadScene("01_Start");
     }   //  GameStart()	   
 
     public void GoToStage() // 스테이지 전환
     {
-        audioSource.Play();
         DataManager.ResetValue();
         SceneManager.LoadScene("02_Stage");
     }   //  GoToStage() 
@@ -50,25 +32,21 @@ public class Interface : MonoBehaviour
 
     public void GoToSt01()
     {
-        audioSource.Play();
         SceneManager.LoadScene("03_Play_1");
     }   // GoToSt01()
 
     public void GoToSt02()
     {
-        audioSource.Play();
         SceneManager.LoadScene("03_Play_2");
     }   // GoToSt02()
 
     public void GoToSt03()
     {
-        audioSource.Play();
         SceneManager.LoadScene("03_Play_3");
     }   // GoToSt03()
 
     public void GoToSt04()
     {
-        audioSource.Play();
         SceneManager.LoadScene("03_Play_4");
     }   // GoToSt04()
 

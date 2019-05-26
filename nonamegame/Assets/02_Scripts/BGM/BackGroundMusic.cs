@@ -5,11 +5,6 @@ using UnityEngine.SceneManagement;  // Scene change
 
 public class BackGroundMusic : MonoBehaviour
 {
-    /*
-     배경음악 관련 스크립트
-     - 시작화면, 스테이지 화면에서의 배경음악
-     */
-
     public AudioClip backGroundMusic;   // 배경음악 음원
     public static AudioSource audioSource;  // 배경음악 설정
 

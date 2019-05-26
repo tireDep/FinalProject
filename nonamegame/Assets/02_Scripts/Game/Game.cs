@@ -7,14 +7,6 @@ using UnityEngine.UI;   // UI
 
 public class Game : MonoBehaviour
 {
-    /*
-     게임 진행 관련 스크립트
-     - 카메라 이동 함수
-     - 일시정지 On/Off 함수
-     - 게임 UI 설정
-     - 점수 계산
-     */
-
     public static bool isPause;    // 일시정지 변수
 
     public static int startScore = 0;
@@ -134,6 +126,7 @@ public class Game : MonoBehaviour
     
     void GoToResultScene()  // 결과창 출력
     {
+        DataManager.checkPlay++;
         DataManager.ResetValue();
         SceneManager.LoadScene("04_Result");
     }   // GoToResultScene()

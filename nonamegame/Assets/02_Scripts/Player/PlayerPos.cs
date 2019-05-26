@@ -6,10 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerPos : MonoBehaviour
 {
-    /*
-     체크포인트 관련 스크립트
-     - 체크포인트 위치 설정
-    */
     private Game game;
 
     private void Start()
